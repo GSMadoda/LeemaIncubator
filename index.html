@@ -518,6 +518,36 @@ body[data-report="on"] .bar .fill{transition:none}
   transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
 .hashrow .cp:hover{color:var(--fg);border-color:var(--fg-mute)}
 .track-line.tight{margin-top:0}
+
+/* The demo console.  Scripted questions, computed answers: the exchange is
+   fixed and written, but every figure inside it is tallied from the same nine
+   intake records that drive section 02, so the demo cannot drift from the
+   profiles.  It is labelled as scripted at the head, in the caret, and at the
+   foot, because a staged exchange that reads as a live one is exactly the kind
+   of claim the rest of this site refuses to make. ────────────────────────── */
+.demo{background:var(--ink-1000);border:1px solid var(--ink-800);border-radius:var(--r);
+  color:var(--ink-200);overflow:hidden}
+.demo-top{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--ink-800)}
+.demo-top .pill{color:var(--ink-400);border-color:var(--ink-800);--stripe:var(--ember-500)}
+.demo-note{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-400)}
+.demo-log{padding:22px 18px;display:grid;gap:10px;align-content:start;min-height:196px}
+.demo-q{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.5;color:var(--growth-500)}
+.demo-a{font-size:15px;line-height:1.6;color:var(--ink-200);margin:0;max-width:60em}
+.demo-a b{font-weight:400;color:var(--white)}
+.demo-a .li{display:block;padding-left:15px;text-indent:-15px;margin-top:7px;color:var(--ink-200)}
+.demo-a .li b{color:var(--white)}
+.demo-a .tail{display:block;margin-top:14px;color:var(--ink-400)}
+.demo-asks{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 18px}
+.demo-ask{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.05em;line-height:1.4;
+  color:var(--ink-400);background:transparent;border:1px solid var(--ink-800);border-radius:2px;
+  padding:9px 12px;cursor:pointer;text-align:left;
+  transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+.demo-ask:hover{color:var(--white);border-color:var(--ink-600)}
+.demo-ask[aria-pressed="true"]{color:var(--growth-500);border-color:var(--growth-700)}
+.demo-foot{padding:15px 18px;border-top:1px solid var(--ink-800);font-family:"IBM Plex Mono",monospace;
+  font-size:11px;line-height:1.65;color:var(--ink-400)}
+.demo-foot b{color:var(--ink-200);font-weight:400}
 .slots{display:grid;gap:10px}
 </style>
 </head>
@@ -807,6 +837,31 @@ body[data-report="on"] .bar .fill{transition:none}
     <div class="grid g-3" id="arefaStats" style="margin-bottom:48px" data-rise></div>
 
     <div class="grid g-2" id="arefaParts" style="margin-bottom:56px;align-items:start" data-rise></div>
+
+    <div data-rise style="margin-bottom:56px">
+      <span class="eyebrow">What it is for</span>
+      <h3 class="as-h4" style="margin:10px 0 6px">Four questions, asked of the cohort</h3>
+      <p style="margin:0 0 22px;font-size:15px;color:var(--fg-mute);max-width:34em">A scripted exchange,
+        so that what AREFA is for can be read without it installed. The questions are fixed and the prose
+        is written — but every figure in the answers is counted from the nine intake records at the moment
+        you click, the same records section 02 is drawn from.</p>
+      <div class="demo">
+        <div class="demo-top">
+          <span class="pill" data-tier="exploring">Scripted demo</span>
+          <span class="demo-note">Not a live model · figures counted from the nine records</span>
+        </div>
+        <div class="demo-log" id="demoLog" role="log" aria-live="polite" aria-label="Demo exchange"></div>
+        <div class="demo-asks" id="demoAsks"></div>
+        <p class="demo-foot">
+          <b>This is a staged exchange, not AREFA answering.</b> The four questions are the only four it
+          takes, and the shape of each reply is written in the page source. What is not staged is the
+          arithmetic: every count above is tallied from the cohort data when you press the button, so the
+          demo cannot say something the profiles do not.<br><br>
+          AREFA is not running on this page, and cannot be. It runs on the centre's own machine, and the
+          transfer reports record no network exposure and none authorised.
+        </p>
+      </div>
+    </div>
 
     <div class="split" style="margin-bottom:56px">
       <div data-rise>
@@ -1821,6 +1876,137 @@ var Dir = (function(){
     return '<span class="slot"><span class="k">' + esc(x.k) + "</span>" +
       '<span class="v">' + esc(x.v) + "</span></span>";
   }).join("");
+
+  /* ── The demo console ──────────────────────────────────────────────────
+     Scripted questions, computed answers.  The prose around each figure is
+     written; the figure itself is tallied from COHORT at the moment of the
+     click.  That split is the whole point: a demo that reads well but says
+     something the nine profiles do not is worse than no demo, so the parts
+     that could drift are not allowed to be typed. ──────────────────────── */
+  /* Transcribed from the source report's summary table, which counts seven
+     sectors across the cohort.  The profiles carry more labels than that, and
+     the demo prints both rather than picking the flattering one \u2014 the same
+     treatment section 03 gives the two figures where that summary and its own
+     profiles disagree. */
+  var SUMMARY_SECTORS = 7;
+
+  function names(list){ return list.map(function(e){ return e.name; }); }
+  function series(a){
+    if (a.length === 1) return a[0];
+    return a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+  }
+  function asking(k){ return COHORT.filter(function(e){ return e.looking.indexOf(k) >= 0; }); }
+  function li(label, body){
+    return '<span class="li">\u00b7 <b>' + esc(label) + "</b> \u2014 " + esc(body) + "</span>";
+  }
+  function tail(t){ return '<span class="tail">' + esc(t) + "</span>"; }
+
+  var DEMO = [
+    { q: "which of the nine can buy from another of the nine?",
+      a: function(){
+        var by = {};
+        COHORT.forEach(function(e){
+          e.sectors.forEach(function(x){ (by[x] = by[x] || []).push(e); });
+        });
+        var all = Object.keys(by);
+        var shared = all.filter(function(x){ return by[x].length > 1; }).sort();
+        var rows = shared.map(function(x){
+          return li(x + " \u00d7 " + by[x].length, series(names(by[x])));
+        }).join("");
+
+        /* One label written two ways is two sectors to a machine and one trade
+           to a buyer, so the pair is found rather than assumed: a label that
+           another label starts with is the same trade spelled longer. */
+        var dup = [];
+        all.forEach(function(a){
+          all.forEach(function(b){
+            if (a !== b && b.toLowerCase().indexOf(a.toLowerCase() + " ") === 0) dup.push([a, b]);
+          });
+        });
+        var note = "";
+        if (all.length !== SUMMARY_SECTORS){
+          note = " The summary table for this cohort says <b>" + SUMMARY_SECTORS + "</b>" +
+            (dup.length ? ", and " + (dup.length === 1 ? "one pair of those labels is the same trade" +
+               " written twice" : dup.length + " pairs of those labels are the same trade written twice") +
+               " (" + dup.map(function(d){ return "\u201c" + d[0] + "\u201d / \u201c" + d[1] +
+               "\u201d"; }).join(", ") + "), which a machine reads as separate." : ".") +
+            " The labels are reported as the profiles carry them, and the disagreement is reported too.";
+        }
+
+        return "The nine records carry <b>" + all.length + "</b> distinct sector labels between them." +
+          note + " <b>" + shared.length + "</b> labels are held by more than one enterprise, and those " +
+          "are where the cohort can trade with itself rather than with a stranger:" + rows +
+          tail("The centre does not have to introduce them. They are already in the same list.");
+      } },
+
+    { q: "where is the cohort stuck, and what is it asking for?",
+      a: function(){
+        var rows = Object.keys(LOOKING).map(function(k){
+          return { k:k, n:asking(k).length };
+        }).sort(function(a, b){ return b.n - a.n; });
+        var top = rows.slice(0, 4).map(function(r){
+          return li(LOOKING[r.k], r.n + " of " + COHORT.length);
+        }).join("");
+        var b = BARRIERS.map(function(x){ return x.n + " name " + x.k.toLowerCase(); });
+        return "Off the intake forms: " + series(b) + ". Set that against what they are " +
+          "asking the centre for, counted across every profile:" + top +
+          tail("Which of the nine is short of what stays off this site. The count does not, " +
+               "because the count is the case for the intervention.");
+      } },
+
+    { q: "who needs a route to market, and what are they selling?",
+      a: function(){
+        var m = asking("market");
+        var rows = m.map(function(e){ return li(e.name, e.summary); }).join("");
+        var provs = {};
+        m.forEach(function(e){ provs[e.prov] = (provs[e.prov] || 0) + 1; });
+        return "<b>" + m.length + "</b> of the " + COHORT.length + " are asking for customers and " +
+          "market access. What each of them has to sell:" + rows +
+          tail("Across " + Object.keys(provs).length + " provinces. A buyer reading this page can " +
+               "take the list to the centre on 014 403 5209 and be put through.");
+      } },
+
+    { q: "what can the centre actually report to sedfa today?",
+      a: function(){
+        var t = {}, pv = {};
+        COHORT.forEach(function(e){
+          t[e.tier] = (t[e.tier] || 0) + 1;
+          pv[e.prov] = (pv[e.prov] || 0) + 1;
+        });
+        var tiers = Object.keys(t).sort(function(a, b){ return t[b] - t[a]; })
+          .map(function(k){ return t[k] + " " + TIERS[k].label.toLowerCase() + (t[k] > 1 ? "s" : ""); });
+        var provs = Object.keys(pv).sort(function(a, b){ return pv[b] - pv[a]; })
+          .map(function(k){ return k + " " + pv[k]; });
+        return "Verified and reportable: <b>" + COHORT.length + "</b> enterprises on four footings \u2014 " +
+          series(tiers) + " \u2014 across " + series(provs) + "." +
+          li("Jobs created", "0. Fifteen are projected across two enterprises. A projection is written " +
+             "as a projection and is never added to the count.") +
+          li("Enterprise longevity", "Not yet readable. The cohort took intake in August and September " +
+             "2026; the first anniversary reading falls due in 2027.") +
+          tail("Two of the five measures have nothing to report yet, and say so. That is the " +
+               "answer, not a gap in it.");
+      } }
+  ];
+
+  var log = $("#demoLog"), asks = $("#demoAsks"), current = -1;
+  asks.innerHTML = DEMO.map(function(d, i){
+    return '<button class="demo-ask" type="button" data-i="' + i + '" aria-pressed="false">' +
+      esc(d.q) + "</button>";
+  }).join("");
+
+  function say(i){
+    var d = DEMO[i]; if (!d) return;
+    current = i;
+    log.innerHTML = '<p class="demo-q">' + esc("arefa> " + d.q) + "</p>" +
+      '<p class="demo-a">' + d.a() + "</p>";
+    $$(".demo-ask", asks).forEach(function(b){
+      b.setAttribute("aria-pressed", String(+b.dataset.i === i));
+    });
+  }
+  asks.addEventListener("click", function(e){
+    var b = e.target.closest(".demo-ask"); if (b) say(+b.dataset.i);
+  });
+  say(0);
 
   var hashes = $("#arefaHashes");
   hashes.innerHTML = AREFA_HASHES.map(function(h, i){
