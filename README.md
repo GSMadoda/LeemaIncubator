@@ -107,6 +107,39 @@ The counts and byte figures live in the `AREFA` object at the top of the inline
 drift apart. Six digests are printed at full length with a copy control on each,
 and every one is also reachable from `⌘K`.
 
+### The demo console
+
+Section 06 carries a scripted console so that what AREFA is for can be read
+without it installed. It is labelled as scripted in three places — a pill at the
+head, the `arefa>` caret, and a footer that says in full sentences that this is
+not AREFA answering.
+
+The split that makes it honest: **the questions and the prose are written; every
+figure in them is tallied from `COHORT` at the moment of the click.** Nothing in
+an answer is a typed number, so the demo cannot say something the nine profiles
+do not. Edit a profile and the answers follow, exactly as the charts do.
+
+The four questions are held in `DEMO` in the inline `<script>`, each with an
+`a()` that computes its own reply.
+
+There is no live model on the page and there cannot be. AREFA runs on the
+centre's own machine, and the transfer reports record `network_exposed: false`
+and `network_exposure_authorized: false`.
+
+### The sector count disagrees with itself
+
+Building the first answer surfaced a third disagreement, on top of the two
+section 03 already documents. The nine profiles carry **13 distinct sector
+labels**; the summary says **seven**; and one pair is the same trade written
+twice — `Repairs` on Lomatlhola and `Repairs and technical services` on Lokissa,
+which no string comparison will ever match, so the directory's "Shares a sector
+with" row cannot link them.
+
+The demo reports both figures and names the duplicate pair rather than picking
+the flattering one. The underlying `COHORT` labels are left as the profiles carry
+them: they are the funder-facing record, and reconciling them is an editorial
+decision for the centre, not a tidy-up.
+
 ### What is deliberately not published
 
 - **Absolute paths, the operator's home directory, and the host it runs on.**
