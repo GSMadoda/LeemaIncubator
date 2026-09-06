@@ -15,7 +15,7 @@ This repository is the site: `index.html` is served at the root.
 
 | Path | Purpose |
 |------|---------|
-| `index.html` | The whole site. Markup, styles, the cohort data, the circuit-board engine and the directory are inline. |
+| `index.html` | The whole site. Markup, styles, the cohort data, the AREFA gate chain, the circuit-board engine and the directory are inline. |
 | `assets/leema-mark-white.png` | The supplied mark, keyed to transparency. White on ink — the primary version. |
 | `assets/leema-mark-ink.png` | The same geometry in ink, for use on paper. |
 | `assets/leema-share.png` | Open Graph card: the primary lockup on ink. |
@@ -83,6 +83,59 @@ Jobs are reported as projections: fifteen across the cohort — ten at Reve P
 Catering once the resort is operating, five at Far Out Excellent. Neither is
 counted as a job created.
 
+## AREFA
+
+Section 06 is the centre's own system. AREFA runs on the centre's hardware —
+a desktop launcher, ten user services, three integrity-audit timers, and
+`qwen2.5:7b` served locally, so nothing an enterprise types into it leaves the
+building.
+
+The system writes reports about itself at each gate of its transfer, and the
+section is transcribed from them rather than described around them:
+
+| Source | What the site takes from it |
+|---|---|
+| T00 · source scope and transfer contract | The exclusion list, the immutability rule, the pass timestamp. |
+| T01 · component manifest and source attestation | Object, file, directory and link counts, total bytes, the component-set digest, the frozen and successor fingerprints. |
+| T01A · model store authority and permission boundary | The model store resolving uniquely, and the model identity proven blob by blob. |
+| Source attestation | Five of the six SHA-256 digests printed in the fingerprints table. |
+| T00 · `scope_inventory.ollama` | The model server's version and the digest of its executable, independently reconfirmed against a supplied copy of the binary (38 086 544 bytes). |
+| T02 | Nothing. It has not run, and the row says so. |
+
+The counts and byte figures live in the `AREFA` object at the top of the inline
+`<script>`; the section renders from it, so the stat cards and the prose cannot
+drift apart. Six digests are printed at full length with a copy control on each,
+and every one is also reachable from `⌘K`.
+
+### What is deliberately not published
+
+- **Absolute paths, the operator's home directory, and the host it runs on.**
+  They identify a person and a machine, and the digests are checkable without
+  them. The roles are named instead.
+- **Anything the transfer contract already excludes** — SSH keys, browser
+  profiles and cookies, shell history, cloud credentials, authentication
+  configuration, password stores — is out of scope of the system itself, so it
+  is nowhere near the site.
+
+The digests are not secrets. They are integrity fingerprints, and printing them
+in full is the only thing that makes the claim checkable by someone holding a
+copy of the system.
+
+### The open gate is written open
+
+`archive_created`, `encryption_performed`, `network_exposed`,
+`recipient_identity_proven` and `overall_transfer_converged` are all false in the
+reports, and the "What has not happened yet" card says so in those words. When a
+gate changes them, edit `AREFA_OPEN` and `AREFA_GATES` — not the prose.
+
+### Artwork still required
+
+The AREFA mark — the continent drawn as a printed-circuit board in gold on ink,
+and the baobab plate at dusk — is not in `assets/`. The section carries a
+`Photograph required`-style placeholder in its place until the files are keyed to
+transparency and given an ink and a white version, the way the LEEMA mark is
+held.
+
 ## The design
 
 The mark is heavy square capitals whose counters are filled with printed-circuit
@@ -103,8 +156,9 @@ Two rules from the guidelines are enforced by the code rather than described:
 There are no gradients anywhere in the stylesheet, by grep.
 
 `⌘K` (or `Ctrl K`, or `/`) opens a command palette over the whole page: every
-enterprise by name, every section, every kind of support as a filter, and the
-centre's phone number and address — all keyboard-driven.
+enterprise by name, every section, every kind of support as a filter, every AREFA
+digest as a copy action, and the centre's phone number and address — all
+keyboard-driven.
 
 ## Accessibility and behaviour
 
