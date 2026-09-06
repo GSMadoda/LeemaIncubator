@@ -1,0 +1,1757 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leema Township Incubator — LEEMA Technology Incubation</title>
+<meta name="description" content="LEEMA Incubation NPC is a township enterprise incubator in Mogwase, North West, working with small enterprises across the North West, Gauteng and the Northern Cape, funded through Seda and SEDFA.">
+<meta name="theme-color" content="#060806">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Leema Township Incubator">
+<meta property="og:site_name" content="LEEMA Incubation NPC">
+<meta property="og:description" content="A township enterprise incubator in Mogwase, North West, working with small enterprises across the North West, Gauteng and the Northern Cape, funded through Seda and SEDFA.">
+<meta property="og:image" content="assets/leema-share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/leema-mark-ink.png">
+<!-- Type is self-hosted: no third-party request is made on any page view. -->
+<link rel="stylesheet" href="assets/leema-type.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/sora-600-normal-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/newsreader-400-normal-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/ibm-plex-mono-400-normal-latin.woff2">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   LEEMA · Brand guidelines Version 1 · September 2026, implemented.
+   Tokens are the document's tokens. oklch is authoritative; the hex
+   declaration above each one is the fallback for engines without oklch.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root{
+  --ink-1000:#060806; --ink-1000:oklch(0.13 0.006 150);
+  --ink-900:#121512;  --ink-900:oklch(0.19 0.006 150);
+  --ink-800:#242725;  --ink-800:oklch(0.27 0.006 150);
+  --ink-600:#535653;  --ink-600:oklch(0.45 0.006 150);
+  --ink-400:#848784;  --ink-400:oklch(0.62 0.006 150);
+  --ink-200:#CFD2CF;  --ink-200:oklch(0.86 0.004 150);
+  --ink-100:#E7E8E5;  --ink-100:oklch(0.93 0.004 120);
+  --ink-050:#FAFAF8;  --ink-050:oklch(0.985 0.003 105);
+  --white:#FFFFFF;
+
+  --growth-700:#29612D; --growth-700:oklch(0.44 0.10 145);
+  --growth-600:#38853E; --growth-600:oklch(0.55 0.13 145);
+  --growth-500:#61B565; --growth-500:oklch(0.70 0.14 145);
+  --growth-100:#E3F4E2; --growth-100:oklch(0.95 0.03 145);
+
+  --ember-700:#824717; --ember-700:oklch(0.46 0.10 55);
+  --ember-600:#B3621E; --ember-600:oklch(0.58 0.13 55);
+  --ember-500:#E0843E; --ember-500:oklch(0.70 0.14 55);
+  --ember-100:#FFEDDF; --ember-100:oklch(0.96 0.03 55);
+
+  /* Surface roles. Sections re-point these; nothing else knows the difference. */
+  --bg:var(--ink-050);
+  --card:var(--white);
+  --fg:var(--ink-1000);
+  --fg-soft:var(--ink-800);
+  --fg-mute:var(--ink-600);
+  --rule:var(--ink-200);
+  --rule-soft:var(--ink-100);
+  --accent:var(--growth-600);
+  --accent-soft:var(--growth-100);
+  --ember:var(--ember-600);
+
+  /* Grid — twelve columns, 24px gutters, 1200px max, 32px margins to 64px. */
+  --gutter:24px;
+  --measure:720px;
+  --max:1200px;
+  --pad:32px;
+
+  /* Motion — 120ms on control states, 180ms on disclosure, one easing curve. */
+  --t-ctl:120ms;
+  --t-disc:180ms;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+
+  --r:4px;              /* 0 to 4px. Eight is photographic containers only. */
+  --r-photo:8px;
+  color-scheme:light;
+}
+
+/* The ink surface: white on ink. Covers, headers, footers, signage. */
+.on-ink{
+  --bg:var(--ink-1000);
+  --card:var(--ink-900);
+  --fg:var(--white);
+  --fg-soft:var(--ink-200);
+  --fg-mute:var(--ink-400);
+  --rule:var(--ink-800);
+  --rule-soft:#1a1d1a;
+  --accent:var(--growth-500);
+  --accent-soft:#12291a;
+  --ember:var(--ember-500);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ink-1000); color:var(--fg);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+::selection{background:var(--growth-500);color:var(--ink-1000)}
+
+/* ── Type ────────────────────────────────────────────────────────────────── */
+h1,h2,h3,h4,.sora{font-family:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:600;margin:0}
+h1{font-size:clamp(38px,5.5vw,80px);line-height:0.96;letter-spacing:-0.02em;max-width:15ch}
+h2{font-size:clamp(30px,3.9vw,52px);line-height:1.02;letter-spacing:-0.018em}
+h3{font-size:clamp(19px,1.5vw,23px);line-height:1.22;letter-spacing:-0.01em}
+h4,.as-h4{font-size:16px;line-height:1.3;letter-spacing:-0.005em}
+p{margin:0 0 1.05em}
+.lead{font-size:clamp(19px,1.75vw,23px);line-height:1.52;color:var(--fg-soft);max-width:22em}
+.prose{max-width:var(--measure)}
+.prose p{color:var(--fg-soft)}
+strong{font-weight:500;color:var(--fg)}
+
+/* IBM Plex Mono — eyebrows, reference numbers, dates, amounts, figures.
+   Uppercase at 12px / 0.14em is the only uppercase setting in the brand. */
+.mono,.eyebrow,.fig{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:400}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute);display:block}
+.eyebrow.is-accent{color:var(--accent)}
+.fig{font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+@media(min-width:1080px){:root{--pad:64px}}
+section{position:relative;background:var(--bg);color:var(--fg)}
+.band{padding-block:clamp(72px,9vw,148px)}
+.sec-head{display:grid;gap:18px;padding-bottom:36px;border-bottom:1px solid var(--rule);margin-bottom:56px}
+.sec-head .lead{margin:0}
+.grid{display:grid;gap:var(--gutter)}
+@media(min-width:820px){
+  .g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .g-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,80px);align-items:start}
+}
+
+/* ── Card — white, 1px hairline, 4px corners, 24px padding, no shadow.
+      A status takes a 3px stripe on the TOP edge. Never a left border. ──── */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:24px;position:relative}
+.card[data-stripe]{border-top:0}
+.card[data-stripe]::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--stripe,var(--ink-800))}
+.card[data-stripe]{padding-top:27px}
+[data-tier="incubatee"]{--stripe:var(--growth-600)}
+[data-tier="reseller"]{--stripe:var(--ink-800)}
+[data-tier="partner"]{--stripe:var(--ember-600)}
+[data-tier="exploring"]{--stripe:var(--ink-400)}
+.on-ink [data-tier="reseller"]{--stripe:var(--ink-200)}
+
+/* Status markers are the only pills in the brand. */
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule);border-radius:999px;
+  padding:4px 11px 4px 9px;font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute);background:transparent;white-space:nowrap;max-width:100%}
+@media(max-width:560px){.pill{white-space:normal;border-radius:12px}}
+.pill::before{content:"";width:6px;height:6px;background:var(--stripe,var(--ink-400));border-radius:1px;flex:none}
+
+/* ── Controls ────────────────────────────────────────────────────────────── */
+.btn{font-family:"Sora",sans-serif;font-weight:500;font-size:15px;line-height:1;letter-spacing:-0.005em;
+  display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:var(--r);cursor:pointer;
+  border:1px solid var(--fg);background:var(--fg);color:var(--bg);
+  transition:background var(--t-ctl) var(--ease),color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--ink-1000)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--rule)}
+.btn.ghost:hover{border-color:var(--fg);background:transparent;color:var(--fg)}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--fg)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+button{font:inherit;color:inherit}
+.skip{position:fixed;top:-100px;left:16px;z-index:200;background:var(--white);color:var(--ink-1000);
+  padding:12px 16px;border-radius:var(--r);font-family:"Sora",sans-serif;font-size:14px}
+.skip:focus{top:16px}
+
+/* ── The board ───────────────────────────────────────────────────────────────
+   The mark is square capitals whose counters are filled with printed-circuit
+   traces. The site is the rest of that board. Traces turn at ninety degrees,
+   and they route around the mark's clear space rather than through it.
+   ──────────────────────────────────────────────────────────────────────── */
+#board{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1;
+  transition:opacity var(--t-disc) var(--ease)}
+/* The board is visible through the ink bands and nowhere else. Every reading
+   surface that carries a figure is opaque paper. */
+section.on-ink{background:color-mix(in srgb,var(--ink-1000) 84%,transparent)}
+.hero.on-ink{background:transparent}
+@supports not (color:color-mix(in srgb,#000 50%,transparent)){
+  section.on-ink{background:var(--ink-1000)}
+  .hero.on-ink{background:transparent}
+}
+body[data-report="on"] #board{opacity:0}
+.layer{position:relative;z-index:1}
+
+/* ── Navigation ──────────────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background:color-mix(in srgb,var(--ink-1000) 88%,transparent);
+  -webkit-backdrop-filter:saturate(1.1) blur(14px);backdrop-filter:saturate(1.1) blur(14px);
+  border-bottom:1px solid var(--ink-800);transition:transform var(--t-disc) var(--ease)}
+.nav.is-hidden{transform:translateY(-101%)}
+.nav-in{display:flex;align-items:center;gap:24px;height:64px}
+.nav-mark{display:flex;align-items:center;gap:14px;flex:none;text-decoration:none}
+.nav-mark img{width:118px;height:auto}
+.nav-mark .prog{border-left:1px solid var(--ink-800);padding-left:14px;font-family:"Sora",sans-serif;
+  font-weight:600;font-size:13px;color:var(--white);line-height:1.15;letter-spacing:-0.01em}
+@media(max-width:900px){.nav-mark .prog{display:none}}
+.nav-links{display:flex;gap:2px;margin-left:auto;align-items:center}
+@media(max-width:1279px){.nav-links .lnk{display:none}}
+.lnk{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.13em;
+  color:var(--ink-400);text-decoration:none;padding:9px 10px;border-radius:2px;position:relative;
+  white-space:nowrap;transition:color var(--t-ctl) var(--ease)}
+.lnk:hover,.lnk[aria-current="true"]{color:var(--white)}
+.lnk[aria-current="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:1px;background:var(--growth-500)}
+.nav-tools{display:flex;gap:8px;align-items:center;margin-left:8px;flex:none}
+.tool{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 11px;border:1px solid var(--ink-800);
+  background:transparent;color:var(--ink-400);border-radius:2px;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;
+  white-space:nowrap;transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+@media(max-width:520px){.kbd{display:none}.tool{padding:0 9px;letter-spacing:0.08em}}
+.tool:hover{color:var(--white);border-color:var(--ink-600)}
+.tool[aria-pressed="true"]{color:var(--growth-500);border-color:var(--growth-700)}
+.kbd{font-family:"IBM Plex Mono",monospace;font-size:10px;border:1px solid var(--ink-800);border-radius:2px;
+  padding:2px 5px;color:var(--ink-400)}
+.nav-progress{position:absolute;left:0;bottom:-1px;height:1px;background:var(--growth-500);width:0}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero{min-height:100svh;display:flex;align-items:center;padding-block:104px 56px;background:transparent;
+  overflow-x:clip}
+.hero-in{width:100%}
+.hero-mark{position:relative;display:inline-block;margin-bottom:clamp(28px,4vw,46px)}
+.hero-mark img{width:clamp(196px,21vw,290px)}
+.hero-mark .clear{position:absolute;pointer-events:none;border:1px dashed var(--ink-600);opacity:0;
+  transition:opacity var(--t-disc) var(--ease)}
+.hero-mark:hover .clear{opacity:1}
+h1 .l2{display:block;color:var(--ink-400)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;padding-top:22px;border-top:1px solid var(--ink-800)}
+.hero-meta span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-400);letter-spacing:0.02em}
+.hero-meta b{color:var(--white);font-weight:400}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.scrollcue{margin-top:clamp(40px,7vw,88px);display:flex;align-items:center;gap:12px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-600)}
+.scrollcue i{display:block;width:56px;height:1px;background:var(--ink-800);position:relative;overflow:hidden}
+.scrollcue i::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:1px;background:var(--growth-500);
+  animation:trace 2.4s linear infinite}
+@keyframes trace{to{left:100%}}
+
+/* ── Section rail — the scroll trace, jogging at ninety degrees ──────────── */
+.rail{position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:55;display:none}
+@media(min-width:1280px){.rail{display:block}}
+body[data-report="on"] .rail{display:none}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.rail a{display:grid;grid-template-columns:26px auto;align-items:center;gap:10px;text-decoration:none;
+  padding:5px 0;color:var(--rail-mute,var(--ink-600))}
+.rail .tick{height:1px;background:currentColor;width:12px;transition:width var(--t-ctl) var(--ease)}
+.rail .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;
+  opacity:0;transform:translateX(-4px);transition:opacity var(--t-ctl) var(--ease),transform var(--t-ctl) var(--ease);white-space:nowrap}
+.rail:hover .lbl{opacity:1;transform:none}
+.rail a:hover .tick,.rail a[aria-current="true"] .tick{width:26px}
+.rail a[aria-current="true"]{color:var(--growth-500)}
+
+/* ── Measures ────────────────────────────────────────────────────────────── */
+.meas{border-top:1px solid var(--rule)}
+.meas-row{border-bottom:1px solid var(--rule);width:100%;text-align:left;background:transparent;border-inline:0;
+  border-top:0;cursor:pointer;padding:0;display:block;transition:background var(--t-ctl) var(--ease)}
+.meas-row:hover{background:var(--rule-soft)}
+.meas-top{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 12px}
+@media(max-width:720px){.meas-top{grid-template-columns:40px minmax(0,1fr);gap:12px}.meas-top .st{grid-column:2}}
+.meas-top .ix{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:0.14em}
+.meas-top .ti{font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(18px,2vw,25px);letter-spacing:-0.012em}
+.meas-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-disc) var(--ease)}
+.meas-row[aria-expanded="true"] .meas-body{grid-template-rows:1fr}
+.meas-body>*{overflow:hidden}
+.meas-inner{padding:0 12px 26px 84px;display:grid;gap:18px;max-width:860px}
+@media(max-width:720px){.meas-inner{padding-left:52px}}
+.meas-inner p{margin:0;color:var(--fg-soft)}
+.slot{border:1px dashed var(--rule);border-radius:2px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px 14px;
+  align-items:baseline;background:transparent}
+.slot .k{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ember)}
+.slot .v{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--fg-mute)}
+.meter{display:grid;gap:8px}
+.meter .track{height:8px;border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden}
+.meter .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--ember-600);
+  transition:width 900ms var(--ease)}
+.meter .cap{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute)}
+
+/* ── Portfolio — enterprises as components seated on the board ───────────── */
+.chips{display:grid;gap:var(--gutter)}
+@media(min-width:760px){.chips{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.chip{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:27px 24px 24px;text-align:left;cursor:pointer;display:grid;gap:14px;align-content:start;min-width:0;
+  transition:border-color var(--t-ctl) var(--ease),transform var(--t-ctl) var(--ease)}
+.chip::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--stripe)}
+.chip:hover{border-color:var(--fg)}
+.chip[aria-pressed="true"]{border-color:var(--fg)}
+.chip.is-dim{opacity:0.34}
+/* Component pads down each side, drawn as hairlines. Flat, no shadow. */
+.chip .pads{position:absolute;top:34px;bottom:18px;width:7px;display:grid;gap:9px;grid-auto-rows:2px}
+.chip .pads.l{left:-1px}.chip .pads.r{right:-1px}
+/* The component pads straddle the card edge. Below the three-up breakpoint the
+   cards run full width, so the pads come off rather than touch the screen. */
+@media(max-width:759px){.chip .pads{display:none}}
+.chip .pads i{background:var(--rule);display:block}
+.chip:hover .pads i,.chip[aria-pressed="true"] .pads i{background:var(--stripe)}
+.chip h3{padding-inline:14px}
+.chip .body{padding-inline:14px;display:grid;gap:12px}
+.chip .desc{font-size:15px;color:var(--fg-mute);margin:0;line-height:1.55}
+.chip .row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--rule-soft);padding-top:10px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute)}
+.chip .row b{font-weight:400;color:var(--fg-soft)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.filter{border:1px solid var(--rule);background:transparent;color:var(--fg-mute);border-radius:2px;padding:8px 13px;
+  cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;
+  display:inline-flex;align-items:center;gap:8px;transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+.filter::before{content:"";width:6px;height:6px;border-radius:1px;background:var(--stripe,var(--ink-400))}
+.filter:hover{color:var(--fg);border-color:var(--fg-mute)}
+.filter[aria-pressed="true"]{color:var(--fg);border-color:var(--fg)}
+
+/* ── System explorer ─────────────────────────────────────────────────────── */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.sw{border:1px solid var(--rule);border-radius:var(--r);background:var(--card);padding:0;overflow:hidden;
+  cursor:copy;text-align:left;display:grid;transition:border-color var(--t-ctl) var(--ease)}
+.sw:hover{border-color:var(--fg)}
+.sw .chip-col{height:76px;background:var(--c)}
+.sw .meta{padding:11px 12px 13px;display:grid;gap:3px}
+.sw .nm{font-family:"Sora",sans-serif;font-weight:500;font-size:13px}
+.sw .tk,.sw .hx{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--fg-mute)}
+.sw .use{font-size:13px;color:var(--fg-mute);line-height:1.45;margin-top:3px}
+
+.spec{display:grid;gap:0;border:1px solid var(--rule);border-radius:var(--r);background:var(--card);overflow:hidden}
+.spec-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--rule)}
+.spec-ctl label{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute)}
+.spec-out{padding:26px 20px 30px;display:grid;gap:24px}
+.spec-line{display:grid;gap:8px}
+.spec-line .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute)}
+.spec-line .sample{line-height:1.05;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.warn{display:none;align-items:flex-start;gap:10px;border-top:3px solid var(--ember-600);background:var(--ember-100);
+  color:var(--ember-700);padding:13px 16px;border-radius:0 0 var(--r) var(--r);font-size:15px}
+.warn.on{display:flex}
+.warn b{color:var(--ember-700);font-weight:500}
+.on-ink .warn{background:#20140a}
+
+input[type=range]{-webkit-appearance:none;appearance:none;height:20px;background:transparent;flex:1;min-width:140px;cursor:ew-resize}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:1px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:3px;height:18px;background:var(--accent);
+  border-radius:0;margin-top:-9px;border:0}
+input[type=range]::-moz-range-thumb{width:3px;height:18px;background:var(--accent);border-radius:0;border:0}
+
+/* Mark validator — the 120px floor, demonstrated rather than described. */
+.val{display:grid;gap:0;border:1px solid var(--rule);border-radius:var(--r);background:var(--card);overflow:hidden}
+.val-stage{min-height:230px;display:grid;place-items:center;padding:38px 20px;background:var(--ink-1000);position:relative}
+.val-stage .clearbox{position:relative;border:1px dashed var(--ink-600);display:grid;place-items:center}
+.val-stage img{display:block}
+.val-bar{background:var(--white);border-radius:1px}
+.val-note{position:absolute;left:14px;bottom:12px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-600)}
+.val-ctl{padding:16px 20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--rule)}
+
+/* ── Voice ───────────────────────────────────────────────────────────────── */
+.voice{display:grid;gap:var(--gutter)}
+@media(min-width:960px){.voice{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.editor{border:1px solid var(--rule);border-radius:var(--r);background:var(--card);display:grid;grid-template-rows:auto 1fr auto}
+.editor .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--rule)}
+.editor textarea{border:0;background:transparent;color:var(--fg);font-family:"Newsreader",serif;font-size:17px;
+  line-height:1.6;padding:18px 16px;min-height:210px;resize:vertical;width:100%;outline:0}
+.editor .foot{display:flex;flex-wrap:wrap;gap:10px;padding:12px 16px;border-top:1px solid var(--rule);align-items:center}
+.findings{display:grid;gap:10px;align-content:start}
+.finding{border:1px solid var(--rule);border-top:3px solid var(--ember-600);border-radius:0 0 var(--r) var(--r);
+  background:var(--card);padding:14px 16px;display:grid;gap:5px}
+.finding.ok{border-top-color:var(--growth-600)}
+.finding .h{font-family:"Sora",sans-serif;font-weight:500;font-size:14px}
+.finding .d{font-size:15px;color:var(--fg-mute);line-height:1.5;margin:0}
+.finding .q{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute)}
+.hit{color:var(--ember-700);border-bottom:1px solid var(--ember-600)}
+.on-ink .hit{color:var(--ember-500)}
+.count{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute);letter-spacing:0.1em}
+
+/* ── Record ──────────────────────────────────────────────────────────────── */
+.quote{border-left:3px solid var(--growth-600);padding:4px 0 4px 22px;margin:0;max-width:660px}
+.quote p{font-size:clamp(19px,2.1vw,25px);line-height:1.42;color:var(--fg);margin:0 0 12px}
+.quote cite{font-family:"IBM Plex Mono",monospace;font-size:11px;font-style:normal;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute)}
+.track-line{position:relative;margin-top:56px;border-top:1px solid var(--rule);display:grid;gap:0}
+.ev{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+@media(max-width:640px){.ev{grid-template-columns:1fr;gap:6px}}
+.ev .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--fg-mute);white-space:nowrap;min-width:120px}
+.ev .t{font-family:"Sora",sans-serif;font-weight:500;font-size:17px}
+.ev .n{font-size:15px;color:var(--fg-mute);margin:4px 0 0}
+.ev[data-state="done"] .d{color:var(--accent)}
+
+/* ── Contact / footer ────────────────────────────────────────────────────── */
+.contact-grid{display:grid;gap:var(--gutter)}
+@media(min-width:820px){.contact-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cline{display:grid;gap:6px;border-top:1px solid var(--rule);padding-top:16px}
+.cline .k{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute)}
+.cline .v{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--fg);text-decoration:none;line-height:1.5}
+.cline a.v:hover{color:var(--accent)}
+footer{background:var(--ink-1000);color:var(--ink-400);border-top:1px solid var(--ink-800);padding-block:36px}
+.foot-in{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.02em}
+footer img{width:104px;opacity:0.9}
+
+/* ── Command palette ─────────────────────────────────────────────────────── */
+.pal{position:fixed;inset:0;z-index:120;display:none;padding:12vh 16px 16px;justify-content:center;
+  background:color-mix(in srgb,var(--ink-1000) 62%,transparent)}
+.pal.on{display:flex}
+.pal-box{width:min(640px,100%);background:var(--white);border:1px solid var(--ink-200);border-radius:var(--r);
+  box-shadow:0 24px 60px rgba(6,8,6,0.28);overflow:hidden;align-self:flex-start;max-height:74vh;display:grid;
+  grid-template-rows:auto 1fr auto}
+.pal-in{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--ink-100)}
+.pal-in input{border:0;outline:0;background:transparent;font-family:"Sora",sans-serif;font-size:17px;
+  color:var(--ink-1000);width:100%}
+.pal-in input::placeholder{color:var(--ink-400)}
+.pal-list{overflow:auto;padding:6px}
+.pal-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;
+  padding:11px 12px;border:0;background:transparent;text-align:left;cursor:pointer;border-radius:2px;color:var(--ink-1000)}
+.pal-item[data-sel="1"]{background:var(--ink-050);box-shadow:inset 3px 0 0 var(--growth-600)}
+.pal-item .ix{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-400);width:26px}
+.pal-item .nm{font-family:"Sora",sans-serif;font-weight:500;font-size:15px}
+.pal-item .sub{font-size:14px;color:var(--ink-600);font-family:"Newsreader",serif}
+.pal-item .cat{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-400)}
+.pal-foot{padding:10px 16px;border-top:1px solid var(--ink-100);display:flex;gap:16px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-400);text-transform:uppercase;letter-spacing:0.12em}
+.pal-empty{padding:26px 14px;font-family:"Newsreader",serif;color:var(--ink-600)}
+
+/* ── Toast ───────────────────────────────────────────────────────────────── */
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:140;background:var(--ink-1000);
+  color:var(--white);border:1px solid var(--ink-800);border-radius:var(--r);padding:11px 16px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;opacity:0;pointer-events:none;
+  transition:opacity var(--t-ctl) var(--ease),transform var(--t-ctl) var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ── Reveal — substrate only. See the note in the Motion section. ───────── */
+[data-rise]{opacity:0;transform:translateY(10px);transition:opacity 320ms var(--ease),transform 320ms var(--ease)}
+[data-rise].in{opacity:1;transform:none}
+body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.001ms!important;animation-iteration-count:1!important;
+    transition-duration:0.001ms!important;scroll-behavior:auto!important}
+  [data-rise]{opacity:1;transform:none}
+}
+
+/* Image positions are ruled placeholders naming the shot required, until the
+   photography exists. Real photography only; no stock, no illustration. */
+.shot{border:1px solid var(--rule);border-radius:var(--r-photo);background:transparent;position:relative;
+  min-height:280px;display:grid;align-content:end;gap:6px;padding:20px;overflow:hidden}
+/* Two hairline diagonals mark an empty image position. Flat strokes, no fill. */
+.shot::before,.shot::after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;
+  border-top:1px solid var(--rule-soft);transform-origin:0 0;pointer-events:none}
+.shot::before{transform:rotate(var(--a1,32deg)) scaleX(2)}
+.shot::after{transform:translateY(100%) rotate(calc(-1 * var(--a1,32deg))) scaleX(2)}
+.shot .k{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ember)}
+.shot .v{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--fg-mute);line-height:1.55;max-width:34em}
+
+@media print{
+  #board,.nav,.rail,.pal,.toast,.scrollcue{display:none!important}
+  body{background:#fff;color:#000}
+  .band{padding-block:24px}
+}
+</style>
+</head>
+<body data-report="off">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="board" aria-hidden="true"></canvas>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="nav-mark" href="#top" aria-label="Leema Township Incubator — home">
+      <img src="assets/leema-mark-white.png" alt="LEEMA Technology Incubation" width="357" height="101">
+      <span class="prog">Leema Township<br>Incubator</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a class="lnk" href="#who">Who we are</a>
+      <a class="lnk" href="#measures">Measures</a>
+      <a class="lnk" href="#enterprises">Enterprises</a>
+      <a class="lnk" href="#system">System</a>
+      <a class="lnk" href="#voice">Voice</a>
+      <a class="lnk" href="#record">Record</a>
+      <a class="lnk" href="#contact">Contact</a>
+      <span class="nav-tools">
+        <button class="tool" id="reportBtn" aria-pressed="false" title="Still the board and remove every scroll-triggered movement">Report mode</button>
+        <button class="tool" id="palBtn" aria-haspopup="dialog">Search <span class="kbd" id="kbdHint">⌘K</span></button>
+      </span>
+    </nav>
+  </div>
+  <div class="nav-progress" id="navProg"></div>
+</header>
+
+<nav class="rail" id="rail" aria-label="Page position">
+  <ol>
+    <li><a href="#who"><span class="tick"></span><span class="lbl">01 · Who we are</span></a></li>
+    <li><a href="#measures"><span class="tick"></span><span class="lbl">02 · What we measure</span></a></li>
+    <li><a href="#enterprises"><span class="tick"></span><span class="lbl">03 · Enterprises</span></a></li>
+    <li><a href="#system"><span class="tick"></span><span class="lbl">04 · The system</span></a></li>
+    <li><a href="#voice"><span class="tick"></span><span class="lbl">05 · How we write</span></a></li>
+    <li><a href="#record"><span class="tick"></span><span class="lbl">06 · The record</span></a></li>
+    <li><a href="#contact"><span class="tick"></span><span class="lbl">07 · Contact</span></a></li>
+  </ol>
+</nav>
+
+<main id="main" class="layer">
+
+<!-- ─────────────────────────────────────────────────────── HERO · ink ── -->
+<section id="top" class="hero on-ink">
+  <div class="wrap hero-in">
+    <div class="hero-mark" id="heroMark">
+      <img src="assets/leema-mark-white.png" alt="LEEMA Technology Incubation" width="357" height="101">
+      <span class="clear" aria-hidden="true"></span>
+    </div>
+    <h1>Township enterprises,<br>built to still be trading<span class="l2">in five years.</span></h1>
+    <p class="lead" style="margin-top:26px">LEEMA Incubation NPC is a township enterprise incubator in Mogwase,
+      North West, working with small enterprises across the North West, Gauteng and the Northern Cape,
+      funded through Seda and SEDFA.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#contact">Talk to the centre <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="#measures">What we report <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero-meta">
+      <span>Programme · <b>Leema Township Incubator</b></span>
+      <span>Parent · <b>LEEMA Incubation NPC</b></span>
+      <span>Centre · <b>Mogwase, North West</b></span>
+      <span>Funders · <b>Seda and SEDFA</b></span>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><i></i><span>Signal follows the scroll</span></div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── 01 WHO WE ARE · paper ── -->
+<section id="who" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">01</span>
+      <h2>Who we are</h2>
+      <p class="lead">Two audiences, one face: a development finance officer reading a quarterly report,
+        and a business owner deciding whether to walk into the centre.</p>
+    </div>
+    <div class="split">
+      <div class="prose" data-rise>
+        <p>The organisation supports three kinds of relationship at once — incubatees in full incubation,
+          resellers trading through the LEEMA network, and strategic partners. That structure is the reason
+          the brand speaks to both audiences without changing its voice.</p>
+        <p><strong>LEEMA Incubation NPC</strong> is the parent, and it is the name used in registration, banking,
+          contracts, funder correspondence and PFMA compliance statements. <strong>Leema Township Incubator</strong>
+          is the programme, and it is the name used in everything public-facing: this website, intake, training,
+          certificates and community materials.</p>
+        <p>The centre is at Stand 43, Factory A, Bodirelo Industrial Park, Mogwase. The door is open to owners
+          in the North West, Gauteng and the Northern Cape.</p>
+        <div class="grid g-2" style="margin-top:32px">
+          <div class="card" data-tier="incubatee" data-stripe>
+            <span class="eyebrow">Parent</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">LEEMA Incubation NPC</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Registration, banking, contracts,
+              funder correspondence, PFMA compliance statements.</p>
+          </div>
+          <div class="card" data-tier="reseller" data-stripe>
+            <span class="eyebrow">Programme</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">Leema Township Incubator</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Website, intake, training, certificates,
+              community materials.</p>
+          </div>
+        </div>
+      </div>
+      <div data-rise>
+        <div class="shot" role="img" aria-label="Image position: photograph required of the Mogwase centre, training room in use">
+          <span class="k">Photograph required</span>
+          <span class="v">Mogwase centre · training room in use · warm natural light · no filters.
+            One commissioned day of photography at the centre and two or three enterprise sites
+            would change the brand more than any other single spend.</span>
+        </div>
+        <div class="cline" style="margin-top:20px">
+          <span class="k">Centre</span>
+          <span class="v">Stand 43, Factory A<br>Bodirelo Industrial Park<br>Mogwase, North West</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────── 02 MEASURES · ink ── -->
+<section id="measures" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">02</span>
+      <h2>What we measure</h2>
+      <p class="lead">Everything the programme produces is measured against five things. They are not
+        marketing lines; they are what the organisation reports on. Open one to read how it is counted.</p>
+    </div>
+    <div class="meas" id="meas" data-rise></div>
+
+    <div class="grid g-2" style="margin-top:56px;align-items:start">
+      <div class="card" data-tier="partner" data-stripe data-rise>
+        <span class="eyebrow">Reported barrier</span>
+        <h3 class="as-h4" style="margin:8px 0 14px">What the cohort says is in the way</h3>
+        <div class="meter">
+          <div class="track"><span class="fill" data-fill="75"></span></div>
+          <div class="cap"><span>Funding and market access</span><span class="fig">75%</span></div>
+        </div>
+        <p style="margin:14px 0 0;font-size:15px;color:var(--fg-mute)">Three quarters of the cohort names funding
+          and market access. That gets printed, not hidden.</p>
+      </div>
+      <div class="card" data-rise>
+        <span class="eyebrow">Counting note</span>
+        <h3 class="as-h4" style="margin:8px 0 10px">Projections are written as projections</h3>
+        <p style="margin:0;font-size:15px;color:var(--fg-mute)">A projected job is not a created job, and the two
+          are never added together. Where a figure has not been verified against the register, this site shows the
+          slot and names the number required rather than filling it with an estimate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────── 03 ENTERPRISES · paper ── -->
+<section id="enterprises" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">03</span>
+      <h2>Enterprises on the board</h2>
+      <p class="lead">We name the enterprise. Never "one of our incubatees". Relationship tiers are fixed:
+        incubatee green, reseller ink, strategic partner ember, exploring grey.</p>
+    </div>
+    <div class="filters" id="filters" data-rise></div>
+    <p class="count" id="chipCount" data-rise style="margin:-14px 0 26px"></p>
+    <div class="chips" id="chips" data-rise></div>
+    <p class="count" style="margin-top:22px">Tier markers below are placeholders · the enterprise register is the source of record</p>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────── 04 THE SYSTEM · ink ── -->
+<section id="system" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">04</span>
+      <h2>The system, running</h2>
+      <p class="lead">Ink and paper carry roughly nine tenths of every surface. Two accents do the rest:
+        growth for what grows, ember for what is being built. Everything here is live — take a token,
+        set the type, test the mark.</p>
+    </div>
+
+    <h3 style="margin-bottom:16px">Colour</h3>
+    <p class="count" style="margin:0 0 18px">Click to copy the oklch value · shift-click for the hex fallback</p>
+    <div class="swatches" id="swatches" data-rise></div>
+
+    <div class="grid g-2" style="margin-top:64px;align-items:start">
+      <div data-rise>
+        <h3 style="margin-bottom:16px">Type</h3>
+        <p class="count" style="margin:0 0 18px">Three faces, each with one job · drag to set the body size</p>
+        <div class="spec">
+          <div class="spec-ctl">
+            <label for="typeSize">Body size</label>
+            <input type="range" id="typeSize" min="11" max="34" value="17" step="1" aria-describedby="typeWarn">
+            <span class="fig" id="typeVal" style="min-width:52px;text-align:right">17px</span>
+          </div>
+          <div class="spec-out">
+            <div class="spec-line">
+              <span class="tag">Sora 600 · display, headings, buttons, labels</span>
+              <span class="sample sora" id="s1" style="font-size:44px;letter-spacing:-0.02em">Enterprise longevity</span>
+            </div>
+            <div class="spec-line">
+              <span class="tag">Newsreader 400 · body, leads, descriptions</span>
+              <span class="sample" id="s2" style="font-size:17px;white-space:normal;line-height:1.6">Businesses still trading in five years, not just registered.</span>
+            </div>
+            <div class="spec-line">
+              <span class="tag">IBM Plex Mono 400 · dates, amounts, figures</span>
+              <span class="sample mono" id="s3" style="font-size:15px">R800 000 · 29 July 2025 · 014 403 5209 · 75%</span>
+            </div>
+          </div>
+          <div class="warn" id="typeWarn" role="status">
+            <span aria-hidden="true">·</span>
+            <span><b>Below the floor.</b> Body text is never set below 15px on screen or 10pt in print.</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-rise>
+        <h3 style="margin-bottom:16px">The mark</h3>
+        <p class="count" style="margin:0 0 18px">Drag below 120px and watch the traces fill in</p>
+        <div class="val">
+          <div class="val-stage">
+            <div class="clearbox" id="clearBox">
+              <img src="assets/leema-mark-white.png" id="valMark" alt="LEEMA Technology Incubation at the selected size">
+              <div class="val-bar" id="valBar" hidden></div>
+            </div>
+            <span class="val-note" id="valNote">Clear space equals the height of the E in LEEMA</span>
+          </div>
+          <div class="val-ctl">
+            <label for="markSize" class="eyebrow" style="letter-spacing:0.14em">Width</label>
+            <input type="range" id="markSize" min="60" max="360" value="240" step="1">
+            <span class="fig" id="markVal" style="min-width:60px;text-align:right">240px</span>
+          </div>
+          <div class="warn" id="markWarn" role="status">
+            <span aria-hidden="true">·</span>
+            <span><b>Below the 120px floor.</b> The circuit traces fill in and the mark reads as a black bar.
+              Minimum reproduction is 28mm in print and 120px on screen.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g-3" style="margin-top:56px">
+      <div class="card" data-rise><span class="eyebrow">Corners</span>
+        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">Zero to four pixels. Eight is the maximum
+          and is reserved for photographic containers. Pills appear only on status markers.</p></div>
+      <div class="card" data-rise><span class="eyebrow">Rules and cards</span>
+        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">One-pixel hairline, four-pixel corners,
+          24 pixels of padding, no shadow at rest. A status takes a three-pixel stripe along the top edge —
+          never a coloured left border.</p></div>
+      <div class="card" data-rise><span class="eyebrow">Motion</span>
+        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">120ms on control states, 180ms on disclosure,
+          one easing curve. The board behind this page is substrate, not content. Report mode stills it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────── 05 VOICE · paper ── -->
+<section id="voice" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">05</span>
+      <h2>How we write</h2>
+      <p class="lead">Grounded and practical. Plain language for township entrepreneurs, precise enough for a
+        development finance officer. Type a sentence and the house rules read it back.</p>
+    </div>
+    <div class="voice">
+      <div class="editor" data-rise>
+        <div class="bar">
+          <span class="eyebrow">Draft</span>
+          <span class="count" id="vCount">0 characters</span>
+        </div>
+        <label class="skip" for="vIn">Draft text to check against the house voice</label>
+        <textarea id="vIn" spellcheck="true" placeholder="Write a sentence the way you would send it to a funder."></textarea>
+        <div class="foot">
+          <button class="btn ghost" id="vFix" style="padding:10px 14px;font-size:14px">Apply number conventions</button>
+          <button class="btn ghost" id="vSample" style="padding:10px 14px;font-size:14px">Load a failing example</button>
+          <button class="btn ghost" id="vClear" style="padding:10px 14px;font-size:14px">Clear</button>
+        </div>
+      </div>
+      <div class="findings" id="vOut" role="status" aria-live="polite" data-rise></div>
+    </div>
+
+    <div class="grid g-2" style="margin-top:56px;align-items:start">
+      <div class="prose" data-rise>
+        <h3 style="margin-bottom:14px">The rules it is reading</h3>
+        <p><strong>Say the thing, then the number.</strong> "Ten new jobs projected once the resort is operating"
+          beats "significant employment impact".</p>
+        <p><strong>Name the enterprise.</strong> Reve P Catering, Moela Energies, Thakaramo Security Solution
+          and Training. Never "one of our incubatees".</p>
+        <p><strong>We</strong> for the incubator, <strong>you</strong> for the entrepreneur, the business's own
+          name in the third person. Never "our clients".</p>
+        <p><strong>Keep the funder's vocabulary intact.</strong> Tranche, business plan, milestone, compliance,
+          PFMA, market access, funding readiness, working capital. These are the terms the money is approved
+          against; do not soften them.</p>
+        <p><strong>State barriers plainly.</strong> Three quarters of the cohort names funding and market access.
+          That gets printed, not hidden.</p>
+      </div>
+      <div class="card" data-rise>
+        <span class="eyebrow">Numbers</span>
+        <h4 style="margin:8px 0 12px">South African conventions throughout</h4>
+        <div class="grid" style="gap:10px">
+          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
+            <span class="count">Amount</span><span class="fig">R800 000</span></div>
+          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
+            <span class="count">Date</span><span class="fig">29 July 2025</span></div>
+          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
+            <span class="count">Telephone</span><span class="fig">014 403 5209</span></div>
+          <div class="row" style="display:flex;justify-content:space-between;gap:16px">
+            <span class="count">Percentage</span><span class="fig">75%</span></div>
+        </div>
+        <p style="margin:16px 0 0;font-size:15px;color:var(--fg-mute)">A space and no comma in amounts.
+          No exclamation marks. No emoji. No "journey", "empower", "upliftment", "beneficiary" or "ecosystem".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────── 06 THE RECORD · ink ── -->
+<section id="record" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">06</span>
+      <h2>The record</h2>
+      <p class="lead">The house voice already exists in the organisation's own correspondence — direct,
+        specific and unembarrassed about detail. Write the way the tranche letter writes.</p>
+    </div>
+    <blockquote class="quote" data-rise>
+      <p>"This letter serves as confirmation that Leema Township Incubation NPC is on track in implementing
+        the business plan as per the submitted report."</p>
+      <cite>First tranche request to Seda · 29 July 2025</cite>
+    </blockquote>
+    <div class="track-line" id="track" data-rise></div>
+    <p class="count" style="margin-top:18px">Rows marked <span style="color:var(--ember)">date required</span>
+      are open slots · they are filled from the programme's own reporting, not estimated here</p>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────── 07 CONTACT · paper ── -->
+<section id="contact" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">07</span>
+      <h2>Walk into the centre</h2>
+      <p class="lead">If you own a small enterprise in the North West, Gauteng or the Northern Cape,
+        start with a phone call. If you are a funder or a partner, ask for the reporting pack.</p>
+    </div>
+    <div class="contact-grid" data-rise>
+      <div class="cline">
+        <span class="k">Telephone</span>
+        <a class="v" href="tel:+27144035209">014 403 5209</a>
+      </div>
+      <div class="cline">
+        <span class="k">Email</span>
+        <a class="v" href="mailto:info@leemaincubation.co.za">info@leemaincubation.co.za</a>
+      </div>
+      <div class="cline">
+        <span class="k">Web</span>
+        <a class="v" href="https://www.leemaincubation.co.za">www.leemaincubation.co.za</a>
+      </div>
+      <div class="cline">
+        <span class="k">Centre</span>
+        <span class="v">Stand 43, Factory A<br>Bodirelo Industrial Park<br>Mogwase, North West</span>
+      </div>
+      <div class="cline">
+        <span class="k">Registered as</span>
+        <span class="v">LEEMA Incubation NPC</span>
+      </div>
+      <div class="cline">
+        <span class="k">Funded through</span>
+        <span class="v">Seda and SEDFA</span>
+      </div>
+    </div>
+    <div class="hero-cta" style="margin-top:44px">
+      <a class="btn" href="tel:+27144035209">Call 014 403 5209 <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="mailto:info@leemaincubation.co.za?subject=Reporting%20pack%20request">Ask for the reporting pack <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="layer">
+  <div class="wrap foot-in">
+    <img src="assets/leema-mark-white.png" alt="LEEMA Technology Incubation" width="357" height="101">
+    <span>LEEMA Incubation NPC · Leema Township Incubator</span>
+    <span>Stand 43, Factory A, Bodirelo Industrial Park, Mogwase, North West</span>
+    <span>014 403 5209 · info@leemaincubation.co.za</span>
+    <span>Brand guidelines Version 1 · September 2026</span>
+  </div>
+</footer>
+
+<div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+  <div class="pal-box">
+    <div class="pal-in">
+      <span class="eyebrow" style="letter-spacing:0.14em">Go</span>
+      <input id="palInput" type="text" autocomplete="off" spellcheck="false"
+        placeholder="Jump to a section, copy a token, call the centre" aria-controls="palList">
+    </div>
+    <div class="pal-list" id="palList" role="listbox" aria-label="Results"></div>
+    <div class="pal-foot">
+      <span>↑ ↓ move</span><span>↵ run</span><span>esc close</span>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+"use strict";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTENT
+   Everything the page says lives here. Figures that have not been verified
+   against the programme's own register are written as `required` slots and
+   render as ruled placeholders naming the number needed — the same discipline
+   the guidelines apply to image positions. Nothing is estimated.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+var MEASURES = [
+  { t:"SMME skills development",
+    d:"Accredited and practical training that raises the ceiling on what an owner can run.",
+    counted:"Training interventions completed, by enterprise and by accreditation status.",
+    cadence:"Reported per tranche.",
+    required:"Learners completing accredited training" },
+  { t:"Transformation",
+    d:"Moving Black-owned township and rural enterprises into real supply chains.",
+    counted:"Enterprises placed into a contracted supply chain within the reporting period.",
+    cadence:"Reported per tranche, against the business plan.",
+    required:"Enterprises entering a supply chain" },
+  { t:"Job creation",
+    d:"Permanent jobs, counted and reported.",
+    counted:"Permanent positions filled and still filled at the close of the period. A projected job is written as a projection and is never added to the count.",
+    cadence:"Reported per tranche. Example from the record: ten new jobs projected once the resort is operating.",
+    required:"Permanent jobs at close of period" },
+  { t:"Enterprise longevity",
+    d:"Businesses still trading in five years, not just registered.",
+    counted:"Enterprises still trading at each anniversary of intake, verified against trading records rather than registration.",
+    cadence:"Reported annually.",
+    required:"Cohort still trading at sixty months" },
+  { t:"Operational capacity improvement",
+    d:"Systems, compliance and equipment, so growth does not break the business.",
+    counted:"Compliance items closed and equipment placed, by enterprise.",
+    cadence:"Reported per tranche.",
+    required:"Compliance items closed" }
+];
+
+var TIERS = {
+  incubatee:{ label:"Incubatee",         note:"In full incubation." },
+  reseller: { label:"Reseller",          note:"Trading through the LEEMA network." },
+  partner:  { label:"Strategic partner", note:"Working with the centre on capacity." },
+  exploring:{ label:"Exploring",         note:"In conversation, not yet placed." }
+};
+
+var ENTERPRISES = [
+  { n:"Reve P Catering", tier:"incubatee", sector:"Catering",
+    d:"Named in the organisation's own correspondence. Catering into events and institutional contracts.",
+    rows:[["Intake","Date required"],["Supply chain","Record required"]] },
+  { n:"Moela Energies", tier:"partner", sector:"Energy",
+    d:"Named in the organisation's own correspondence. Energy supply and installation work.",
+    rows:[["Intake","Date required"],["Supply chain","Record required"]] },
+  { n:"Thakaramo Security Solution and Training", tier:"reseller", sector:"Security and training",
+    d:"Named in the organisation's own correspondence. Guarding services and accredited security training.",
+    rows:[["Intake","Date required"],["Supply chain","Record required"]] }
+];
+
+var TOKENS = [
+  {n:"Ink",        v:"--ink-1000",   ok:"oklch(0.13 0.006 150)",  hx:"#060806", use:"Covers, headers, footers, dividers, primary buttons. The brand ground."},
+  {n:"Ink 800",    v:"--ink-800",    ok:"oklch(0.27 0.006 150)",  hx:"#242725", use:"Body text at strength, reseller tier, hover state on ink."},
+  {n:"Paper",      v:"--ink-050",    ok:"oklch(0.985 0.003 105)", hx:"#FAFAF8", use:"Document and page ground. A warm off-white, never pure white."},
+  {n:"Card",       v:"--white",      ok:"#FFFFFF",                hx:"#FFFFFF", use:"Cards and tables sitting on paper."},
+  {n:"Growth 700", v:"--growth-700", ok:"oklch(0.44 0.10 145)",   hx:"#29612D", use:"Accent text and links on paper."},
+  {n:"Growth 600", v:"--growth-600", ok:"oklch(0.55 0.13 145)",   hx:"#38853E", use:"Primary accent. Incubatee tier, active status, accent buttons."},
+  {n:"Growth 500", v:"--growth-500", ok:"oklch(0.70 0.14 145)",   hx:"#61B565", use:"Accent on ink grounds only."},
+  {n:"Growth 100", v:"--growth-100", ok:"oklch(0.95 0.03 145)",   hx:"#E3F4E2", use:"Soft fill behind positive callouts."},
+  {n:"Ember 700",  v:"--ember-700",  ok:"oklch(0.46 0.10 55)",    hx:"#824717", use:"Accent text on paper."},
+  {n:"Ember 600",  v:"--ember-600",  ok:"oklch(0.58 0.13 55)",    hx:"#B3621E", use:"Strategic partner tier, attention status, capacity measures."},
+  {n:"Ember 500",  v:"--ember-500",  ok:"oklch(0.70 0.14 55)",    hx:"#E0843E", use:"Accent on ink grounds."},
+  {n:"Ember 100",  v:"--ember-100",  ok:"oklch(0.96 0.03 55)",    hx:"#FFEDDF", use:"Soft fill behind reported barriers."}
+];
+
+var TRACK = [
+  { d:"29 July 2025", t:"First tranche request submitted to Seda", state:"done",
+    n:"Confirmation that Leema Township Incubation NPC is on track in implementing the business plan as per the submitted report." },
+  { d:"Date required", t:"Second tranche request", state:"open",
+    n:"Submitted against milestones closed in the first tranche period." },
+  { d:"Date required", t:"Quarterly report to SEDFA", state:"open",
+    n:"The five measures, counted, with barriers stated plainly." },
+  { d:"Date required", t:"Next cohort intake at the Mogwase centre", state:"open",
+    n:"Open to owners in the North West, Gauteng and the Northern Cape." }
+];
+
+/* ═════════════════════════════════════════════════════════════ helpers ══ */
+var $  = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+var esc = function(s){ return String(s).replace(/[&<>"']/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+var coarse  = window.matchMedia("(pointer: coarse)");
+
+var toastEl = $("#toast"), toastT = 0;
+function toast(msg){
+  toastEl.textContent = msg; toastEl.classList.add("on");
+  clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove("on"); }, 1900);
+}
+function copy(text, label){
+  var done = function(){ toast(label + " copied · " + text); };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(text, done); });
+  } else { fallback(text, done); }
+}
+function fallback(text, done){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.setAttribute("readonly","");
+  ta.style.cssText = "position:fixed;left:-9999px;top:0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){ toast("Copy is blocked in this browser"); }
+  document.body.removeChild(ta);
+}
+function store(k, v){
+  try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }
+  catch(e){ return null; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE BOARD
+   The mark's counters are filled with printed-circuit traces. This is the rest
+   of that board: Manhattan routing on a fixed grid, ninety-degree turns only,
+   flat colour, no gradients. Signal packets run the traces; the pointer
+   energises what it passes; a click sends a square probe pulse.
+
+   Two rules from the guidelines are enforced here rather than described:
+     · Nothing enters the mark's clear space. The router draws, then the mark's
+       live clear-space rectangle is cleared out of the frame every tick.
+     · Report mode stops all of it. The board is substrate, not content, and a
+       funder reading a figure never sees a moving thing.
+   ═════════════════════════════════════════════════════════════════════════ */
+var Board = (function(){
+  var cv = $("#board"), ctx = cv.getContext("2d", { alpha:true });
+  var off = document.createElement("canvas"), octx = off.getContext("2d");
+  var dpr = 1, W = 0, H = 0, CELL = 46;
+  var paths = [], packets = [], probes = [], hash = {}, running = false, raf = 0;
+  var ptr = { x:-9999, y:-9999, on:false };
+  var boost = 1, lastY = window.pageYOffset, last = 0;
+
+  var C = {
+    trace:  "rgba(255,255,255,0.058)",
+    traceHi:"rgba(255,255,255,0.30)",
+    pad:    "rgba(255,255,255,0.10)",
+    growth: "97,181,101",
+    ember:  "224,132,62",
+    probe:  "rgba(255,255,255,0.16)"
+  };
+
+  function key(x,y){ return (x/CELL|0) + ":" + (y/CELL|0); }
+
+  /* Route one trace: a random walk on the grid that only ever turns ninety
+     degrees, never doubles back, and never leaves the board. */
+  function route(cols, rows){
+    var dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+    var cx = (Math.random()*cols)|0, cy = (Math.random()*rows)|0;
+    var d = dirs[(Math.random()*4)|0];
+    var pts = [[cx,cy]], legs = 3 + ((Math.random()*6)|0);
+    for (var i=0;i<legs;i++){
+      var run = 1 + ((Math.random()*5)|0);
+      var nx = Math.max(0, Math.min(cols, cx + d[0]*run));
+      var ny = Math.max(0, Math.min(rows, cy + d[1]*run));
+      if (nx === cx && ny === cy) break;
+      cx = nx; cy = ny; pts.push([cx,cy]);
+      /* Turn ninety degrees. Never continue straight, never reverse. */
+      d = d[0] !== 0 ? [0, Math.random() < 0.5 ? 1 : -1] : [Math.random() < 0.5 ? 1 : -1, 0];
+    }
+    if (pts.length < 3) return null;
+
+    var segs = [], total = 0;
+    for (var j=1;j<pts.length;j++){
+      var ax = pts[j-1][0]*CELL, ay = pts[j-1][1]*CELL;
+      var bx = pts[j][0]*CELL,   by = pts[j][1]*CELL;
+      var len = Math.abs(bx-ax) + Math.abs(by-ay);
+      segs.push({ ax:ax, ay:ay, bx:bx, by:by, len:len, at:total });
+      total += len;
+    }
+    return total > 40 ? { pts:pts, segs:segs, len:total } : null;
+  }
+
+  function build(){
+    var cols = Math.ceil(W / CELL), rows = Math.ceil(H / CELL);
+    var target = Math.max(26, Math.min(78, Math.round((cols*rows) / 26)));
+    paths = []; hash = {};
+    var guard = 0;
+    while (paths.length < target && guard++ < target*8){
+      var p = route(cols, rows);
+      if (p) paths.push(p);
+    }
+    /* Spatial hash so pointer proximity is a lookup, not a scan. */
+    paths.forEach(function(p, pi){
+      p.segs.forEach(function(s, si){
+        var steps = Math.max(1, Math.round(s.len / CELL));
+        for (var k=0;k<=steps;k++){
+          var t = k/steps;
+          var kx = s.ax + (s.bx-s.ax)*t, ky = s.ay + (s.by-s.ay)*t;
+          var kk = key(kx, ky);
+          (hash[kk] || (hash[kk] = [])).push([pi, si]);
+        }
+      });
+    });
+
+    /* Static layer: traces and junction pads, drawn once per resize. */
+    off.width = W*dpr; off.height = H*dpr;
+    octx.setTransform(dpr,0,0,dpr,0,0);
+    octx.clearRect(0,0,W,H);
+    octx.lineWidth = 1; octx.strokeStyle = C.trace; octx.lineCap = "butt";
+    octx.beginPath();
+    paths.forEach(function(p){
+      p.segs.forEach(function(s){
+        octx.moveTo(s.ax+0.5, s.ay+0.5); octx.lineTo(s.bx+0.5, s.by+0.5);
+      });
+    });
+    octx.stroke();
+    octx.fillStyle = C.pad;
+    paths.forEach(function(p){
+      p.pts.forEach(function(pt, i){
+        var sz = (i === 0 || i === p.pts.length-1) ? 5 : 3;
+        octx.fillRect(pt[0]*CELL - sz/2, pt[1]*CELL - sz/2, sz, sz);
+      });
+    });
+
+    /* Packets. Growth mostly, ember on roughly one trace in five. */
+    packets = [];
+    var n = Math.max(12, Math.min(34, Math.round(paths.length * 0.55)));
+    for (var i=0;i<n;i++){
+      var pi = (Math.random()*paths.length)|0;
+      packets.push({
+        p: pi,
+        t: Math.random() * paths[pi].len,
+        v: 26 + Math.random()*54,
+        c: Math.random() < 0.22 ? C.ember : C.growth
+      });
+    }
+  }
+
+  function at(path, dist){
+    var d = dist % path.len; if (d < 0) d += path.len;
+    var segs = path.segs;
+    for (var i=0;i<segs.length;i++){
+      var s = segs[i];
+      if (d <= s.at + s.len){
+        var f = s.len ? (d - s.at) / s.len : 0;
+        return [s.ax + (s.bx-s.ax)*f, s.ay + (s.by-s.ay)*f];
+      }
+    }
+    var e = segs[segs.length-1];
+    return [e.bx, e.by];
+  }
+
+  /* Nothing enters the mark's clear space. */
+  function punchClearSpace(){
+    var m = $("#heroMark");
+    if (!m) return;
+    var r = m.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > H) return;
+    var pad = r.width * 0.176;                 /* the height of the E in LEEMA */
+    ctx.clearRect(r.left - pad, r.top - pad, r.width + pad*2, r.height + pad*2);
+  }
+
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    var dt = Math.min(52, now - (last || now)); last = now;
+
+    /* Scroll speeds the signal up, then it settles back. No parallax: the
+       board does not move with the page, only the traffic on it changes. */
+    var y = window.pageYOffset;
+    var dv = Math.min(2.6, Math.abs(y - lastY) / 22); lastY = y;
+    boost += (1 + dv - boost) * 0.08;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.drawImage(off, 0, 0, W, H);
+
+    /* Pointer energises the traces it is near. */
+    if (ptr.on){
+      var cellR = 2, cx0 = (ptr.x/CELL)|0, cy0 = (ptr.y/CELL)|0, seen = {};
+      ctx.strokeStyle = C.traceHi; ctx.lineWidth = 1; ctx.beginPath();
+      for (var gx=cx0-cellR; gx<=cx0+cellR; gx++){
+        for (var gy=cy0-cellR; gy<=cy0+cellR; gy++){
+          var list = hash[gx+":"+gy]; if (!list) continue;
+          for (var i=0;i<list.length;i++){
+            var id = list[i][0]+"."+list[i][1]; if (seen[id]) continue; seen[id] = 1;
+            var s = paths[list[i][0]].segs[list[i][1]];
+            ctx.moveTo(s.ax+0.5, s.ay+0.5); ctx.lineTo(s.bx+0.5, s.by+0.5);
+          }
+        }
+      }
+      ctx.stroke();
+    }
+
+    /* Packets. Square heads, stepped tails — flat alpha steps, no gradient. */
+    var TAIL = [[10,0.55],[20,0.34],[30,0.18],[40,0.08]];
+    for (var k=0;k<packets.length;k++){
+      var pk = packets[k], path = paths[pk.p];
+      pk.t = (pk.t + pk.v * boost * dt / 1000) % path.len;
+      var head = at(path, pk.t);
+      for (var q=0;q<TAIL.length;q++){
+        var tp = at(path, pk.t - TAIL[q][0]);
+        ctx.fillStyle = "rgba(" + pk.c + "," + TAIL[q][1] + ")";
+        ctx.fillRect(tp[0]-1, tp[1]-1, 2, 2);
+      }
+      ctx.fillStyle = "rgba(" + pk.c + ",0.95)";
+      ctx.fillRect(head[0]-1.5, head[1]-1.5, 3, 3);
+    }
+
+    /* Probe pulses: square rings, because the traces turn at ninety degrees. */
+    for (var pI=probes.length-1; pI>=0; pI--){
+      var pr = probes[pI];
+      pr.age += dt;
+      var f = pr.age / 820;
+      if (f >= 1){ probes.splice(pI,1); continue; }
+      var rad = f * 340;
+      ctx.strokeStyle = "rgba(255,255,255," + (0.20 * (1-f)).toFixed(3) + ")";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(pr.x - rad, pr.y - rad, rad*2, rad*2);
+    }
+
+    punchClearSpace();
+  }
+
+  function resize(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    CELL = W < 700 ? 38 : 46;
+    build();
+  }
+
+  function start(){ if (running) return; running = true; last = 0; raf = requestAnimationFrame(frame); }
+  function stop(){ running = false; cancelAnimationFrame(raf); ctx.clearRect(0,0,W,H); }
+
+  function still(){                       /* traces and pads only, no traffic */
+    cancelAnimationFrame(raf); running = false;
+    ctx.clearRect(0,0,W,H); ctx.drawImage(off,0,0,W,H); punchClearSpace();
+  }
+
+  var rt = 0;
+  window.addEventListener("resize", function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ resize(); if (!running) still(); }, 160);
+  });
+
+  if (!coarse.matches){
+    window.addEventListener("pointermove", function(e){
+      ptr.x = e.clientX; ptr.y = e.clientY; ptr.on = true;
+    }, { passive:true });
+    window.addEventListener("pointerleave", function(){ ptr.on = false; });
+    window.addEventListener("pointerdown", function(e){
+      if (!running) return;
+      probes.push({ x:e.clientX, y:e.clientY, age:0 });
+      if (probes.length > 4) probes.shift();
+      boost = 2.4;
+    }, { passive:true });
+  }
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) { cancelAnimationFrame(raf); }
+    else if (running) { last = 0; raf = requestAnimationFrame(frame); }
+  });
+
+  return { resize:resize, start:start, stop:stop, still:still,
+           isRunning:function(){ return running; } };
+})();
+
+/* ═════════════════════════════════════════════════════════ rendering ══ */
+
+/* Measures — disclosure rows, 180ms. */
+(function(){
+  var host = $("#meas");
+  host.innerHTML = MEASURES.map(function(m, i){
+    var ix = ("0" + (i+1)).slice(-2);
+    return '<button class="meas-row" type="button" aria-expanded="false">' +
+      '<span class="meas-top">' +
+        '<span class="ix">' + ix + '</span>' +
+        '<span class="ti">' + esc(m.t) + '</span>' +
+        '<span class="st count">Open</span>' +
+      '</span>' +
+      '<span class="meas-body"><span><span class="meas-inner">' +
+        '<p>' + esc(m.d) + '</p>' +
+        '<p><strong>Counted as</strong> ' + esc(m.counted) + '</p>' +
+        '<p><strong>Cadence</strong> ' + esc(m.cadence) + '</p>' +
+        '<span class="slot"><span class="k">Figure required</span>' +
+          '<span class="v">' + esc(m.required) + '</span></span>' +
+      '</span></span></span></button>';
+  }).join("");
+
+  host.addEventListener("click", function(e){
+    var row = e.target.closest(".meas-row"); if (!row) return;
+    var open = row.getAttribute("aria-expanded") === "true";
+    $$(".meas-row", host).forEach(function(r){
+      r.setAttribute("aria-expanded","false");
+      $(".st", r).textContent = "Open";
+    });
+    if (!open){ row.setAttribute("aria-expanded","true"); $(".st", row).textContent = "Close"; }
+  });
+})();
+
+/* Enterprises — components seated on the board, filtered by tier. */
+(function(){
+  var chips = $("#chips"), filters = $("#filters"), countEl = $("#chipCount");
+  var order = ["incubatee","reseller","partner","exploring"], active = "all";
+
+  filters.innerHTML =
+    '<button class="filter" type="button" data-f="all" aria-pressed="true" style="--stripe:var(--fg-mute)">All</button>' +
+    order.map(function(k){
+      return '<button class="filter" type="button" data-f="' + k + '" aria-pressed="false" data-tier="' + k + '">' +
+             esc(TIERS[k].label) + '</button>';
+    }).join("");
+
+  chips.innerHTML = ENTERPRISES.map(function(en){
+    var pads = new Array(6).join("<i></i>") + "<i></i>";
+    return '<button class="chip" type="button" data-tier="' + en.tier + '" aria-pressed="false"' +
+      ' aria-label="' + esc(en.n) + ' \u2014 select the ' + esc(TIERS[en.tier].label.toLowerCase()) + ' tier">' +
+      '<span class="pads l" aria-hidden="true">' + pads + '</span>' +
+      '<span class="pads r" aria-hidden="true">' + pads + '</span>' +
+      '<h3>' + esc(en.n) + '</h3>' +
+      '<span class="body">' +
+        '<span class="pill" data-tier="' + en.tier + '">' + esc(TIERS[en.tier].label) + ' · placeholder</span>' +
+        '<p class="desc">' + esc(en.d) + '</p>' +
+        '<span class="row"><span>Sector</span><b>' + esc(en.sector) + '</b></span>' +
+        en.rows.map(function(r){
+          return '<span class="row"><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></span>';
+        }).join("") +
+      '</span></button>';
+  }).join("");
+
+  function apply(){
+    var shown = 0;
+    $$(".chip", chips).forEach(function(c){
+      var hit = active === "all" || c.dataset.tier === active;
+      c.classList.toggle("is-dim", !hit);
+      c.setAttribute("aria-pressed", String(hit && active !== "all"));
+      if (hit) shown++;
+    });
+    var note = active === "all" ? "every relationship" : TIERS[active].note.toLowerCase().replace(/\.$/,"");
+    countEl.textContent = shown + " of " + ENTERPRISES.length + " named enterprises · " + note;
+  }
+  function setFilter(next){
+    active = next;
+    $$(".filter", filters).forEach(function(f){
+      f.setAttribute("aria-pressed", String(f.dataset.f === active));
+    });
+    apply();
+  }
+  filters.addEventListener("click", function(e){
+    var b = e.target.closest(".filter"); if (b) setFilter(b.dataset.f);
+  });
+  /* Selecting a component selects its tier, so the board reads as one system
+     rather than three unrelated cards. Selecting it again clears the filter. */
+  chips.addEventListener("click", function(e){
+    var c = e.target.closest(".chip"); if (!c) return;
+    var tier = c.dataset.tier;
+    setFilter(active === tier ? "all" : tier);
+    toast(active === "all" ? "Showing every relationship"
+                           : TIERS[tier].label + " \u00b7 " + TIERS[tier].note);
+  });
+  setFilter("all");
+})();
+
+/* Colour — click copies oklch, shift-click copies the hex fallback. */
+(function(){
+  var host = $("#swatches");
+  host.innerHTML = TOKENS.map(function(t){
+    return '<button class="sw" type="button" data-ok="' + esc(t.ok) + '" data-hx="' + esc(t.hx) + '"' +
+      ' data-nm="' + esc(t.n) + '" style="--c:' + t.hx + ';--c:var(' + t.v + ')">' +
+      '<span class="chip-col" aria-hidden="true"></span>' +
+      '<span class="meta">' +
+        '<span class="nm">' + esc(t.n) + '</span>' +
+        '<span class="tk">' + esc(t.v) + '</span>' +
+        '<span class="hx">' + esc(t.ok) + '</span>' +
+        '<span class="use">' + esc(t.use) + '</span>' +
+      '</span></button>';
+  }).join("");
+  host.addEventListener("click", function(e){
+    var b = e.target.closest(".sw"); if (!b) return;
+    var hex = e.shiftKey;
+    copy(hex ? b.dataset.hx : b.dataset.ok, b.dataset.nm + (hex ? " hex" : ""));
+  });
+})();
+
+/* The record. */
+(function(){
+  $("#track").innerHTML = TRACK.map(function(e){
+    var d = e.state === "done" ? esc(e.d)
+          : '<span style="color:var(--ember)">' + esc(e.d) + '</span>';
+    return '<div class="ev" data-state="' + e.state + '">' +
+      '<span class="d">' + d + '</span>' +
+      '<span><span class="t">' + esc(e.t) + '</span><p class="n">' + esc(e.n) + '</p></span></div>';
+  }).join("");
+})();
+
+/* ═══════════════════════════════════════════════════════ instruments ══ */
+
+/* Type specimen. The 15px floor is a live guardrail, not a footnote. */
+(function(){
+  var r = $("#typeSize"), out = $("#typeVal"), warn = $("#typeWarn");
+  var s1 = $("#s1"), s2 = $("#s2"), s3 = $("#s3");
+  function set(){
+    var v = +r.value;
+    out.textContent = v + "px";
+    s2.style.fontSize = v + "px";
+    s1.style.fontSize = Math.round(v * 2.6) + "px";
+    s3.style.fontSize = Math.max(10, Math.round(v * 0.88)) + "px";
+    warn.classList.toggle("on", v < 15);
+  }
+  r.addEventListener("input", set); set();
+})();
+
+/* Mark validator. Below 120px the traces fill in and the mark reads as a bar —
+   the guideline's own failure state, shown rather than asserted. */
+(function(){
+  var r = $("#markSize"), out = $("#markVal"), warn = $("#markWarn");
+  var img = $("#valMark"), bar = $("#valBar"), box = $("#clearBox"), note = $("#valNote");
+  var RATIO = 101 / 357;                     /* the supplied artwork, unaltered */
+  function set(){
+    var w = +r.value, h = w * RATIO, pad = w * 0.176, under = w < 120;
+    out.textContent = w + "px";
+    box.style.padding = pad + "px";
+    img.hidden = under; bar.hidden = !under;
+    img.style.width = w + "px";
+    bar.style.width = w + "px"; bar.style.height = Math.max(3, h * 0.62) + "px";
+    warn.classList.toggle("on", under);
+    note.textContent = under
+      ? "Below the floor · the mark reads as a solid bar"
+      : "Clear space equals the height of the E in LEEMA";
+  }
+  r.addEventListener("input", set); set();
+})();
+
+/* The one meter on the page fills when it is first read. */
+(function(){
+  var fills = $$("[data-fill]");
+  if (!("IntersectionObserver" in window)){
+    fills.forEach(function(f){ f.style.width = f.dataset.fill + "%"; }); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if (en.isIntersecting){
+        en.target.style.width = en.target.dataset.fill + "%";
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold:0.6 });
+  fills.forEach(function(f){ io.observe(f); });
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE VOICE ENGINE
+   The rules on page 07 of the guidelines, made executable. Every finding
+   quotes the rule it came from, so the tool teaches the voice rather than
+   just policing it.
+   ═════════════════════════════════════════════════════════════════════════ */
+(function(){
+  var IN = $("#vIn"), OUT = $("#vOut"), CNT = $("#vCount");
+  var ACRONYMS = { LEEMA:1, SEDA:1, SEDFA:1, PFMA:1, SMME:1, SMMES:1, NPC:1, SARS:1, CIPC:1,
+                   VAT:1, BBBEE:1, POPIA:1, TECHNOLOGY:1, INCUBATION:1, NORTH:1, WEST:1, CAPE:1 };
+  var MONTHS = ["January","February","March","April","May","June",
+                "July","August","September","October","November","December"];
+
+  var RULES = [
+    { id:"banned",
+      re:/\b(journeys?|empower(?:ment|ed|ing|s)?|uplift(?:ment|ing|ed|s)?|beneficiar(?:y|ies)|ecosystems?|synerg(?:y|ies|istic))\b/gi,
+      h:"Word that is not in the brand",
+      d:"Replace it with what actually happened.",
+      q:'No "journey", "empower", "upliftment", "beneficiary" or "ecosystem".' },
+    { id:"ourclients", re:/\bour clients\b/gi,
+      h:'"Our clients"',
+      d:"We for the incubator, you for the entrepreneur, the business's own name in the third person.",
+      q:'Never "our clients".' },
+    { id:"unnamed", re:/\b(one of our incubatees|one of the businesses|a local business|an? (?:local )?enterprise we support)\b/gi,
+      h:"Unnamed enterprise",
+      d:"Name it. Reve P Catering, Moela Energies, Thakaramo Security Solution and Training.",
+      q:'Name the enterprise. Never "one of our incubatees".' },
+    { id:"vague", re:/\b(significant(?:ly)?|substantial(?:ly)?|considerable|numerous|various|meaningful|impactful|transformative|world-class)\b/gi,
+      h:"Claim without a number",
+      d:'Say the thing, then the number. "Ten new jobs projected once the resort is operating" beats "significant employment impact".',
+      q:"Say the thing, then the number." },
+    { id:"bang", re:/!+/g,
+      h:"Exclamation mark",
+      d:"The tranche letter does not raise its voice, and neither does the brand.",
+      q:"No exclamation marks." },
+    { id:"emoji", re:/[\u203C\u2049\u2122\u2139\u2194-\u21AA\u231A\u231B\u23E9-\u23FA\u24C2\u25AA-\u25FE\u2600-\u27BF\u2934\u2935\u2B00-\u2BFF\u3030\u303D\u3297\u3299]|[\uD83C-\uDBFF][\uDC00-\uDFFF]|\uFE0F/g,
+      h:"Emoji",
+      d:"Two Unicode characters are permitted: the arrow in links and buttons, and the middot as a metadata separator.",
+      q:"No emoji — not in social posts, not in the interface." },
+    { id:"amount", re:/R\s?\d{1,3}(?:,\d{3})+(?:\.\d+)?\b|R\s?\d{4,}\b/g,
+      h:"Amount format",
+      d:"South African convention is a space and no comma.",
+      q:"R800 000 with a space and no comma." },
+    { id:"date", re:/\b\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4}\b|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b/gi,
+      h:"Date format",
+      d:"Day, month in full, year.",
+      q:"Dates as 29 July 2025." },
+    { id:"percent", re:/\b\d+(?:[.,]\d+)?\s?(?:percent|per cent)\b/gi,
+      h:"Percentage format",
+      d:"Percentages are written out with the sign.",
+      q:"Percentages written out as 75%." },
+    { id:"phone", re:/\b0\d{9}\b|\b0\d{2}[- ]\d{3}[- ]\d{4}\b/g,
+      h:"Telephone format",
+      d:"Three, three, four, separated by spaces.",
+      q:"Phone numbers as 014 403 5209." },
+    { id:"shout", re:/\b[A-Z][A-Z]{3,}\b/g,
+      h:"Uppercase in running text",
+      d:"The mono eyebrow at 12px is the only uppercase setting in the brand.",
+      q:"Sentence case for every heading and label except the mono eyebrow.",
+      skip:function(m){ return ACRONYMS[m.toUpperCase()] === 1; } }
+  ];
+
+  function scan(text){
+    var found = [], marks = [];
+    RULES.forEach(function(r){
+      r.re.lastIndex = 0;
+      var m, hits = [];
+      while ((m = r.re.exec(text)) !== null){
+        if (m[0] === "") { r.re.lastIndex++; continue; }
+        if (r.skip && r.skip(m[0])) continue;
+        hits.push(m[0]);
+        marks.push([m.index, m.index + m[0].length]);
+        if (hits.length > 40) break;
+      }
+      if (hits.length) found.push({ rule:r, hits:hits });
+    });
+    return { found:found, marks:marks };
+  }
+
+  function preview(text, marks){
+    if (!marks.length) return esc(text);
+    marks.sort(function(a,b){ return a[0]-b[0]; });
+    var merged = [], cur = marks[0].slice();
+    for (var i=1;i<marks.length;i++){
+      if (marks[i][0] <= cur[1]) cur[1] = Math.max(cur[1], marks[i][1]);
+      else { merged.push(cur); cur = marks[i].slice(); }
+    }
+    merged.push(cur);
+    var out = "", at = 0;
+    merged.forEach(function(m){
+      out += esc(text.slice(at, m[0])) + '<span class="hit">' + esc(text.slice(m[0], m[1])) + "</span>";
+      at = m[1];
+    });
+    return out + esc(text.slice(at));
+  }
+
+  function render(){
+    var text = IN.value;
+    CNT.textContent = text.length + (text.length === 1 ? " character" : " characters");
+    if (!text.trim()){
+      OUT.innerHTML = '<div class="finding ok"><span class="h">Nothing to read yet</span>' +
+        '<p class="d">Write the way the tranche letter writes — direct, specific and unembarrassed about detail.</p></div>';
+      return;
+    }
+    var res = scan(text);
+    var head = '<div class="finding ' + (res.found.length ? "" : "ok") + '">' +
+      '<span class="h">' + (res.found.length
+        ? res.found.length + (res.found.length === 1 ? " rule to answer" : " rules to answer")
+        : "Reads as house voice") + '</span>' +
+      '<p class="d" style="font-family:Newsreader,serif">' + preview(text, res.marks) + "</p></div>";
+    OUT.innerHTML = head + res.found.map(function(f){
+      var uniq = f.hits.filter(function(v,i,a){ return a.indexOf(v) === i; }).slice(0,6);
+      return '<div class="finding">' +
+        '<span class="h">' + esc(f.rule.h) + " · " + f.hits.length + "</span>" +
+        '<p class="d">' + esc(f.rule.d) + "</p>" +
+        '<span class="q">Found · ' + uniq.map(esc).join(" · ") + "</span>" +
+        '<span class="q" style="color:var(--fg-soft)">Rule · ' + esc(f.rule.q) + "</span></div>";
+    }).join("");
+  }
+
+  /* Rewrites only what has one correct answer: the number conventions. */
+  function conventions(t){
+    t = t.replace(/R\s?(\d[\d,\s]*\d|\d)/g, function(_, n){
+      var digits = n.replace(/[,\s]/g, "");
+      if (!/^\d+$/.test(digits)) return _;
+      return "R" + digits.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    });
+    t = t.replace(/\b(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})\b/g, function(_, d, m, y){
+      var mi = +m - 1; return MONTHS[mi] ? (+d) + " " + MONTHS[mi] + " " + y : _;
+    });
+    t = t.replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, function(_, y, m, d){
+      var mi = +m - 1; return MONTHS[mi] ? (+d) + " " + MONTHS[mi] + " " + y : _;
+    });
+    t = t.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})\b/gi,
+      function(_, mo, d, y){ return (+d) + " " + mo.charAt(0).toUpperCase() + mo.slice(1).toLowerCase() + " " + y; });
+    t = t.replace(/\b(\d+(?:[.,]\d+)?)\s?(?:percent|per cent)\b/gi, "$1%");
+    t = t.replace(/\b0(\d{2})[\s-]?(\d{3})[\s-]?(\d{4})\b/g, "0$1 $2 $3");
+    return t;
+  }
+
+  var SAMPLE = "We are excited about the journey of one of our incubatees! Our clients have seen " +
+    "significant impact across the ecosystem, with R1,250,000 in working capital approved on 29/07/2025 " +
+    "and 75 percent of beneficiaries reporting growth. Call 0144035209.";
+
+  IN.addEventListener("input", render);
+  $("#vFix").addEventListener("click", function(){
+    IN.value = conventions(IN.value); render(); toast("Number conventions applied");
+  });
+  $("#vSample").addEventListener("click", function(){ IN.value = SAMPLE; render(); IN.focus(); });
+  $("#vClear").addEventListener("click", function(){ IN.value = ""; render(); IN.focus(); });
+  render();
+})();
+
+/* ═══════════════════════════════════════════════════════ command palette ══ */
+(function(){
+  var pal = $("#pal"), box = $(".pal-box", pal), input = $("#palInput"), list = $("#palList");
+  var sel = 0, items = [], lastFocus = null;
+  var mac = /Mac|iPod|iPhone|iPad/.test(navigator.platform || "");
+  $("#kbdHint").textContent = mac ? "⌘K" : "Ctrl K";
+
+  function go(id){ var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block:"start" }); }
+
+  var ACTIONS = [
+    { c:"Go", n:"Who we are",        s:"The parent, the programme and the centre", r:function(){ go("who"); } },
+    { c:"Go", n:"What we measure",   s:"The five things the organisation reports on", r:function(){ go("measures"); } },
+    { c:"Go", n:"Enterprises",       s:"Named enterprises and the fixed relationship tiers", r:function(){ go("enterprises"); } },
+    { c:"Go", n:"The system",        s:"Colour, type and the mark, running", r:function(){ go("system"); } },
+    { c:"Go", n:"How we write",      s:"The house voice, made executable", r:function(){ go("voice"); } },
+    { c:"Go", n:"The record",        s:"Tranche correspondence and open slots", r:function(){ go("record"); } },
+    { c:"Go", n:"Contact",           s:"Mogwase, North West", r:function(){ go("contact"); } },
+    { c:"Do", n:"Call the centre",   s:"014 403 5209", r:function(){ location.href = "tel:+27144035209"; } },
+    { c:"Do", n:"Email the centre",  s:"info@leemaincubation.co.za", r:function(){ location.href = "mailto:info@leemaincubation.co.za"; } },
+    { c:"Do", n:"Copy the address",  s:"Stand 43, Factory A, Bodirelo Industrial Park", r:function(){
+        copy("Stand 43, Factory A, Bodirelo Industrial Park, Mogwase, North West", "Address"); } },
+    { c:"Do", n:"Report mode",       s:"Still the board and remove every moving thing", r:function(){ $("#reportBtn").click(); } },
+    { c:"Do", n:"Back to the top",   s:"", r:function(){ window.scrollTo({ top:0, behavior: reduced.matches ? "auto" : "smooth" }); } }
+  ].concat(TOKENS.map(function(t){
+    return { c:"Copy", n:t.n, s:t.v + " · " + t.ok, r:function(){ copy(t.ok, t.n); } };
+  }));
+
+  /* Subsequence scoring: contiguous runs and word starts rank first. */
+  function score(q, s){
+    if (!q) return 0;
+    q = q.toLowerCase(); s = s.toLowerCase();
+    var i = 0, sc = 0, run = 0;
+    for (var j=0;j<s.length && i<q.length;j++){
+      if (s[j] === q[i]){
+        sc += 1 + run * 2 + (j === 0 || s[j-1] === " " || s[j-1] === "-" ? 3 : 0);
+        run++; i++;
+      } else run = 0;
+    }
+    return i === q.length ? sc : -1;
+  }
+
+  function draw(){
+    var q = input.value.trim();
+    items = ACTIONS.map(function(a){
+      return { a:a, sc: q ? Math.max(score(q, a.n), score(q, a.s) * 0.4, score(q, a.c) * 0.3) : 1 };
+    }).filter(function(x){ return x.sc > 0; })
+      .sort(function(a,b){ return b.sc - a.sc; })
+      .slice(0, 9).map(function(x){ return x.a; });
+
+    sel = 0;
+    if (!items.length){
+      list.innerHTML = '<p class="pal-empty">Nothing matches that. Try a section name, a colour or "call".</p>';
+      return;
+    }
+    list.innerHTML = items.map(function(a, i){
+      return '<button class="pal-item" type="button" role="option" data-i="' + i + '"' +
+        (i === 0 ? ' data-sel="1" aria-selected="true"' : ' aria-selected="false"') + '>' +
+        '<span class="ix">' + ("0" + (i+1)).slice(-2) + "</span>" +
+        '<span><span class="nm">' + esc(a.n) + "</span>" +
+          (a.s ? '<br><span class="sub">' + esc(a.s) + "</span>" : "") + "</span>" +
+        '<span class="cat">' + esc(a.c) + "</span></button>";
+    }).join("");
+  }
+
+  function move(d){
+    if (!items.length) return;
+    sel = (sel + d + items.length) % items.length;
+    $$(".pal-item", list).forEach(function(el, i){
+      el.setAttribute("data-sel", i === sel ? "1" : "0");
+      el.setAttribute("aria-selected", String(i === sel));
+      if (i === sel && el.scrollIntoView) el.scrollIntoView({ block:"nearest" });
+    });
+  }
+  function run(i){ var a = items[i]; if (!a) return; close(); a.r(); }
+
+  function open(){
+    lastFocus = document.activeElement;
+    pal.hidden = false; pal.classList.add("on");
+    input.value = ""; draw(); input.focus();
+    document.documentElement.style.overflow = "hidden";
+  }
+  function close(){
+    pal.classList.remove("on"); pal.hidden = true;
+    document.documentElement.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  input.addEventListener("input", draw);
+  list.addEventListener("click", function(e){
+    var b = e.target.closest(".pal-item"); if (b) run(+b.dataset.i);
+  });
+  pal.addEventListener("mousedown", function(e){ if (e.target === pal) close(); });
+  pal.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){ e.preventDefault(); close(); }
+    else if (e.key === "ArrowDown"){ e.preventDefault(); move(1); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); move(-1); }
+    else if (e.key === "Enter"){ e.preventDefault(); run(sel); }
+    else if (e.key === "Tab"){ e.preventDefault(); move(e.shiftKey ? -1 : 1); }
+  });
+  $("#palBtn").addEventListener("click", open);
+  document.addEventListener("keydown", function(e){
+    if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")){
+      e.preventDefault(); pal.hidden ? open() : close();
+    } else if (e.key === "/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName) && pal.hidden){
+      e.preventDefault(); open();
+    }
+  });
+})();
+
+/* ═══════════════════════════════════════════════════ page choreography ══ */
+
+/* Report mode. The guidelines allow no scroll-triggered animation on anything
+   a funder will see, so the page ships with the switch that guarantees it. */
+(function(){
+  var btn = $("#reportBtn"), body = document.body;
+  function set(on, announce){
+    body.dataset.report = on ? "on" : "off";
+    btn.setAttribute("aria-pressed", String(on));
+    if (on) Board.stop(); else if (!reduced.matches) Board.start(); else Board.still();
+    store("leema-report", on ? "on" : "off");
+    if (announce) toast(on ? "Report mode on · nothing moves" : "Report mode off");
+  }
+  btn.addEventListener("click", function(){ set(body.dataset.report !== "on", true); });
+  if (store("leema-report") === "on") set(true, false);
+})();
+
+/* Navigation: progress, current section, and it steps out of the way going down. */
+(function(){
+  var nav = $("#nav"), prog = $("#navProg");
+  var ids = ["who","measures","enterprises","system","voice","record","contact"];
+  var links = {}, ticks = {};
+  $$(".lnk").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+  $$("#rail a").forEach(function(a){ ticks[a.getAttribute("href").slice(1)] = a; });
+  var lastY = 0, tick = false;
+
+  function frame(){
+    tick = false;
+    var y = window.pageYOffset;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + "%";
+    nav.classList.toggle("is-hidden", y > 520 && y > lastY + 4 && $("#pal").hidden);
+    lastY = y;
+
+    var cur = "", mid = window.innerHeight * 0.36;
+    for (var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]); if (!el) continue;
+      if (el.getBoundingClientRect().top <= mid) cur = ids[i];
+    }
+    ids.forEach(function(id){
+      var on = id === cur;
+      if (links[id]) links[id].setAttribute("aria-current", String(on));
+      if (ticks[id]) ticks[id].setAttribute("aria-current", String(on));
+    });
+  }
+  window.addEventListener("scroll", function(){
+    if (!tick){ tick = true; requestAnimationFrame(frame); }
+  }, { passive:true });
+  frame();
+})();
+
+/* Reveal. Substrate only — Report mode and reduced motion switch it off. */
+(function(){
+  var els = $$("[data-rise]");
+  if (!("IntersectionObserver" in window) || reduced.matches){
+    els.forEach(function(e){ e.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { rootMargin:"0px 0px -8% 0px", threshold:0.08 });
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* The mark's clear space, drawn on the mark itself when you look at it. */
+(function(){
+  var m = $("#heroMark"), c = $(".clear", m);
+  function set(){
+    var w = m.getBoundingClientRect().width, pad = w * 0.176;
+    c.style.inset = (-pad) + "px";
+  }
+  window.addEventListener("resize", set);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+  set();
+})();
+
+/* Start the board. */
+Board.resize();
+if (reduced.matches) Board.still(); else if (document.body.dataset.report !== "on") Board.start();
+reduced.addEventListener && reduced.addEventListener("change", function(){
+  if (reduced.matches) Board.still();
+  else if (document.body.dataset.report !== "on") Board.start();
+});
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  // Cloudflare deploy config for the Leema Township Incubator site.
+  // Static files, no build step.  Deploy with:  npx wrangler deploy
+  "name": "leemaincubator",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    // Serve the repository root; index.html is the entry point.
+    "directory": "."
+  }
+}
