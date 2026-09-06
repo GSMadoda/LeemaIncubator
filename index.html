@@ -496,6 +496,29 @@ body[data-report="on"] .bar .fill{transition:none}
   font-size:11px;letter-spacing:0.14em;color:var(--accent)}
 .step h3{font-size:18px}
 .step p{margin:0;font-size:15px;color:var(--fg-mute);line-height:1.55}
+
+/* ── AREFA ───────────────────────────────────────────────────────────────
+   A fingerprint is only worth printing if it can be read off the page and
+   checked, so the hex is set in the mono face at full length, wraps rather
+   than truncates, and carries its own copy control. ───────────────────── */
+.hashes{border-top:1px solid var(--rule)}
+.hashrow{display:grid;grid-template-columns:186px minmax(0,1fr) auto;gap:8px 18px;align-items:center;
+  padding:13px 0;border-bottom:1px solid var(--rule-soft)}
+@media(max-width:760px){
+  .hashrow{grid-template-columns:minmax(0,1fr) auto}
+  .hashrow .k{grid-column:1/-1}
+}
+.hashrow .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute)}
+.hashrow .v{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.55;color:var(--fg-soft);
+  overflow-wrap:anywhere}
+.hashrow .cp{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;
+  letter-spacing:0.12em;color:var(--fg-mute);background:transparent;border:1px solid var(--rule);
+  border-radius:2px;padding:6px 10px;cursor:pointer;justify-self:end;
+  transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+.hashrow .cp:hover{color:var(--fg);border-color:var(--fg-mute)}
+.track-line.tight{margin-top:0}
+.slots{display:grid;gap:10px}
 </style>
 </head>
 <body data-report="off">
@@ -514,6 +537,7 @@ body[data-report="on"] .bar .fill{transition:none}
       <a class="lnk" href="#portfolio">Portfolio</a>
       <a class="lnk" href="#measures">Measures</a>
       <a class="lnk" href="#pipeline">How it works</a>
+      <a class="lnk" href="#arefa">AREFA</a>
       <a class="lnk" href="#record">Record</a>
       <a class="lnk" href="#contact">Contact</a>
       <span class="nav-tools">
@@ -532,8 +556,9 @@ body[data-report="on"] .bar .fill{transition:none}
     <li><a href="#portfolio"><span class="tick"></span><span class="lbl">03 · What it shows</span></a></li>
     <li><a href="#measures"><span class="tick"></span><span class="lbl">04 · What we measure</span></a></li>
     <li><a href="#pipeline"><span class="tick"></span><span class="lbl">05 · How it works</span></a></li>
-    <li><a href="#record"><span class="tick"></span><span class="lbl">06 · The record</span></a></li>
-    <li><a href="#contact"><span class="tick"></span><span class="lbl">07 · Contact</span></a></li>
+    <li><a href="#arefa"><span class="tick"></span><span class="lbl">06 · AREFA</span></a></li>
+    <li><a href="#record"><span class="tick"></span><span class="lbl">07 · The record</span></a></li>
+    <li><a href="#contact"><span class="tick"></span><span class="lbl">08 · Contact</span></a></li>
   </ol>
 </nav>
 
@@ -740,8 +765,9 @@ body[data-report="on"] .bar .fill{transition:none}
     <div class="split" style="margin-top:64px">
       <div class="prose" data-rise>
         <h3 style="margin-bottom:14px">How the pipeline is tracked</h3>
-        <p>The centre runs a process-mining system over its own intake and support records — internally
-          the AREFA/VID3 system. Stripped of the terminology, it does four things a paper file cannot.</p>
+        <p>The centre runs a process-mining system over its own intake and support records —
+          <a href="#arefa">the AREFA/VID3 system</a>, described in full in the next section. Stripped of
+          the terminology, it does four things a paper file cannot.</p>
         <p><strong>It maps what actually happens.</strong> Every profile, compliance check and support
           action leaves a timestamp, so the route an enterprise takes through the centre is drawn from the
           record rather than from memory.</p>
@@ -767,11 +793,93 @@ body[data-report="on"] .bar .fill{transition:none}
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────── 06 THE RECORD · ink ── -->
-<section id="record" class="band on-ink">
+<!-- ───────────────────────────────────────────────── 06 AREFA · paper ── -->
+<section id="arefa" class="band">
   <div class="wrap">
     <div class="sec-head" data-rise>
       <span class="eyebrow is-accent">06</span>
+      <h2>AREFA</h2>
+      <p class="lead">The system behind section 05, on the centre's own hardware. It is the instrument the
+        pipeline figures are drawn with — and, like every other figure on this site, what it claims about
+        itself is measured, fingerprinted and printed rather than asserted.</p>
+    </div>
+
+    <div class="grid g-3" id="arefaStats" style="margin-bottom:48px" data-rise></div>
+
+    <div class="grid g-2" id="arefaParts" style="margin-bottom:56px;align-items:start" data-rise></div>
+
+    <div class="split" style="margin-bottom:56px">
+      <div data-rise>
+        <span class="eyebrow">The chain it writes about itself</span>
+        <h3 class="as-h4" style="margin:10px 0 0">Every gate, in order, including the one still open</h3>
+        <p style="margin:12px 0 0;font-size:15px;color:var(--fg-mute);max-width:34em">Each gate re-measures
+          the system and writes a report with the fingerprints it took. A gate that has not run is written
+          as open. Nothing below is a plan; it is the reading.</p>
+        <div class="track-line tight" id="arefaGates" style="margin-top:28px"></div>
+      </div>
+      <div data-rise>
+        <div class="card" data-tier="partner" data-stripe>
+          <span class="eyebrow">Reported empty rather than estimated</span>
+          <h3 class="as-h4" style="margin:8px 0 14px">What has not happened yet</h3>
+          <div class="slots" id="arefaOpen"></div>
+          <p style="margin:16px 0 0;font-size:15px;color:var(--fg-mute)">The transfer of this system to an
+            intern at the centre is part-run, not finished. The rows above say so. They will say something
+            else when the gate that changes them has passed, and not before.</p>
+        </div>
+      </div>
+    </div>
+
+    <div data-rise style="margin-bottom:56px">
+      <span class="eyebrow">Fingerprints</span>
+      <h3 class="as-h4" style="margin:10px 0 6px">Check the claim, do not take it</h3>
+      <p style="margin:0 0 22px;font-size:15px;color:var(--fg-mute);max-width:34em">These are SHA-256
+        digests, not secrets. They are printed at full length so that anyone holding a copy of the system
+        can recompute them and see for themselves whether they hold.</p>
+      <div class="hashes" id="arefaHashes"></div>
+    </div>
+
+    <div class="grid g-2" style="align-items:start">
+      <div class="card" data-rise>
+        <span class="eyebrow">The boundary</span>
+        <h3 class="as-h4" style="margin:8px 0 10px">What is never carried with it</h3>
+        <p style="margin:0 0 12px;font-size:15px;color:var(--fg-mute)">The transfer contract names the
+          exclusions before anything is packed, and the first gate checks them. SSH keys, browser profiles
+          and cookies, shell history, cloud credentials, authentication configuration, password stores, and
+          unrelated personal files and application state are out of scope by contract, not by care taken on
+          the day.</p>
+        <p style="margin:0;font-size:15px;color:var(--fg-mute)">The same rule runs the other way. Historical
+          audit files are immutable: they are never rewritten to make a path tidier for transfer, because a
+          record edited for convenience is no longer a record. Absolute paths and the operator's home
+          directory are not published on this page for the same reason they are not published for the
+          cohort — they identify a person.</p>
+      </div>
+      <div data-rise>
+        <div class="card" data-tier="incubatee" data-stripe style="margin-bottom:24px">
+          <span class="eyebrow">Why it sits on this site</span>
+          <h3 class="as-h4" style="margin:8px 0 10px">Skills development, in its most literal form</h3>
+          <p style="margin:0;font-size:15px;color:var(--fg-mute)">Measure 01 is SMME skills development. The
+            whole working system — runtime, launcher, services, audit timers, project and evidence chain,
+            and the model itself — is being reproduced for an intern at the centre, intact and checkable,
+            rather than described in a training slide. When the last gate passes, that is one training
+            intervention that can be verified by digest.</p>
+        </div>
+        <div class="shot" role="img" aria-label="Image position: AREFA mark artwork required">
+          <span class="k">Artwork required</span>
+          <span class="v">AREFA mark · the continent drawn as a printed-circuit board, gold traces on ink,
+            and the baobab plate at dusk with signal running through the grass. Both need keying to
+            transparency and an ink and a white version before they go on the site, held the same way the
+            LEEMA mark is held.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────── 07 THE RECORD · ink ── -->
+<section id="record" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">07</span>
       <h2>The record</h2>
       <p class="lead">Direct, specific and unembarrassed about detail. Where a date is not yet set, the row
         says so rather than guessing.</p>
@@ -785,11 +893,11 @@ body[data-report="on"] .bar .fill{transition:none}
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────── 07 CONTACT · paper ── -->
+<!-- ──────────────────────────────────────────── 08 CONTACT · paper ── -->
 <section id="contact" class="band">
   <div class="wrap">
     <div class="sec-head" data-rise>
-      <span class="eyebrow is-accent">07</span>
+      <span class="eyebrow is-accent">08</span>
       <h2>Walk into the centre</h2>
       <p class="lead">If you own a small enterprise in the North West, Gauteng or the Northern Cape, start
         with a phone call. If you want to buy from one of the nine, or fund them, the centre will put you
@@ -1065,6 +1173,81 @@ var TRACK = [
   { d:"Date required", t:"Next cohort intake at the Mogwase centre", state:"open",
     n:"Open to owners in the North West, Gauteng and the Northern Cape." }
 ];
+/* ═══════════════════════════════════════════════════════════════ AREFA ══
+   The centre's own system.  Every figure and every digest below is
+   transcribed from the reports the system writes about itself — T00 (source
+   scope and transfer contract), T01 (component manifest and source
+   attestation) and T01A (model store authority and permission boundary) —
+   and is a measured value, never a target.
+
+   What is deliberately NOT here: absolute paths, the operator's home
+   directory, and the host the system runs on.  They identify a person and a
+   machine, and they are no more publishable than an owner's mobile number.
+   The roles are named instead, which is what makes the digests checkable.
+   ═════════════════════════════════════════════════════════════════════ */
+var AREFA = {
+  model: { name:"qwen2.5:7b", bytes:4683087332, blobs:5, server:"Ollama 0.30.7" },
+  scope: { objects:271061, files:217420, dirs:53517, symlinks:124, bytes:13276820437 },
+  runtimeFiles:17, services:10, audits:3
+};
+
+var AREFA_PARTS = [
+  { t:"One machine, one launcher",
+    d:"AREFA opens from a desktop icon like any other application. There is no server to reach and no " +
+      "account to sign into: the runtime, the state and the model all sit on the centre's own disk, and " +
+      "the installed runtime is seventeen files." },
+  { t:"Ten services and three audits",
+    d:"The engine, mail in and out, the web face, the proxy and the production run are ordinary user " +
+      "services. Three timers — daily, weekly and monthly — re-measure the system against its own " +
+      "manifest and write down what they found, whether or not anyone asked." },
+  { t:"The model is local",
+    d:"qwen2.5:7b, served by Ollama 0.30.7 on the same machine, 4.68 GB in five blobs. Each blob was " +
+      "recomputed from disk and matched against the manifest naming it, and the server binary is " +
+      "fingerprinted below alongside them. Nothing an enterprise types into it leaves the centre." },
+  { t:"It reports on itself",
+    d:"Every gate the system passes writes a report carrying the digests it measured. The chain below is " +
+      "not a description of AREFA written afterwards; it is AREFA's own reading, transcribed." }
+];
+
+var AREFA_GATES = [
+  { d:"T00", t:"Source scope and transfer contract", state:"done",
+    n:"What the system is made of, and what is never carried with it. Passed 6 September 2026, 11:14 UTC." },
+  { d:"T01", t:"Component manifest and source attestation", state:"done",
+    n:"Every object measured and closed into one component-set digest, with the source frozen either " +
+      "side of the reading and unchanged. Passed 6 September 2026, 11:22 UTC." },
+  { d:"T01A", t:"Model store authority and permission boundary", state:"done",
+    n:"One authoritative model store, uniquely resolved, and the exact model identity proven blob by " +
+      "blob. Passed 6 September 2026, 11:22 UTC." },
+  { d:"Not yet run", t:"T02 · Deterministic bundle construction and plaintext identity", state:"open",
+    n:"The next gate. Until it passes, the rows beside it stay empty." }
+];
+
+/* Deliberately the negative space: what the transfer state reports as not
+   done.  A half-finished process reported as finished is the one thing this
+   site does not do anywhere else either. */
+var AREFA_OPEN = [
+  { k:"Archive",           v:"Not created" },
+  { k:"Encryption",        v:"Not performed" },
+  { k:"Network exposure",  v:"None — the system has not been put on a network for this transfer" },
+  { k:"Recipient identity",v:"Not yet proven" },
+  { k:"Transfer",          v:"Not converged" }
+];
+
+var AREFA_HASHES = [
+  { k:"Component set",      v:"007b16ef9bf9af0cbc6e3e4044b615b2905250dcd2e14c04c8cd5f923b82e776",
+    n:"Every file, directory and link in scope, closed into one digest." },
+  { k:"Model manifest",     v:"845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    n:"The manifest naming the five blobs that make the model." },
+  { k:"Source attestation", v:"b76533de09d8d39b58d1b4f2fb6e46cbc2ef332cddfc99611888417c39bb419e",
+    n:"The signed statement of what was measured, and by whose authority." },
+  { k:"Frozen source",      v:"f7e2317a6c9a2dea0ac9da3491a4b1a4fe050a9989bf2a76ac93fb08465bd648",
+    n:"The frozen build, identical before and after the reading." },
+  { k:"Successor source",   v:"85c7f4e945c7827036c0eaf24f6fb18ebb17cc7606f11220a5026fb01912778b",
+    n:"The successor build, likewise unchanged across the reading." },
+  { k:"Model server",       v:"856526267c71977efa7f542ea04e3dcba493b1b6ba3edbab766871c9ae69deb5",
+    n:"The Ollama 0.30.7 executable that serves the model, 38 086 544 bytes." }
+];
+
 /* ═════════════════════════════════════════════════════════════ helpers ══ */
 var $  = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
@@ -1602,6 +1785,57 @@ var Dir = (function(){
       '<span><span class="t">' + esc(e.t) + '</span><p class="n">' + esc(e.n) + "</p></span></div>";
   }).join("");
 })();
+/* ═══════════════════════════════════════════════════════════════ AREFA ══ */
+(function(){
+  var A = AREFA;
+  /* Thin spaces group the digits; the mono face keeps the columns aligned. */
+  function group(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u2009"); }
+  function gb(n){ return (n / 1e9).toFixed(2) + " GB"; }
+
+  $("#arefaStats").innerHTML =
+    '<div class="stat" data-tier="incubatee"><span class="n">' + esc(A.model.name) + "</span>" +
+      '<span class="l">the model, served on the centre\u2019s own machine \u00b7 ' + gb(A.model.bytes) +
+      " in " + A.model.blobs + " blobs, every one recomputed from disk and matched</span></div>" +
+    '<div class="stat" data-tier="reseller"><span class="n">' + group(A.scope.objects) + "</span>" +
+      '<span class="l">objects closed into one digest \u00b7 ' + group(A.scope.files) + " files, " +
+      group(A.scope.dirs) + " directories, " + A.scope.symlinks + " links</span></div>" +
+    '<div class="stat" data-tier="partner"><span class="n">' + gb(A.scope.bytes) + "</span>" +
+      '<span class="l">measured across the installed runtime, the project and the evidence chain</span></div>';
+
+  $("#arefaParts").innerHTML = AREFA_PARTS.map(function(x, i){
+    return '<div class="card">' +
+      '<span class="eyebrow">' + ("0" + (i+1)).slice(-2) + "</span>" +
+      '<h3 class="as-h4" style="margin:8px 0 10px">' + esc(x.t) + "</h3>" +
+      '<p style="margin:0;font-size:15px;color:var(--fg-mute);line-height:1.55">' + esc(x.d) + "</p></div>";
+  }).join("");
+
+  $("#arefaGates").innerHTML = AREFA_GATES.map(function(e){
+    var d = e.state === "done" ? esc(e.d)
+          : '<span style="color:var(--ember)">' + esc(e.d) + "</span>";
+    return '<div class="ev" data-state="' + e.state + '">' +
+      '<span class="d">' + d + "</span>" +
+      '<span><span class="t">' + esc(e.t) + '</span><p class="n">' + esc(e.n) + "</p></span></div>";
+  }).join("");
+
+  $("#arefaOpen").innerHTML = AREFA_OPEN.map(function(x){
+    return '<span class="slot"><span class="k">' + esc(x.k) + "</span>" +
+      '<span class="v">' + esc(x.v) + "</span></span>";
+  }).join("");
+
+  var hashes = $("#arefaHashes");
+  hashes.innerHTML = AREFA_HASHES.map(function(h, i){
+    return '<div class="hashrow">' +
+      '<span class="k">' + esc(h.k) + "</span>" +
+      '<span class="v">' + esc(h.v) +
+        '<br><span style="color:var(--fg-mute)">' + esc(h.n) + "</span></span>" +
+      '<button class="cp" type="button" data-i="' + i + '" ' +
+        'aria-label="Copy the ' + esc(h.k.toLowerCase()) + ' digest">Copy</button></div>';
+  }).join("");
+  hashes.addEventListener("click", function(e){
+    var b = e.target.closest(".cp"); if (!b) return;
+    var h = AREFA_HASHES[+b.dataset.i]; if (h) copy(h.v, h.k);
+  });
+})();
 /* ═══════════════════════════════════════════════════════ command palette ══ */
 (function(){
   var pal = $("#pal"), box = $(".pal-box", pal), input = $("#palInput"), list = $("#palList");
@@ -1617,6 +1851,7 @@ var Dir = (function(){
     { c:"Go", n:"Portfolio",       s:"Counted off the nine intake forms", r:function(){ go("portfolio"); } },
     { c:"Go", n:"What we measure", s:"The five things the organisation reports on", r:function(){ go("measures"); } },
     { c:"Go", n:"How it works",    s:"Intake, placement, support, report", r:function(){ go("pipeline"); } },
+    { c:"Go", n:"AREFA",           s:"The centre\u2019s own system, its gate chain and its fingerprints", r:function(){ go("arefa"); } },
     { c:"Go", n:"The record",      s:"Tranche correspondence and open dates", r:function(){ go("record"); } },
     { c:"Go", n:"Contact",         s:"Mogwase, North West", r:function(){ go("contact"); } },
     { c:"Do", n:"Call the centre",  s:"014 403 5209", r:function(){ location.href = "tel:+27144035209"; } },
@@ -1635,6 +1870,11 @@ var Dir = (function(){
                    var el = document.querySelector(".ent.is-open");
                    if (el) el.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block:"center" });
                  }, reduced.matches ? 0 : 420); } };
+  }))
+  /* Every AREFA digest is copyable from here without scrolling to the table. */
+  .concat(AREFA_HASHES.map(function(h){
+    return { c:"Digest", n:"Copy the " + h.k.toLowerCase() + " digest", s:h.n,
+             r:function(){ copy(h.v, h.k); } };
   }))
   /* And so is each kind of support an enterprise can ask the centre for. */
   .concat(Object.keys(LOOKING).map(function(k){
@@ -1744,7 +1984,7 @@ var Dir = (function(){
 /* Navigation: progress, current section, and it steps out of the way going down. */
 (function(){
   var nav = $("#nav"), prog = $("#navProg");
-  var ids = ["about","cohort","portfolio","measures","pipeline","record","contact"];
+  var ids = ["about","cohort","portfolio","measures","pipeline","arefa","record","contact"];
   var links = {}, ticks = {};
   $$(".lnk").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
   $$("#rail a").forEach(function(a){ ticks[a.getAttribute("href").slice(1)] = a; });
