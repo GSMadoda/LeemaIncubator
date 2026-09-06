@@ -315,66 +315,6 @@ body[data-report="on"] .rail{display:none}
 .filter:hover{color:var(--fg);border-color:var(--fg-mute)}
 .filter[aria-pressed="true"]{color:var(--fg);border-color:var(--fg)}
 
-/* ── System explorer ─────────────────────────────────────────────────────── */
-.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
-.sw{border:1px solid var(--rule);border-radius:var(--r);background:var(--card);padding:0;overflow:hidden;
-  cursor:copy;text-align:left;display:grid;transition:border-color var(--t-ctl) var(--ease)}
-.sw:hover{border-color:var(--fg)}
-.sw .chip-col{height:76px;background:var(--c)}
-.sw .meta{padding:11px 12px 13px;display:grid;gap:3px}
-.sw .nm{font-family:"Sora",sans-serif;font-weight:500;font-size:13px}
-.sw .tk,.sw .hx{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--fg-mute)}
-.sw .use{font-size:13px;color:var(--fg-mute);line-height:1.45;margin-top:3px}
-
-.spec{display:grid;gap:0;border:1px solid var(--rule);border-radius:var(--r);background:var(--card);overflow:hidden}
-.spec-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--rule)}
-.spec-ctl label{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute)}
-.spec-out{padding:26px 20px 30px;display:grid;gap:24px}
-.spec-line{display:grid;gap:8px}
-.spec-line .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--fg-mute)}
-.spec-line .sample{line-height:1.05;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.warn{display:none;align-items:flex-start;gap:10px;border-top:3px solid var(--ember-600);background:var(--ember-100);
-  color:var(--ember-700);padding:13px 16px;border-radius:0 0 var(--r) var(--r);font-size:15px}
-.warn.on{display:flex}
-.warn b{color:var(--ember-700);font-weight:500}
-.on-ink .warn{background:#20140a}
-
-input[type=range]{-webkit-appearance:none;appearance:none;height:20px;background:transparent;flex:1;min-width:140px;cursor:ew-resize}
-input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--rule)}
-input[type=range]::-moz-range-track{height:1px;background:var(--rule)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:3px;height:18px;background:var(--accent);
-  border-radius:0;margin-top:-9px;border:0}
-input[type=range]::-moz-range-thumb{width:3px;height:18px;background:var(--accent);border-radius:0;border:0}
-
-/* Mark validator — the 120px floor, demonstrated rather than described. */
-.val{display:grid;gap:0;border:1px solid var(--rule);border-radius:var(--r);background:var(--card);overflow:hidden}
-.val-stage{min-height:230px;display:grid;place-items:center;padding:38px 20px;background:var(--ink-1000);position:relative}
-.val-stage .clearbox{position:relative;border:1px dashed var(--ink-600);display:grid;place-items:center}
-.val-stage img{display:block}
-.val-bar{background:var(--white);border-radius:1px}
-.val-note{position:absolute;left:14px;bottom:12px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
-  letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-600)}
-.val-ctl{padding:16px 20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--rule)}
-
-/* ── Voice ───────────────────────────────────────────────────────────────── */
-.voice{display:grid;gap:var(--gutter)}
-@media(min-width:960px){.voice{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
-.editor{border:1px solid var(--rule);border-radius:var(--r);background:var(--card);display:grid;grid-template-rows:auto 1fr auto}
-.editor .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--rule)}
-.editor textarea{border:0;background:transparent;color:var(--fg);font-family:"Newsreader",serif;font-size:17px;
-  line-height:1.6;padding:18px 16px;min-height:210px;resize:vertical;width:100%;outline:0}
-.editor .foot{display:flex;flex-wrap:wrap;gap:10px;padding:12px 16px;border-top:1px solid var(--rule);align-items:center}
-.findings{display:grid;gap:10px;align-content:start}
-.finding{border:1px solid var(--rule);border-top:3px solid var(--ember-600);border-radius:0 0 var(--r) var(--r);
-  background:var(--card);padding:14px 16px;display:grid;gap:5px}
-.finding.ok{border-top-color:var(--growth-600)}
-.finding .h{font-family:"Sora",sans-serif;font-weight:500;font-size:14px}
-.finding .d{font-size:15px;color:var(--fg-mute);line-height:1.5;margin:0}
-.finding .q{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute)}
-.hit{color:var(--ember-700);border-bottom:1px solid var(--ember-600)}
-.on-ink .hit{color:var(--ember-500)}
-.count{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute);letter-spacing:0.1em}
-
 /* ── Record ──────────────────────────────────────────────────────────────── */
 .quote{border-left:3px solid var(--growth-600);padding:4px 0 4px 22px;margin:0;max-width:660px}
 .quote p{font-size:clamp(19px,2.1vw,25px);line-height:1.42;color:var(--fg);margin:0 0 12px}
@@ -457,6 +397,105 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
   body{background:#fff;color:#000}
   .band{padding-block:24px}
 }
+
+/* ── The cohort directory ────────────────────────────────────────────────────
+   Every enterprise is a component seated on the board: hairline outline, pads
+   down each edge, a three-pixel tier stripe along the top. Probing one expands
+   it across the full row rather than navigating away.
+   ──────────────────────────────────────────────────────────────────────── */
+.dir-controls{display:grid;gap:16px;margin-bottom:28px}
+.search{display:flex;align-items:center;gap:12px;border:1px solid var(--rule);border-radius:var(--r);
+  background:var(--card);padding:0 16px;height:52px}
+.search input{border:0;outline:0;background:transparent;color:var(--fg);width:100%;
+  font-family:"Sora",sans-serif;font-size:16px}
+.search input::placeholder{color:var(--fg-mute)}
+.search .lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute);flex:none}
+.search button{border:0;background:transparent;cursor:pointer;color:var(--fg-mute);flex:none;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em}
+.search button:hover{color:var(--fg)}
+
+.facets{display:grid;gap:12px}
+.facet{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.facet>.k{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute);width:104px;flex:none}
+@media(max-width:600px){.facet>.k{width:100%}}
+
+.ent-grid{display:grid;gap:var(--gutter)}
+@media(min-width:720px){.ent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1080px){.ent-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.ent{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:27px 24px 22px;text-align:left;cursor:pointer;display:grid;gap:12px;align-content:start;min-width:0;
+  transition:border-color var(--t-ctl) var(--ease)}
+.ent::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--stripe)}
+.ent:hover{border-color:var(--fg)}
+.ent.is-open{grid-column:1/-1;border-color:var(--fg);cursor:default}
+.ent .pads{position:absolute;top:34px;bottom:16px;width:7px;display:grid;gap:9px;grid-auto-rows:2px}
+.ent .pads.l{left:-1px}.ent .pads.r{right:-1px}
+.ent .pads i{background:var(--rule);display:block}
+.ent:hover .pads i,.ent.is-open .pads i{background:var(--stripe)}
+@media(max-width:719px){.ent .pads{display:none}}
+.ent-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline;justify-content:space-between}
+.ent-name{font-family:"Sora",sans-serif;font-weight:600;font-size:19px;line-height:1.2;letter-spacing:-0.012em}
+.ent-where{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--fg-mute);letter-spacing:0.02em}
+.ent>.pill{justify-self:start}
+.ent-pitch{margin:0;font-size:15px;line-height:1.55;color:var(--fg-mute)}
+.ent-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;
+  border:1px solid var(--rule);border-radius:2px;padding:3px 7px;color:var(--fg-mute);
+  background:transparent;line-height:1.5}
+button.tag{cursor:pointer;transition:color var(--t-ctl) var(--ease),border-color var(--t-ctl) var(--ease)}
+button.tag:hover{color:var(--fg);border-color:var(--fg)}
+.ent-more{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--accent);border-top:1px solid var(--rule-soft);padding-top:10px}
+
+/* The opened record. Two columns of labelled rows — a document, not a brochure. */
+.rec{display:grid;gap:0;border-top:1px solid var(--rule);margin-top:4px}
+@media(min-width:860px){.rec{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}}
+.rec-row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:13px 0;
+  border-bottom:1px solid var(--rule-soft);align-items:baseline}
+@media(max-width:560px){.rec-row{grid-template-columns:1fr;gap:4px}}
+.rec-row .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute)}
+.rec-row .v{font-size:15px;line-height:1.55;color:var(--fg-soft)}
+.rec-row .v em{font-style:normal;color:var(--fg)}
+.rec-wide{grid-column:1/-1}
+.ent-close{justify-self:start;margin-top:14px}
+
+/* ── Portfolio figures ───────────────────────────────────────────────────── */
+.figs{display:grid;gap:var(--gutter)}
+@media(min-width:760px){.figs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.figblock{border-top:1px solid var(--rule);padding-top:18px;display:grid;gap:14px;align-content:start}
+.figblock>.k{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.14em;color:var(--fg-mute)}
+.bars{display:grid;gap:11px}
+.bar{display:grid;gap:6px;cursor:pointer;background:transparent;border:0;padding:0;text-align:left;
+  border-radius:2px;transition:opacity var(--t-ctl) var(--ease)}
+.bar:hover{opacity:0.72}
+.bar .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.bar .nm{font-size:15px;color:var(--fg-soft)}
+.bar .ct{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--fg);font-variant-numeric:tabular-nums}
+.bar .track{height:6px;border:1px solid var(--rule);border-radius:2px;overflow:hidden;position:relative}
+.bar .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--c,var(--accent));
+  transition:width 760ms var(--ease)}
+/* Report mode promises nothing moves, so the bars arrive already drawn. */
+body[data-report="on"] .bar .fill{transition:none}
+.stat{display:grid;gap:6px;border-top:3px solid var(--stripe,var(--accent));background:var(--card);
+  border-inline:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  border-radius:0 0 var(--r) var(--r);padding:18px 20px 20px}
+.stat .n{font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(30px,3.4vw,44px);line-height:1;
+  letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+.stat .l{font-size:15px;color:var(--fg-mute);line-height:1.5}
+
+/* ── Pipeline ────────────────────────────────────────────────────────────── */
+.steps{display:grid;gap:var(--gutter);counter-reset:step}
+@media(min-width:820px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.step{border-top:1px solid var(--rule);padding-top:18px;display:grid;gap:9px;align-content:start;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:0.14em;color:var(--accent)}
+.step h3{font-size:18px}
+.step p{margin:0;font-size:15px;color:var(--fg-mute);line-height:1.55}
 </style>
 </head>
 <body data-report="off">
@@ -470,11 +509,11 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
       <span class="prog">Leema Township<br>Incubator</span>
     </a>
     <nav class="nav-links" aria-label="Sections">
-      <a class="lnk" href="#who">Who we are</a>
+      <a class="lnk" href="#about">The incubator</a>
+      <a class="lnk" href="#cohort">The cohort</a>
+      <a class="lnk" href="#portfolio">Portfolio</a>
       <a class="lnk" href="#measures">Measures</a>
-      <a class="lnk" href="#enterprises">Enterprises</a>
-      <a class="lnk" href="#system">System</a>
-      <a class="lnk" href="#voice">Voice</a>
+      <a class="lnk" href="#pipeline">How it works</a>
       <a class="lnk" href="#record">Record</a>
       <a class="lnk" href="#contact">Contact</a>
       <span class="nav-tools">
@@ -488,11 +527,11 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
 
 <nav class="rail" id="rail" aria-label="Page position">
   <ol>
-    <li><a href="#who"><span class="tick"></span><span class="lbl">01 · Who we are</span></a></li>
-    <li><a href="#measures"><span class="tick"></span><span class="lbl">02 · What we measure</span></a></li>
-    <li><a href="#enterprises"><span class="tick"></span><span class="lbl">03 · Enterprises</span></a></li>
-    <li><a href="#system"><span class="tick"></span><span class="lbl">04 · The system</span></a></li>
-    <li><a href="#voice"><span class="tick"></span><span class="lbl">05 · How we write</span></a></li>
+    <li><a href="#about"><span class="tick"></span><span class="lbl">01 · The incubator</span></a></li>
+    <li><a href="#cohort"><span class="tick"></span><span class="lbl">02 · The cohort</span></a></li>
+    <li><a href="#portfolio"><span class="tick"></span><span class="lbl">03 · What it shows</span></a></li>
+    <li><a href="#measures"><span class="tick"></span><span class="lbl">04 · What we measure</span></a></li>
+    <li><a href="#pipeline"><span class="tick"></span><span class="lbl">05 · How it works</span></a></li>
     <li><a href="#record"><span class="tick"></span><span class="lbl">06 · The record</span></a></li>
     <li><a href="#contact"><span class="tick"></span><span class="lbl">07 · Contact</span></a></li>
   </ol>
@@ -507,266 +546,222 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
       <img src="assets/leema-mark-white.png" alt="LEEMA Technology Incubation" width="357" height="101">
       <span class="clear" aria-hidden="true"></span>
     </div>
-    <h1>Township enterprises,<br>built to still be trading<span class="l2">in five years.</span></h1>
-    <p class="lead" style="margin-top:26px">LEEMA Incubation NPC is a township enterprise incubator in Mogwase,
-      North West, working with small enterprises across the North West, Gauteng and the Northern Cape,
-      funded through Seda and SEDFA.</p>
+    <h1>Nine enterprises,<br>three provinces,<span class="l2">one centre.</span></h1>
+    <p class="lead" style="margin-top:26px">LEEMA Incubation NPC runs the Leema Township Incubator out of
+      Bodirelo Industrial Park in Mogwase. We take small enterprises from the North West, Gauteng and the
+      Northern Cape into incubation, trade with them through our reseller network, and work them into supply
+      chains they could not reach alone.</p>
     <div class="hero-cta">
-      <a class="btn" href="#contact">Talk to the centre <span aria-hidden="true">→</span></a>
-      <a class="btn ghost" href="#measures">What we report <span aria-hidden="true">→</span></a>
+      <a class="btn" href="#cohort">See the cohort <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="#contact">Talk to the centre <span aria-hidden="true">→</span></a>
     </div>
     <div class="hero-meta">
-      <span>Programme · <b>Leema Township Incubator</b></span>
-      <span>Parent · <b>LEEMA Incubation NPC</b></span>
+      <span>Cohort · <b>9 enterprises</b></span>
+      <span>Intake · <b>August and September 2026</b></span>
       <span>Centre · <b>Mogwase, North West</b></span>
-      <span>Funders · <b>Seda and SEDFA</b></span>
+      <span>Funded through · <b>Seda and SEDFA</b></span>
     </div>
     <div class="scrollcue" aria-hidden="true"><i></i><span>Signal follows the scroll</span></div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────────── 01 WHO WE ARE · paper ── -->
-<section id="who" class="band">
+<!-- ─────────────────────────────────────────── 01 THE INCUBATOR · paper ── -->
+<section id="about" class="band">
   <div class="wrap">
     <div class="sec-head" data-rise>
       <span class="eyebrow is-accent">01</span>
-      <h2>Who we are</h2>
+      <h2>What the incubator does</h2>
       <p class="lead">Two audiences, one face: a development finance officer reading a quarterly report,
         and a business owner deciding whether to walk into the centre.</p>
     </div>
     <div class="split">
       <div class="prose" data-rise>
-        <p>The organisation supports three kinds of relationship at once — incubatees in full incubation,
-          resellers trading through the LEEMA network, and strategic partners. That structure is the reason
-          the brand speaks to both audiences without changing its voice.</p>
-        <p><strong>LEEMA Incubation NPC</strong> is the parent, and it is the name used in registration, banking,
-          contracts, funder correspondence and PFMA compliance statements. <strong>Leema Township Incubator</strong>
-          is the programme, and it is the name used in everything public-facing: this website, intake, training,
-          certificates and community materials.</p>
-        <p>The centre is at Stand 43, Factory A, Bodirelo Industrial Park, Mogwase. The door is open to owners
-          in the North West, Gauteng and the Northern Cape.</p>
-        <div class="grid g-2" style="margin-top:32px">
+        <p>LEEMA Incubation NPC is a township enterprise incubator in Mogwase, North West. We work with small
+          enterprises across the North West, Gauteng and the Northern Cape, funded through Seda and SEDFA.</p>
+        <p>An enterprise arrives at the centre with a business, not a business plan. We take one profile —
+          what it sells, who it sells to, where it trades, and what it is trying to reach — and place it on
+          one of four footings. The footing decides what the centre owes it: accredited training, funding
+          readiness, equipment, suppliers, or a route to a customer it cannot reach on its own.</p>
+        <p>Nothing here is a standard package. Each of the nine enterprises in the current cohort named its
+          own list of what it wants from the centre, and those lists are what we work.</p>
+        <p><strong>LEEMA Incubation NPC</strong> is the parent, and it is the name used in registration,
+          banking, contracts, funder correspondence and PFMA compliance statements.
+          <strong>Leema Township Incubator</strong> is the programme, and it is the name on everything
+          public-facing.</p>
+      </div>
+      <div data-rise>
+        <div class="grid" style="gap:12px">
           <div class="card" data-tier="incubatee" data-stripe>
-            <span class="eyebrow">Parent</span>
-            <h3 class="as-h4" style="margin:8px 0 6px">LEEMA Incubation NPC</h3>
-            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Registration, banking, contracts,
-              funder correspondence, PFMA compliance statements.</p>
+            <span class="eyebrow">Footing 01</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">Incubatee</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">In full incubation. Three enterprises:
+              Reve P Catering, Moela Energies, TM Leasure Homes.</p>
           </div>
           <div class="card" data-tier="reseller" data-stripe>
-            <span class="eyebrow">Programme</span>
-            <h3 class="as-h4" style="margin:8px 0 6px">Leema Township Incubator</h3>
-            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Website, intake, training, certificates,
-              community materials.</p>
+            <span class="eyebrow">Footing 02</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">Reseller</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Trading through the LEEMA network.
+              Four enterprises across ICT, security, electrical and supply.</p>
+          </div>
+          <div class="card" data-tier="partner" data-stripe>
+            <span class="eyebrow">Footing 03</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">Strategic partner</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">Working with the centre on capacity.
+              One enterprise: Motsogapele Food Produce.</p>
+          </div>
+          <div class="card" data-tier="exploring" data-stripe>
+            <span class="eyebrow">Footing 04</span>
+            <h3 class="as-h4" style="margin:8px 0 6px">Exploring</h3>
+            <p style="margin:0;font-size:15px;color:var(--fg-mute)">In conversation, not yet placed.
+              One enterprise, and the door the other eight came through.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────── 02 THE COHORT · ink ── -->
+<section id="cohort" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">02</span>
+      <h2>The cohort</h2>
+      <p class="lead">Nine enterprises took intake in August and September 2026. We name the enterprise —
+        never "one of our incubatees". Search them, filter them, or open one to read the full record.</p>
+    </div>
+
+    <div class="dir-controls" data-rise>
+      <div class="search">
+        <span class="lbl">Find</span>
+        <label class="skip" for="entSearch">Search the cohort</label>
+        <input id="entSearch" type="search" autocomplete="off" spellcheck="false"
+          placeholder="A name, a town, a sector, something they sell">
+        <button type="button" id="entReset">Reset</button>
+      </div>
+      <div class="facets">
+        <div class="facet" id="facetTier"  role="group" aria-label="Filter by footing"><span class="k">Footing</span></div>
+        <div class="facet" id="facetProv"  role="group" aria-label="Filter by province"><span class="k">Province</span></div>
+        <div class="facet" id="facetLook"  role="group" aria-label="Filter by what they are looking for"><span class="k">Looking for</span></div>
+      </div>
+    </div>
+
+    <p class="count" id="entCount" data-rise style="margin:0 0 22px"></p>
+    <div class="ent-grid" id="entGrid" data-rise></div>
+    <p class="count" id="entEmpty" hidden style="margin-top:8px"></p>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────── 03 WHAT IT SHOWS · paper ── -->
+<section id="portfolio" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">03</span>
+      <h2>What the portfolio shows</h2>
+      <p class="lead">Counted off the nine intake forms, not estimated. Every bar below is a filter —
+        select one to see which enterprises sit behind the number.</p>
+    </div>
+
+    <div class="grid g-3" style="margin-bottom:48px" data-rise>
+      <div class="stat" data-tier="incubatee"><span class="n">9</span>
+        <span class="l">enterprises in the current cohort, across four footings</span></div>
+      <div class="stat" data-tier="reseller"><span class="n">3</span>
+        <span class="l">provinces: the North West, Gauteng and the Northern Cape</span></div>
+      <div class="stat" data-tier="partner"><span class="n">7</span>
+        <span class="l">of the nine name funding or working capital as their biggest obstacle</span></div>
+    </div>
+
+    <div class="figs" data-rise>
+      <div class="figblock">
+        <span class="k">By footing</span>
+        <div class="bars" id="barTier"></div>
+      </div>
+      <div class="figblock">
+        <span class="k">By province</span>
+        <div class="bars" id="barProv"></div>
+      </div>
+      <div class="figblock">
+        <span class="k">What they are asking the centre for</span>
+        <div class="bars" id="barLook"></div>
+      </div>
+    </div>
+
+    <div class="grid g-2" style="margin-top:56px;align-items:start">
+      <div class="card" data-tier="partner" data-stripe data-rise>
+        <span class="eyebrow">The reported barrier</span>
+        <h3 class="as-h4" style="margin:8px 0 14px">What the cohort says is in the way</h3>
+        <div class="bars" id="barBarrier"></div>
+        <p style="margin:16px 0 0;font-size:15px;color:var(--fg-mute)">Seven of the nine name funding or
+          working capital as the single biggest obstacle; two name market access. That gets printed,
+          not hidden — it is the case for a targeted funding intervention, and it is the reason funding
+          readiness sits in eight of the nine support lists.</p>
+      </div>
+      <div class="card" data-rise>
+        <span class="eyebrow">A note on the counting</span>
+        <h3 class="as-h4" style="margin:8px 0 10px">Figures are counted from the profiles</h3>
+        <p style="margin:0 0 12px;font-size:15px;color:var(--fg-mute)">Every number on this page is computed
+          from the nine intake records in the data file behind it, so the charts and the profiles cannot
+          drift apart. Jobs are the exception worth naming: fifteen are projected across the cohort — ten at
+          Reve P Catering once the resort is operating, five at Far Out Excellent. Both are projections.
+          Neither is counted as a job created.</p>
+        <p style="margin:0;font-size:15px;color:var(--fg-mute)">Each enterprise's funding gap, cash-flow
+          position and stated weakness stay out of the public record. They were submitted to the incubator
+          and its funder. They appear here in aggregate, which is the form in which they argue for funding
+          without naming which business is short of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────── 04 MEASURES · ink ── -->
+<section id="measures" class="band on-ink">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">04</span>
+      <h2>What we measure</h2>
+      <p class="lead">Everything the programme produces is measured against five things. They are not
+        marketing lines; they are what the organisation reports on. Open one to read how it is counted
+        and where the cohort stands.</p>
+    </div>
+    <div class="meas" id="meas" data-rise></div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────── 05 HOW IT WORKS · paper ── -->
+<section id="pipeline" class="band">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <span class="eyebrow is-accent">05</span>
+      <h2>How it works</h2>
+      <p class="lead">Four steps from a phone call to a line in a funder report.</p>
+    </div>
+    <div class="steps" id="steps" data-rise></div>
+
+    <div class="split" style="margin-top:64px">
+      <div class="prose" data-rise>
+        <h3 style="margin-bottom:14px">How the pipeline is tracked</h3>
+        <p>The centre runs a process-mining system over its own intake and support records — internally
+          the AREFA/VID3 system. Stripped of the terminology, it does four things a paper file cannot.</p>
+        <p><strong>It maps what actually happens.</strong> Every profile, compliance check and support
+          action leaves a timestamp, so the route an enterprise takes through the centre is drawn from the
+          record rather than from memory.</p>
+        <p><strong>It finds where enterprises get stuck.</strong> Waiting times between steps are measured,
+          so a delay in funding approval or a compliance item sitting unclosed shows up as a number rather
+          than as a complaint.</p>
+        <p><strong>It reads the two directions together.</strong> What the enterprises report from the
+          market — cash flow, capital, route to a customer — is set against what the funders require, so
+          the support the centre gives is aimed at the constraint the businesses actually named.</p>
+        <p><strong>It matches the cohort to itself.</strong> Nine enterprises across seven sectors buy from
+          and sell to each other. The one with the ICT stock and the one that needs a website are in the
+          same list.</p>
       </div>
       <div data-rise>
         <div class="shot" role="img" aria-label="Image position: photograph required of the Mogwase centre, training room in use">
           <span class="k">Photograph required</span>
           <span class="v">Mogwase centre · training room in use · warm natural light · no filters.
             One commissioned day of photography at the centre and two or three enterprise sites
-            would change the brand more than any other single spend.</span>
+            would do more for this page than anything else on it.</span>
         </div>
-        <div class="cline" style="margin-top:20px">
-          <span class="k">Centre</span>
-          <span class="v">Stand 43, Factory A<br>Bodirelo Industrial Park<br>Mogwase, North West</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────────────── 02 MEASURES · ink ── -->
-<section id="measures" class="band on-ink">
-  <div class="wrap">
-    <div class="sec-head" data-rise>
-      <span class="eyebrow is-accent">02</span>
-      <h2>What we measure</h2>
-      <p class="lead">Everything the programme produces is measured against five things. They are not
-        marketing lines; they are what the organisation reports on. Open one to read how it is counted.</p>
-    </div>
-    <div class="meas" id="meas" data-rise></div>
-
-    <div class="grid g-2" style="margin-top:56px;align-items:start">
-      <div class="card" data-tier="partner" data-stripe data-rise>
-        <span class="eyebrow">Reported barrier</span>
-        <h3 class="as-h4" style="margin:8px 0 14px">What the cohort says is in the way</h3>
-        <div class="meter">
-          <div class="track"><span class="fill" data-fill="75"></span></div>
-          <div class="cap"><span>Funding and market access</span><span class="fig">75%</span></div>
-        </div>
-        <p style="margin:14px 0 0;font-size:15px;color:var(--fg-mute)">Three quarters of the cohort names funding
-          and market access. That gets printed, not hidden.</p>
-      </div>
-      <div class="card" data-rise>
-        <span class="eyebrow">Counting note</span>
-        <h3 class="as-h4" style="margin:8px 0 10px">Projections are written as projections</h3>
-        <p style="margin:0;font-size:15px;color:var(--fg-mute)">A projected job is not a created job, and the two
-          are never added together. Where a figure has not been verified against the register, this site shows the
-          slot and names the number required rather than filling it with an estimate.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────── 03 ENTERPRISES · paper ── -->
-<section id="enterprises" class="band">
-  <div class="wrap">
-    <div class="sec-head" data-rise>
-      <span class="eyebrow is-accent">03</span>
-      <h2>Enterprises on the board</h2>
-      <p class="lead">We name the enterprise. Never "one of our incubatees". Relationship tiers are fixed:
-        incubatee green, reseller ink, strategic partner ember, exploring grey.</p>
-    </div>
-    <div class="filters" id="filters" data-rise></div>
-    <p class="count" id="chipCount" data-rise style="margin:-14px 0 26px"></p>
-    <div class="chips" id="chips" data-rise></div>
-    <p class="count" style="margin-top:22px">Tier markers below are placeholders · the enterprise register is the source of record</p>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────── 04 THE SYSTEM · ink ── -->
-<section id="system" class="band on-ink">
-  <div class="wrap">
-    <div class="sec-head" data-rise>
-      <span class="eyebrow is-accent">04</span>
-      <h2>The system, running</h2>
-      <p class="lead">Ink and paper carry roughly nine tenths of every surface. Two accents do the rest:
-        growth for what grows, ember for what is being built. Everything here is live — take a token,
-        set the type, test the mark.</p>
-    </div>
-
-    <h3 style="margin-bottom:16px">Colour</h3>
-    <p class="count" style="margin:0 0 18px">Click to copy the oklch value · shift-click for the hex fallback</p>
-    <div class="swatches" id="swatches" data-rise></div>
-
-    <div class="grid g-2" style="margin-top:64px;align-items:start">
-      <div data-rise>
-        <h3 style="margin-bottom:16px">Type</h3>
-        <p class="count" style="margin:0 0 18px">Three faces, each with one job · drag to set the body size</p>
-        <div class="spec">
-          <div class="spec-ctl">
-            <label for="typeSize">Body size</label>
-            <input type="range" id="typeSize" min="11" max="34" value="17" step="1" aria-describedby="typeWarn">
-            <span class="fig" id="typeVal" style="min-width:52px;text-align:right">17px</span>
-          </div>
-          <div class="spec-out">
-            <div class="spec-line">
-              <span class="tag">Sora 600 · display, headings, buttons, labels</span>
-              <span class="sample sora" id="s1" style="font-size:44px;letter-spacing:-0.02em">Enterprise longevity</span>
-            </div>
-            <div class="spec-line">
-              <span class="tag">Newsreader 400 · body, leads, descriptions</span>
-              <span class="sample" id="s2" style="font-size:17px;white-space:normal;line-height:1.6">Businesses still trading in five years, not just registered.</span>
-            </div>
-            <div class="spec-line">
-              <span class="tag">IBM Plex Mono 400 · dates, amounts, figures</span>
-              <span class="sample mono" id="s3" style="font-size:15px">R800 000 · 29 July 2025 · 014 403 5209 · 75%</span>
-            </div>
-          </div>
-          <div class="warn" id="typeWarn" role="status">
-            <span aria-hidden="true">·</span>
-            <span><b>Below the floor.</b> Body text is never set below 15px on screen or 10pt in print.</span>
-          </div>
-        </div>
-      </div>
-
-      <div data-rise>
-        <h3 style="margin-bottom:16px">The mark</h3>
-        <p class="count" style="margin:0 0 18px">Drag below 120px and watch the traces fill in</p>
-        <div class="val">
-          <div class="val-stage">
-            <div class="clearbox" id="clearBox">
-              <img src="assets/leema-mark-white.png" id="valMark" alt="LEEMA Technology Incubation at the selected size">
-              <div class="val-bar" id="valBar" hidden></div>
-            </div>
-            <span class="val-note" id="valNote">Clear space equals the height of the E in LEEMA</span>
-          </div>
-          <div class="val-ctl">
-            <label for="markSize" class="eyebrow" style="letter-spacing:0.14em">Width</label>
-            <input type="range" id="markSize" min="60" max="360" value="240" step="1">
-            <span class="fig" id="markVal" style="min-width:60px;text-align:right">240px</span>
-          </div>
-          <div class="warn" id="markWarn" role="status">
-            <span aria-hidden="true">·</span>
-            <span><b>Below the 120px floor.</b> The circuit traces fill in and the mark reads as a black bar.
-              Minimum reproduction is 28mm in print and 120px on screen.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid g-3" style="margin-top:56px">
-      <div class="card" data-rise><span class="eyebrow">Corners</span>
-        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">Zero to four pixels. Eight is the maximum
-          and is reserved for photographic containers. Pills appear only on status markers.</p></div>
-      <div class="card" data-rise><span class="eyebrow">Rules and cards</span>
-        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">One-pixel hairline, four-pixel corners,
-          24 pixels of padding, no shadow at rest. A status takes a three-pixel stripe along the top edge —
-          never a coloured left border.</p></div>
-      <div class="card" data-rise><span class="eyebrow">Motion</span>
-        <p style="margin:10px 0 0;font-size:15px;color:var(--fg-mute)">120ms on control states, 180ms on disclosure,
-          one easing curve. The board behind this page is substrate, not content. Report mode stills it.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────── 05 VOICE · paper ── -->
-<section id="voice" class="band">
-  <div class="wrap">
-    <div class="sec-head" data-rise>
-      <span class="eyebrow is-accent">05</span>
-      <h2>How we write</h2>
-      <p class="lead">Grounded and practical. Plain language for township entrepreneurs, precise enough for a
-        development finance officer. Type a sentence and the house rules read it back.</p>
-    </div>
-    <div class="voice">
-      <div class="editor" data-rise>
-        <div class="bar">
-          <span class="eyebrow">Draft</span>
-          <span class="count" id="vCount">0 characters</span>
-        </div>
-        <label class="skip" for="vIn">Draft text to check against the house voice</label>
-        <textarea id="vIn" spellcheck="true" placeholder="Write a sentence the way you would send it to a funder."></textarea>
-        <div class="foot">
-          <button class="btn ghost" id="vFix" style="padding:10px 14px;font-size:14px">Apply number conventions</button>
-          <button class="btn ghost" id="vSample" style="padding:10px 14px;font-size:14px">Load a failing example</button>
-          <button class="btn ghost" id="vClear" style="padding:10px 14px;font-size:14px">Clear</button>
-        </div>
-      </div>
-      <div class="findings" id="vOut" role="status" aria-live="polite" data-rise></div>
-    </div>
-
-    <div class="grid g-2" style="margin-top:56px;align-items:start">
-      <div class="prose" data-rise>
-        <h3 style="margin-bottom:14px">The rules it is reading</h3>
-        <p><strong>Say the thing, then the number.</strong> "Ten new jobs projected once the resort is operating"
-          beats "significant employment impact".</p>
-        <p><strong>Name the enterprise.</strong> Reve P Catering, Moela Energies, Thakaramo Security Solution
-          and Training. Never "one of our incubatees".</p>
-        <p><strong>We</strong> for the incubator, <strong>you</strong> for the entrepreneur, the business's own
-          name in the third person. Never "our clients".</p>
-        <p><strong>Keep the funder's vocabulary intact.</strong> Tranche, business plan, milestone, compliance,
-          PFMA, market access, funding readiness, working capital. These are the terms the money is approved
-          against; do not soften them.</p>
-        <p><strong>State barriers plainly.</strong> Three quarters of the cohort names funding and market access.
-          That gets printed, not hidden.</p>
-      </div>
-      <div class="card" data-rise>
-        <span class="eyebrow">Numbers</span>
-        <h4 style="margin:8px 0 12px">South African conventions throughout</h4>
-        <div class="grid" style="gap:10px">
-          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
-            <span class="count">Amount</span><span class="fig">R800 000</span></div>
-          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
-            <span class="count">Date</span><span class="fig">29 July 2025</span></div>
-          <div class="row" style="display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding-bottom:8px">
-            <span class="count">Telephone</span><span class="fig">014 403 5209</span></div>
-          <div class="row" style="display:flex;justify-content:space-between;gap:16px">
-            <span class="count">Percentage</span><span class="fig">75%</span></div>
-        </div>
-        <p style="margin:16px 0 0;font-size:15px;color:var(--fg-mute)">A space and no comma in amounts.
-          No exclamation marks. No emoji. No "journey", "empower", "upliftment", "beneficiary" or "ecosystem".</p>
       </div>
     </div>
   </div>
@@ -778,8 +773,8 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
     <div class="sec-head" data-rise>
       <span class="eyebrow is-accent">06</span>
       <h2>The record</h2>
-      <p class="lead">The house voice already exists in the organisation's own correspondence — direct,
-        specific and unembarrassed about detail. Write the way the tranche letter writes.</p>
+      <p class="lead">Direct, specific and unembarrassed about detail. Where a date is not yet set, the row
+        says so rather than guessing.</p>
     </div>
     <blockquote class="quote" data-rise>
       <p>"This letter serves as confirmation that Leema Township Incubation NPC is on track in implementing
@@ -787,8 +782,6 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
       <cite>First tranche request to Seda · 29 July 2025</cite>
     </blockquote>
     <div class="track-line" id="track" data-rise></div>
-    <p class="count" style="margin-top:18px">Rows marked <span style="color:var(--ember)">date required</span>
-      are open slots · they are filled from the programme's own reporting, not estimated here</p>
   </div>
 </section>
 
@@ -798,39 +791,31 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
     <div class="sec-head" data-rise>
       <span class="eyebrow is-accent">07</span>
       <h2>Walk into the centre</h2>
-      <p class="lead">If you own a small enterprise in the North West, Gauteng or the Northern Cape,
-        start with a phone call. If you are a funder or a partner, ask for the reporting pack.</p>
+      <p class="lead">If you own a small enterprise in the North West, Gauteng or the Northern Cape, start
+        with a phone call. If you want to buy from one of the nine, or fund them, the centre will put you
+        through.</p>
     </div>
     <div class="contact-grid" data-rise>
-      <div class="cline">
-        <span class="k">Telephone</span>
-        <a class="v" href="tel:+27144035209">014 403 5209</a>
-      </div>
-      <div class="cline">
-        <span class="k">Email</span>
-        <a class="v" href="mailto:info@leemaincubation.co.za">info@leemaincubation.co.za</a>
-      </div>
-      <div class="cline">
-        <span class="k">Web</span>
-        <a class="v" href="https://www.leemaincubation.co.za">www.leemaincubation.co.za</a>
-      </div>
-      <div class="cline">
-        <span class="k">Centre</span>
-        <span class="v">Stand 43, Factory A<br>Bodirelo Industrial Park<br>Mogwase, North West</span>
-      </div>
-      <div class="cline">
-        <span class="k">Registered as</span>
-        <span class="v">LEEMA Incubation NPC</span>
-      </div>
-      <div class="cline">
-        <span class="k">Funded through</span>
-        <span class="v">Seda and SEDFA</span>
-      </div>
+      <div class="cline"><span class="k">Telephone</span>
+        <a class="v" href="tel:+27144035209">014 403 5209</a></div>
+      <div class="cline"><span class="k">Email</span>
+        <a class="v" href="mailto:info@leemaincubation.co.za">info@leemaincubation.co.za</a></div>
+      <div class="cline"><span class="k">Web</span>
+        <a class="v" href="https://www.leemaincubation.co.za">www.leemaincubation.co.za</a></div>
+      <div class="cline"><span class="k">Centre</span>
+        <span class="v">Stand 43, Factory A<br>Bodirelo Industrial Park<br>Mogwase, North West</span></div>
+      <div class="cline"><span class="k">Registered as</span>
+        <span class="v">LEEMA Incubation NPC</span></div>
+      <div class="cline"><span class="k">Funded through</span>
+        <span class="v">Seda and SEDFA</span></div>
     </div>
     <div class="hero-cta" style="margin-top:44px">
       <a class="btn" href="tel:+27144035209">Call 014 403 5209 <span aria-hidden="true">→</span></a>
-      <a class="btn ghost" href="mailto:info@leemaincubation.co.za?subject=Reporting%20pack%20request">Ask for the reporting pack <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="mailto:info@leemaincubation.co.za?subject=Intake%20enquiry">Ask about intake <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="mailto:info@leemaincubation.co.za?subject=Buying%20from%20the%20cohort">Buy from the cohort <span aria-hidden="true">→</span></a>
     </div>
+    <p class="count" style="margin-top:26px">Enquiries to an enterprise in the cohort go through the centre ·
+      owners' direct contact details are not published here</p>
   </div>
 </section>
 </main>
@@ -841,7 +826,7 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
     <span>LEEMA Incubation NPC · Leema Township Incubator</span>
     <span>Stand 43, Factory A, Bodirelo Industrial Park, Mogwase, North West</span>
     <span>014 403 5209 · info@leemaincubation.co.za</span>
-    <span>Brand guidelines Version 1 · September 2026</span>
+    <span>Cohort intake · August and September 2026</span>
   </div>
 </footer>
 
@@ -850,12 +835,10 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
     <div class="pal-in">
       <span class="eyebrow" style="letter-spacing:0.14em">Go</span>
       <input id="palInput" type="text" autocomplete="off" spellcheck="false"
-        placeholder="Jump to a section, copy a token, call the centre" aria-controls="palList">
+        placeholder="An enterprise, a section, the centre's number" aria-controls="palList">
     </div>
     <div class="pal-list" id="palList" role="listbox" aria-label="Results"></div>
-    <div class="pal-foot">
-      <span>↑ ↓ move</span><span>↵ run</span><span>esc close</span>
-    </div>
+    <div class="pal-foot"><span>↑ ↓ move</span><span>↵ run</span><span>esc close</span></div>
   </div>
 </div>
 
@@ -865,39 +848,154 @@ body[data-report="on"] [data-rise]{opacity:1;transform:none;transition:none}
 "use strict";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CONTENT
-   Everything the page says lives here. Figures that have not been verified
-   against the programme's own register are written as `required` slots and
-   render as ruled placeholders naming the number needed — the same discipline
-   the guidelines apply to image positions. Nothing is estimated.
+   THE COHORT
+   Nine enterprises, transcribed from the intake profiles in LEEMA's portfolio
+   report to SEDFA. Every field below is the enterprise's own submission.
+
+   What is deliberately NOT here: the contact person, telephone number and
+   email address on each intake form, and each enterprise's stated funding gap,
+   cash-flow position and biggest operational weakness. Those were submitted to
+   the incubator and its funder, not to the public. Enquiries route through the
+   centre, and the barrier data appears in aggregate only — which is the form
+   in which it argues for funding without naming which business is short of it.
    ═════════════════════════════════════════════════════════════════════════ */
 
-var MEASURES = [
-  { t:"SMME skills development",
-    d:"Accredited and practical training that raises the ceiling on what an owner can run.",
-    counted:"Training interventions completed, by enterprise and by accreditation status.",
-    cadence:"Reported per tranche.",
-    required:"Learners completing accredited training" },
-  { t:"Transformation",
-    d:"Moving Black-owned township and rural enterprises into real supply chains.",
-    counted:"Enterprises placed into a contracted supply chain within the reporting period.",
-    cadence:"Reported per tranche, against the business plan.",
-    required:"Enterprises entering a supply chain" },
-  { t:"Job creation",
-    d:"Permanent jobs, counted and reported.",
-    counted:"Permanent positions filled and still filled at the close of the period. A projected job is written as a projection and is never added to the count.",
-    cadence:"Reported per tranche. Example from the record: ten new jobs projected once the resort is operating.",
-    required:"Permanent jobs at close of period" },
-  { t:"Enterprise longevity",
-    d:"Businesses still trading in five years, not just registered.",
-    counted:"Enterprises still trading at each anniversary of intake, verified against trading records rather than registration.",
-    cadence:"Reported annually.",
-    required:"Cohort still trading at sixty months" },
-  { t:"Operational capacity improvement",
-    d:"Systems, compliance and equipment, so growth does not break the business.",
-    counted:"Compliance items closed and equipment placed, by enterprise.",
-    cadence:"Reported per tranche.",
-    required:"Compliance items closed" }
+var COHORT = [
+  { id:"reve-p",
+    name:"Reve P Catering",
+    tier:"incubatee", town:"Pretoria (Ninapark)", prov:"Gauteng",
+    sectors:["Food and hospitality"],
+    pitch:"A one-stop shop for catering and event management for corporates, government and private clients.",
+    summary:"Catering and event management services for corporates, government and private clients.",
+    products:"Food meals, fruit baskets, ginger drink.",
+    services:"Catering services, decor hire, event management.",
+    customers:"Individuals, corporates, government.",
+    market:"Gauteng and the North West.",
+    edge:["Price","Experience","Technical expertise","Personal service"],
+    goals:"Occupy, renovate and begin operating from a resort granted for their use. Ten new jobs projected once the resort is operating.",
+    looking:["market","funding","equipment"],
+    intake:"28 August 2026" },
+
+  { id:"far-out",
+    name:"Far Out Excellent Trading and Projects",
+    tier:"reseller", town:"Mafikeng", prov:"North West",
+    sectors:["ICT and technology"],
+    pitch:"Computer and technology reseller.",
+    summary:"Computer and technology reseller, with setup, support and repair.",
+    products:"Desktop computers, laptops and notebooks, tablets, mini PCs, accessories, peripherals, storage, networking equipment, components, printing technology.",
+    services:"Computer setups, device configuration, technical support, hardware upgrades, maintenance, repair, installation, customer technical assistance.",
+    customers:"Individuals, corporates, schools, government.",
+    market:"Mafikeng and surrounding areas.",
+    edge:["Price","Quality","Local availability"],
+    goals:"Become a trusted technology reseller and solutions provider across the province, hire five full-time staff, and secure a regular corporate supply contract.",
+    looking:["market","suppliers","skills","distribution"],
+    intake:"27 August 2026" },
+
+  { id:"lomatlhola",
+    name:"Lomatlhola Trading Enterprise",
+    tier:"reseller", town:"Klerksdorp", prov:"North West",
+    sectors:["Construction","Manufacturing","ICT and technology","Professional services","Transport","Repairs","Food and hospitality"],
+    pitch:"Supply and delivery across construction, office and retail.",
+    summary:"Supply and delivery.",
+    products:"Office furniture, retail goods.",
+    services:"Supply and delivery, landscaping design, gardening.",
+    customers:"Individuals, corporates, government.",
+    market:"The North West.",
+    edge:["Price","Quality","Local availability","Technical expertise","Speed","Personal service","Specialist products"],
+    goals:"Expand and achieve financial growth.",
+    looking:["suppliers","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"midc",
+    name:"MIDC",
+    tier:"exploring", town:"Johannesburg", prov:"Gauteng",
+    sectors:["Professional services"],
+    pitch:"Diversified investment and development holding company.",
+    summary:"Diversified investments and development company.",
+    products:"None listed.",
+    services:"Website development (EaziEcom), capital raising, BEE investments.",
+    customers:"Individuals, corporates.",
+    market:"Johannesburg and Cape Town.",
+    edge:["Specialist products and services"],
+    goals:"Build a subsidiary that generates consistent cash flow.",
+    looking:["market","suppliers","partnerships","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"thakaramo",
+    name:"Thakaramo Security Solution and Training",
+    tier:"reseller", town:"Kathu", prov:"Northern Cape",
+    sectors:["Professional services","Training"],
+    pitch:"Professional security solutions and accredited security training — protecting people, developing skills and building safer communities.",
+    summary:"Security solutions and accredited training.",
+    products:"Retail security equipment.",
+    services:"Guarding and patrolling, CCTV installation and maintenance, alarm systems and monitoring, security training Grade E to A.",
+    customers:"Individuals, corporates, government.",
+    market:"The Northern Cape and the North West.",
+    edge:["Price","Quality","Local availability","Technical expertise","Speed","Personal service","Specialist products"],
+    goals:"Expand and achieve financial growth.",
+    looking:["suppliers","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"lokissa",
+    name:"Lokissa Business Solutions",
+    tier:"reseller", town:"", prov:"Gauteng",   /* no town on the intake form */
+    sectors:["Repairs and technical services"],
+    pitch:"Electrical maintenance, electrical services and supplies.",
+    trading:"Trading as Lokissa.",
+    summary:"Electrical maintenance, installation and supply.",
+    products:"Electrical products.",
+    services:"Electrical maintenance and installation.",
+    customers:"Corporates.",
+    market:"Mafikeng and surrounding areas.",
+    edge:["Price","Quality","Local availability","Technical expertise","Speed","Same-day service"],
+    goals:"Secure more projects and operational stability.",
+    looking:["suppliers","partnerships","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"moela",
+    name:"Moela Energies",
+    tier:"incubatee", town:"Mahikeng", prov:"North West",
+    sectors:["Retail and wholesale","Energy"],
+    pitch:"Energy, lubricants and automotive fitment.",
+    summary:"Petroleum, lubricants and automotive components.",
+    products:"Petroleum products, automotive products.",
+    services:"Energy and automotive fitment components.",
+    customers:"Individuals, corporates, schools, government.",
+    market:"Mines, farmers, construction, transport and plant contractors, and government departments.",
+    edge:["Price","Quality","Convenience","Local availability","Experience","Technical expertise","Speed","Personal service","Rural development pricing"],
+    goals:"Become a locally and provincially trusted cross-border supplier, with competent staff, an in-house bursary fund for employees' families, and employee shareholding.",
+    looking:["market","suppliers","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"tm-leasure",
+    name:"TM Leasure Homes",
+    tier:"incubatee", town:"Mahikeng", prov:"North West",
+    sectors:["Food and hospitality","Property"],
+    pitch:"Hospitality and catering.",
+    summary:"Hospitality, catering and property leasing.",
+    products:"Hospitality and catering.",
+    services:"Hospitality, catering, rental units.",
+    customers:"Individuals, corporates, schools, government.",
+    market:"Government, private and public sectors.",
+    edge:["Price","Quality","Convenience","Local availability","Experience","Personal service","Specialist products"],
+    goals:"Establish a local, regional, provincial and international supplier network.",
+    looking:["market","suppliers","partnerships","skills","funding","equipment","distribution"],
+    intake:"2 September 2026" },
+
+  { id:"motsogapele",
+    name:"Motsogapele Food Produce",
+    tier:"partner", town:"Mafikeng", prov:"North West",
+    sectors:["Agriculture","Food and hospitality"],
+    pitch:"Livestock, chicken and vegetable farming.",
+    summary:"Livestock, chicken and vegetable farming.",
+    products:"Small livestock.",
+    services:"None listed.",
+    customers:"Individuals.",
+    market:"Mafikeng and its surrounding communities.",
+    edge:["Quality","Local availability"],
+    goals:"Supply hospitals across the whole of the North West.",
+    looking:["skills","funding","equipment"],
+    intake:"2 September 2026" }
 ];
 
 var TIERS = {
@@ -907,44 +1005,66 @@ var TIERS = {
   exploring:{ label:"Exploring",         note:"In conversation, not yet placed." }
 };
 
-var ENTERPRISES = [
-  { n:"Reve P Catering", tier:"incubatee", sector:"Catering",
-    d:"Named in the organisation's own correspondence. Catering into events and institutional contracts.",
-    rows:[["Intake","Date required"],["Supply chain","Record required"]] },
-  { n:"Moela Energies", tier:"partner", sector:"Energy",
-    d:"Named in the organisation's own correspondence. Energy supply and installation work.",
-    rows:[["Intake","Date required"],["Supply chain","Record required"]] },
-  { n:"Thakaramo Security Solution and Training", tier:"reseller", sector:"Security and training",
-    d:"Named in the organisation's own correspondence. Guarding services and accredited security training.",
-    rows:[["Intake","Date required"],["Supply chain","Record required"]] }
+var LOOKING = {
+  market:      "Customers and market access",
+  suppliers:   "Suppliers",
+  partnerships:"Partnerships",
+  skills:      "Skills and training",
+  funding:     "Funding readiness",
+  equipment:   "Equipment and infrastructure",
+  distribution:"Distribution opportunities"
+};
+
+/* The barrier data stays at cohort level. Counted from the intake forms:
+   seven of the nine name funding or working capital as the single biggest
+   obstacle; two name market access. */
+var BARRIERS = [
+  { k:"Funding or working capital", n:7, c:"ember" },
+  { k:"Market access",              n:2, c:"ember" }
 ];
 
-var TOKENS = [
-  {n:"Ink",        v:"--ink-1000",   ok:"oklch(0.13 0.006 150)",  hx:"#060806", use:"Covers, headers, footers, dividers, primary buttons. The brand ground."},
-  {n:"Ink 800",    v:"--ink-800",    ok:"oklch(0.27 0.006 150)",  hx:"#242725", use:"Body text at strength, reseller tier, hover state on ink."},
-  {n:"Paper",      v:"--ink-050",    ok:"oklch(0.985 0.003 105)", hx:"#FAFAF8", use:"Document and page ground. A warm off-white, never pure white."},
-  {n:"Card",       v:"--white",      ok:"#FFFFFF",                hx:"#FFFFFF", use:"Cards and tables sitting on paper."},
-  {n:"Growth 700", v:"--growth-700", ok:"oklch(0.44 0.10 145)",   hx:"#29612D", use:"Accent text and links on paper."},
-  {n:"Growth 600", v:"--growth-600", ok:"oklch(0.55 0.13 145)",   hx:"#38853E", use:"Primary accent. Incubatee tier, active status, accent buttons."},
-  {n:"Growth 500", v:"--growth-500", ok:"oklch(0.70 0.14 145)",   hx:"#61B565", use:"Accent on ink grounds only."},
-  {n:"Growth 100", v:"--growth-100", ok:"oklch(0.95 0.03 145)",   hx:"#E3F4E2", use:"Soft fill behind positive callouts."},
-  {n:"Ember 700",  v:"--ember-700",  ok:"oklch(0.46 0.10 55)",    hx:"#824717", use:"Accent text on paper."},
-  {n:"Ember 600",  v:"--ember-600",  ok:"oklch(0.58 0.13 55)",    hx:"#B3621E", use:"Strategic partner tier, attention status, capacity measures."},
-  {n:"Ember 500",  v:"--ember-500",  ok:"oklch(0.70 0.14 55)",    hx:"#E0843E", use:"Accent on ink grounds."},
-  {n:"Ember 100",  v:"--ember-100",  ok:"oklch(0.96 0.03 55)",    hx:"#FFEDDF", use:"Soft fill behind reported barriers."}
+var MEASURES = [
+  { t:"SMME skills development",
+    d:"Accredited and practical training that raises the ceiling on what an owner can run.",
+    counted:"Training interventions completed, by enterprise and by accreditation status.",
+    now:"Eight of the nine enterprises are looking to the centre for skills and training." },
+  { t:"Transformation",
+    d:"Moving Black-owned township and rural enterprises into real supply chains.",
+    counted:"Enterprises placed into a contracted supply chain within the reporting period.",
+    now:"Five of the nine are working the centre for customers and market access." },
+  { t:"Job creation",
+    d:"Permanent jobs, counted and reported.",
+    counted:"Permanent positions filled and still filled at the close of the period. A projected job is written as a projection and is never added to the count.",
+    now:"Fifteen jobs are projected across the cohort: ten at Reve P Catering once the resort is operating, five at Far Out Excellent. Both are projections, not placements." },
+  { t:"Enterprise longevity",
+    d:"Businesses still trading in five years, not just registered.",
+    counted:"Enterprises still trading at each anniversary of intake, verified against trading records rather than registration.",
+    now:"The cohort took intake in August and September 2026. The first longevity reading falls due in 2027." },
+  { t:"Operational capacity improvement",
+    d:"Systems, compliance and equipment, so growth does not break the business.",
+    counted:"Compliance items closed and equipment placed, by enterprise.",
+    now:"Eight of the nine name equipment and infrastructure among what they need." }
+];
+
+var PIPELINE = [
+  { t:"Intake", d:"The enterprise submits one profile: what it sells, who it sells to, where it trades, and what it is trying to reach. Nine profiles were taken in August and September 2026." },
+  { t:"Placement", d:"The centre places the enterprise on one of four footings — incubatee, reseller, strategic partner, or still exploring. The footing sets what the centre owes it." },
+  { t:"Support", d:"Skills and training, funding readiness, equipment, suppliers and route to market. Each enterprise names which of these it wants; the centre works that list, not a standard package." },
+  { t:"Report", d:"Progress is counted against five measures and reported to Seda and SEDFA per tranche. Where a figure is not verified, the slot is reported empty rather than estimated." }
 ];
 
 var TRACK = [
   { d:"29 July 2025", t:"First tranche request submitted to Seda", state:"done",
     n:"Confirmation that Leema Township Incubation NPC is on track in implementing the business plan as per the submitted report." },
-  { d:"Date required", t:"Second tranche request", state:"open",
-    n:"Submitted against milestones closed in the first tranche period." },
-  { d:"Date required", t:"Quarterly report to SEDFA", state:"open",
-    n:"The five measures, counted, with barriers stated plainly." },
+  { d:"27 August 2026", t:"First profile of the current cohort taken", state:"done",
+    n:"Far Out Excellent Trading and Projects, Mafikeng." },
+  { d:"2 September 2026", t:"Cohort intake closed at nine enterprises", state:"done",
+    n:"Three provinces, four relationship footings, seven sectors." },
+  { d:"Date required", t:"Portfolio report submitted to SEDFA", state:"open",
+    n:"All nine profiles, the aggregate barrier data, and the case for targeted funding intervention." },
   { d:"Date required", t:"Next cohort intake at the Mogwase centre", state:"open",
     n:"Open to owners in the North West, Gauteng and the Northern Cape." }
 ];
-
 /* ═════════════════════════════════════════════════════════════ helpers ══ */
 var $  = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
@@ -1222,341 +1342,266 @@ var Board = (function(){
            isRunning:function(){ return running; } };
 })();
 
-/* ═════════════════════════════════════════════════════════ rendering ══ */
 
-/* Measures — disclosure rows, 180ms. */
+/* ═════════════════════════════════════════════════════════ the directory ══ */
+var Dir = (function(){
+  var grid = $("#entGrid"), countEl = $("#entCount"), emptyEl = $("#entEmpty");
+  var input = $("#entSearch");
+  var state = { q:"", tier:"", prov:"", look:"", open:"" };
+  var PROVS = [];
+  COHORT.forEach(function(e){ if (PROVS.indexOf(e.prov) < 0) PROVS.push(e.prov); });
+  PROVS.sort();
+
+  function chip(group, val, label, tier){
+    return '<button class="filter" type="button" data-g="' + group + '" data-v="' + esc(val) + '"' +
+      (tier ? ' data-tier="' + tier + '"' : ' style="--stripe:var(--fg-mute)"') +
+      ' aria-pressed="false">' + esc(label) + "</button>";
+  }
+  $("#facetTier").insertAdjacentHTML("beforeend",
+    chip("tier","","All") + Object.keys(TIERS).map(function(k){
+      return chip("tier", k, TIERS[k].label, k); }).join(""));
+  $("#facetProv").insertAdjacentHTML("beforeend",
+    chip("prov","","All") + PROVS.map(function(p){ return chip("prov", p, p); }).join(""));
+  $("#facetLook").insertAdjacentHTML("beforeend",
+    chip("look","","All") + Object.keys(LOOKING).map(function(k){
+      return chip("look", k, LOOKING[k]); }).join(""));
+
+  function haystack(e){
+    return [e.name, e.town, e.prov, e.pitch, e.summary, e.products, e.services,
+            e.customers, e.market, e.goals, e.sectors.join(" "), e.edge.join(" "),
+            TIERS[e.tier].label, e.looking.map(function(k){ return LOOKING[k]; }).join(" ")
+           ].join(" ").toLowerCase();
+  }
+  COHORT.forEach(function(e){ e._h = haystack(e); });
+
+  function matches(e){
+    if (state.tier && e.tier !== state.tier) return false;
+    if (state.prov && e.prov !== state.prov) return false;
+    if (state.look && e.looking.indexOf(state.look) < 0) return false;
+    if (state.q){
+      var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+      for (var i=0;i<terms.length;i++) if (e._h.indexOf(terms[i]) < 0) return false;
+    }
+    return true;
+  }
+
+  function row(k, v, wide){
+    if (!v) return "";
+    return '<div class="rec-row' + (wide ? " rec-wide" : "") + '">' +
+      '<span class="k">' + esc(k) + '</span><span class="v">' + v + "</span></div>";
+  }
+
+  function record(e){
+    var looking = e.looking.map(function(k){
+      return '<button class="tag" type="button" data-look="' + k + '" ' +
+        'title="Show everyone asking for this">' + esc(LOOKING[k]) + "</button>";
+    }).join(" ");
+    var also = COHORT.filter(function(o){
+      return o.id !== e.id && o.sectors.some(function(s){ return e.sectors.indexOf(s) >= 0; });
+    }).map(function(o){ return o.name; });
+
+    return '<div class="rec">' +
+      row("Footing", "<em>" + esc(TIERS[e.tier].label) + "</em> · " + esc(TIERS[e.tier].note)) +
+      row("Intake", esc(e.intake)) +
+      row("Where", esc([e.town, e.prov].filter(Boolean).join(", "))) +
+      row("Sectors", e.sectors.map(esc).join(" · ")) +
+      row("What it is", esc(e.summary) + (e.trading ? " " + esc(e.trading) : "")) +
+      row("Products", esc(e.products)) +
+      row("Services", esc(e.services)) +
+      row("Customers", esc(e.customers)) +
+      row("Market", esc(e.market)) +
+      row("Competes on", e.edge.map(esc).join(" · ")) +
+      row("Where it is going", esc(e.goals), true) +
+      row("Asking the centre for", '<span class="ent-tags">' + looking + "</span>", true) +
+      (also.length ? row("Shares a sector with", esc(also.join(" · ")), true) : "") +
+    "</div>" +
+    '<button class="btn ghost ent-close" type="button" data-close="1" ' +
+      'style="padding:10px 14px;font-size:14px">Close record</button>';
+  }
+
+  function card(e){
+    var open = state.open === e.id;
+    var pads = new Array(7).join("<i></i>");
+    var where = [e.town, e.prov].filter(Boolean).join(", ");
+    return '<div class="ent' + (open ? " is-open" : "") + '" data-tier="' + e.tier + '" data-id="' + e.id + '"' +
+      (open ? "" : ' role="button" tabindex="0" aria-expanded="false"') +
+      (open ? ' aria-expanded="true"' : '') + '>' +
+      '<span class="pads l" aria-hidden="true">' + pads + "</span>" +
+      '<span class="pads r" aria-hidden="true">' + pads + "</span>" +
+      '<span class="ent-head"><span class="ent-name">' + esc(e.name) + "</span>" +
+        '<span class="ent-where">' + esc(where) + "</span></span>" +
+      '<span class="pill" data-tier="' + e.tier + '">' + esc(TIERS[e.tier].label) + "</span>" +
+      '<p class="ent-pitch">' + esc(e.pitch) + "</p>" +
+      '<span class="ent-tags">' + e.sectors.slice(0,3).map(function(s){
+        return '<span class="tag">' + esc(s) + "</span>"; }).join("") + "</span>" +
+      (open ? record(e) : '<span class="ent-more">Open the record →</span>') +
+      "</div>";
+  }
+
+  function render(){
+    var list = COHORT.filter(matches);
+    if (state.open && list.every(function(e){ return e.id !== state.open; })) state.open = "";
+    grid.innerHTML = list.map(card).join("");
+    var bits = [];
+    if (state.tier) bits.push(TIERS[state.tier].label.toLowerCase());
+    if (state.prov) bits.push("in the " + state.prov.replace(/^the /,""));
+    if (state.look) bits.push("asking for " + LOOKING[state.look].toLowerCase());
+    if (state.q) bits.push('matching "' + state.q + '"');
+    countEl.textContent = list.length + " of " + COHORT.length + " enterprises" +
+      (bits.length ? " · " + bits.join(" · ") : " · the whole cohort");
+    emptyEl.hidden = list.length > 0;
+    if (!list.length) emptyEl.textContent = "Nothing matches that. Reset the filters, or search a sector such as catering, security, electrical or farming.";
+    $$(".filter", $(".facets")).forEach(function(f){
+      f.setAttribute("aria-pressed", String(state[f.dataset.g] === f.dataset.v));
+    });
+  }
+
+  function set(k, v){ state[k] = v; state.open = ""; render(); }
+
+  $(".facets").addEventListener("click", function(e){
+    var b = e.target.closest(".filter"); if (b) set(b.dataset.g, b.dataset.v);
+  });
+  var qt = 0;
+  input.addEventListener("input", function(){
+    clearTimeout(qt);
+    qt = setTimeout(function(){ state.q = input.value.trim(); state.open = ""; render(); }, 110);
+  });
+  $("#entReset").addEventListener("click", function(){
+    state = { q:"", tier:"", prov:"", look:"", open:"" }; input.value = ""; render();
+  });
+
+  grid.addEventListener("click", function(e){
+    if (e.target.closest("[data-close]")){ state.open = ""; render(); return; }
+    var tag = e.target.closest("[data-look]");
+    if (tag){ set("look", tag.dataset.look); return; }
+    var c = e.target.closest(".ent"); if (!c || c.classList.contains("is-open")) return;
+    state.open = c.dataset.id; render();
+    var el = grid.querySelector(".ent.is-open");
+    if (el) el.focus && el.setAttribute("tabindex","-1"), el.focus();
+  });
+  grid.addEventListener("keydown", function(e){
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var c = e.target.closest(".ent[role=button]"); if (!c) return;
+    e.preventDefault(); state.open = c.dataset.id; render();
+  });
+
+  render();
+  return {
+    /* Reaching an enterprise by name clears the filters — otherwise a filter
+       set earlier would silently swallow the one you asked for. */
+    open: function(id){
+      state = { q:"", tier:"", prov:"", look:"", open:id };
+      input.value = ""; render();
+    },
+    focus: function(k, v){ set(k, v); }
+  };
+})();
+
+/* ═══════════════════════════════════════════════ portfolio, from the data ══ */
+(function(){
+  function tally(keyFn){
+    var m = {};
+    COHORT.forEach(function(e){
+      [].concat(keyFn(e)).forEach(function(k){ m[k] = (m[k]||0) + 1; });
+    });
+    return Object.keys(m).map(function(k){ return { k:k, n:m[k] }; })
+      .sort(function(a,b){ return b.n - a.n || a.k.localeCompare(b.k); });
+  }
+
+  function bars(host, rows, label, colour, group, valueOf){
+    var max = rows.reduce(function(m,r){ return Math.max(m, r.n); }, 0) || 1;
+    host.innerHTML = rows.map(function(r){
+      var v = valueOf ? valueOf(r.k) : r.k;
+      return '<button class="bar" type="button" data-g="' + group + '" data-v="' + esc(v) + '"' +
+        ' style="--c:' + colour + '" aria-label="' + esc(label(r.k)) + ": " + r.n +
+        ' of ' + COHORT.length + '. Filter the cohort.">' +
+        '<span class="top"><span class="nm">' + esc(label(r.k)) + "</span>" +
+          '<span class="ct">' + r.n + "</span></span>" +
+        '<span class="track"><span class="fill" data-w="' + Math.round(r.n/max*100) + '"></span></span>' +
+        "</button>";
+    }).join("");
+  }
+
+  bars($("#barTier"), tally(function(e){ return e.tier; }),
+       function(k){ return TIERS[k].label; }, "var(--growth-600)", "tier");
+  bars($("#barProv"), tally(function(e){ return e.prov; }),
+       function(k){ return k; }, "var(--ink-800)", "prov");
+  bars($("#barLook"), tally(function(e){ return e.looking; }),
+       function(k){ return LOOKING[k]; }, "var(--ember-600)", "look");
+
+  var maxB = BARRIERS.reduce(function(m,b){ return Math.max(m, b.n); }, 0) || 1;
+  $("#barBarrier").innerHTML = BARRIERS.map(function(b){
+    return '<div class="bar" style="--c:var(--ember-600);cursor:default">' +
+      '<span class="top"><span class="nm">' + esc(b.k) + "</span>" +
+        '<span class="ct">' + b.n + " of " + COHORT.length + "</span></span>" +
+      '<span class="track"><span class="fill" data-w="' + Math.round(b.n/maxB*100) + '"></span></span>' +
+      "</div>";
+  }).join("");
+
+  /* Every bar is a filter: selecting one scrolls to the enterprises behind it. */
+  $$(".bars").forEach(function(host){
+    host.addEventListener("click", function(e){
+      var b = e.target.closest(".bar[data-g]"); if (!b) return;
+      Dir.focus(b.dataset.g, b.dataset.v);
+      document.getElementById("cohort").scrollIntoView(
+        { behavior: reduced.matches ? "auto" : "smooth", block:"start" });
+    });
+  });
+
+  /* Bars fill when they are first read, and are already full in Report mode. */
+  var fills = $$(".bars .fill");
+  function fill(el){ el.style.width = el.dataset.w + "%"; }
+  if (!("IntersectionObserver" in window) || document.body.dataset.report === "on"){
+    fills.forEach(fill);
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if (en.isIntersecting){ fill(en.target); io.unobserve(en.target); } });
+    }, { threshold:0.4 });
+    fills.forEach(function(f){ io.observe(f); });
+  }
+})();
+
+/* ═════════════════════════════════════════════════════════════ measures ══ */
 (function(){
   var host = $("#meas");
   host.innerHTML = MEASURES.map(function(m, i){
-    var ix = ("0" + (i+1)).slice(-2);
     return '<button class="meas-row" type="button" aria-expanded="false">' +
       '<span class="meas-top">' +
-        '<span class="ix">' + ix + '</span>' +
-        '<span class="ti">' + esc(m.t) + '</span>' +
+        '<span class="ix">' + ("0" + (i+1)).slice(-2) + "</span>" +
+        '<span class="ti">' + esc(m.t) + "</span>" +
         '<span class="st count">Open</span>' +
-      '</span>' +
+      "</span>" +
       '<span class="meas-body"><span><span class="meas-inner">' +
-        '<p>' + esc(m.d) + '</p>' +
-        '<p><strong>Counted as</strong> ' + esc(m.counted) + '</p>' +
-        '<p><strong>Cadence</strong> ' + esc(m.cadence) + '</p>' +
-        '<span class="slot"><span class="k">Figure required</span>' +
-          '<span class="v">' + esc(m.required) + '</span></span>' +
-      '</span></span></span></button>';
+        "<p>" + esc(m.d) + "</p>" +
+        "<p><strong>Counted as</strong> " + esc(m.counted) + "</p>" +
+        '<span class="slot"><span class="k">Where the cohort stands</span>' +
+          '<span class="v">' + esc(m.now) + "</span></span>" +
+      "</span></span></span></button>";
   }).join("");
-
   host.addEventListener("click", function(e){
     var row = e.target.closest(".meas-row"); if (!row) return;
     var open = row.getAttribute("aria-expanded") === "true";
     $$(".meas-row", host).forEach(function(r){
-      r.setAttribute("aria-expanded","false");
-      $(".st", r).textContent = "Open";
+      r.setAttribute("aria-expanded","false"); $(".st", r).textContent = "Open";
     });
     if (!open){ row.setAttribute("aria-expanded","true"); $(".st", row).textContent = "Close"; }
   });
 })();
 
-/* Enterprises — components seated on the board, filtered by tier. */
+/* ══════════════════════════════════════════════════════ pipeline, record ══ */
 (function(){
-  var chips = $("#chips"), filters = $("#filters"), countEl = $("#chipCount");
-  var order = ["incubatee","reseller","partner","exploring"], active = "all";
-
-  filters.innerHTML =
-    '<button class="filter" type="button" data-f="all" aria-pressed="true" style="--stripe:var(--fg-mute)">All</button>' +
-    order.map(function(k){
-      return '<button class="filter" type="button" data-f="' + k + '" aria-pressed="false" data-tier="' + k + '">' +
-             esc(TIERS[k].label) + '</button>';
-    }).join("");
-
-  chips.innerHTML = ENTERPRISES.map(function(en){
-    var pads = new Array(6).join("<i></i>") + "<i></i>";
-    return '<button class="chip" type="button" data-tier="' + en.tier + '" aria-pressed="false"' +
-      ' aria-label="' + esc(en.n) + ' \u2014 select the ' + esc(TIERS[en.tier].label.toLowerCase()) + ' tier">' +
-      '<span class="pads l" aria-hidden="true">' + pads + '</span>' +
-      '<span class="pads r" aria-hidden="true">' + pads + '</span>' +
-      '<h3>' + esc(en.n) + '</h3>' +
-      '<span class="body">' +
-        '<span class="pill" data-tier="' + en.tier + '">' + esc(TIERS[en.tier].label) + ' · placeholder</span>' +
-        '<p class="desc">' + esc(en.d) + '</p>' +
-        '<span class="row"><span>Sector</span><b>' + esc(en.sector) + '</b></span>' +
-        en.rows.map(function(r){
-          return '<span class="row"><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></span>';
-        }).join("") +
-      '</span></button>';
+  $("#steps").innerHTML = PIPELINE.map(function(s){
+    return '<div class="step"><h3>' + esc(s.t) + "</h3><p>" + esc(s.d) + "</p></div>";
   }).join("");
 
-  function apply(){
-    var shown = 0;
-    $$(".chip", chips).forEach(function(c){
-      var hit = active === "all" || c.dataset.tier === active;
-      c.classList.toggle("is-dim", !hit);
-      c.setAttribute("aria-pressed", String(hit && active !== "all"));
-      if (hit) shown++;
-    });
-    var note = active === "all" ? "every relationship" : TIERS[active].note.toLowerCase().replace(/\.$/,"");
-    countEl.textContent = shown + " of " + ENTERPRISES.length + " named enterprises · " + note;
-  }
-  function setFilter(next){
-    active = next;
-    $$(".filter", filters).forEach(function(f){
-      f.setAttribute("aria-pressed", String(f.dataset.f === active));
-    });
-    apply();
-  }
-  filters.addEventListener("click", function(e){
-    var b = e.target.closest(".filter"); if (b) setFilter(b.dataset.f);
-  });
-  /* Selecting a component selects its tier, so the board reads as one system
-     rather than three unrelated cards. Selecting it again clears the filter. */
-  chips.addEventListener("click", function(e){
-    var c = e.target.closest(".chip"); if (!c) return;
-    var tier = c.dataset.tier;
-    setFilter(active === tier ? "all" : tier);
-    toast(active === "all" ? "Showing every relationship"
-                           : TIERS[tier].label + " \u00b7 " + TIERS[tier].note);
-  });
-  setFilter("all");
-})();
-
-/* Colour — click copies oklch, shift-click copies the hex fallback. */
-(function(){
-  var host = $("#swatches");
-  host.innerHTML = TOKENS.map(function(t){
-    return '<button class="sw" type="button" data-ok="' + esc(t.ok) + '" data-hx="' + esc(t.hx) + '"' +
-      ' data-nm="' + esc(t.n) + '" style="--c:' + t.hx + ';--c:var(' + t.v + ')">' +
-      '<span class="chip-col" aria-hidden="true"></span>' +
-      '<span class="meta">' +
-        '<span class="nm">' + esc(t.n) + '</span>' +
-        '<span class="tk">' + esc(t.v) + '</span>' +
-        '<span class="hx">' + esc(t.ok) + '</span>' +
-        '<span class="use">' + esc(t.use) + '</span>' +
-      '</span></button>';
-  }).join("");
-  host.addEventListener("click", function(e){
-    var b = e.target.closest(".sw"); if (!b) return;
-    var hex = e.shiftKey;
-    copy(hex ? b.dataset.hx : b.dataset.ok, b.dataset.nm + (hex ? " hex" : ""));
-  });
-})();
-
-/* The record. */
-(function(){
   $("#track").innerHTML = TRACK.map(function(e){
     var d = e.state === "done" ? esc(e.d)
-          : '<span style="color:var(--ember)">' + esc(e.d) + '</span>';
+          : '<span style="color:var(--ember)">' + esc(e.d) + "</span>";
     return '<div class="ev" data-state="' + e.state + '">' +
-      '<span class="d">' + d + '</span>' +
-      '<span><span class="t">' + esc(e.t) + '</span><p class="n">' + esc(e.n) + '</p></span></div>';
+      '<span class="d">' + d + "</span>" +
+      '<span><span class="t">' + esc(e.t) + '</span><p class="n">' + esc(e.n) + "</p></span></div>";
   }).join("");
 })();
-
-/* ═══════════════════════════════════════════════════════ instruments ══ */
-
-/* Type specimen. The 15px floor is a live guardrail, not a footnote. */
-(function(){
-  var r = $("#typeSize"), out = $("#typeVal"), warn = $("#typeWarn");
-  var s1 = $("#s1"), s2 = $("#s2"), s3 = $("#s3");
-  function set(){
-    var v = +r.value;
-    out.textContent = v + "px";
-    s2.style.fontSize = v + "px";
-    s1.style.fontSize = Math.round(v * 2.6) + "px";
-    s3.style.fontSize = Math.max(10, Math.round(v * 0.88)) + "px";
-    warn.classList.toggle("on", v < 15);
-  }
-  r.addEventListener("input", set); set();
-})();
-
-/* Mark validator. Below 120px the traces fill in and the mark reads as a bar —
-   the guideline's own failure state, shown rather than asserted. */
-(function(){
-  var r = $("#markSize"), out = $("#markVal"), warn = $("#markWarn");
-  var img = $("#valMark"), bar = $("#valBar"), box = $("#clearBox"), note = $("#valNote");
-  var RATIO = 101 / 357;                     /* the supplied artwork, unaltered */
-  function set(){
-    var w = +r.value, h = w * RATIO, pad = w * 0.176, under = w < 120;
-    out.textContent = w + "px";
-    box.style.padding = pad + "px";
-    img.hidden = under; bar.hidden = !under;
-    img.style.width = w + "px";
-    bar.style.width = w + "px"; bar.style.height = Math.max(3, h * 0.62) + "px";
-    warn.classList.toggle("on", under);
-    note.textContent = under
-      ? "Below the floor · the mark reads as a solid bar"
-      : "Clear space equals the height of the E in LEEMA";
-  }
-  r.addEventListener("input", set); set();
-})();
-
-/* The one meter on the page fills when it is first read. */
-(function(){
-  var fills = $$("[data-fill]");
-  if (!("IntersectionObserver" in window)){
-    fills.forEach(function(f){ f.style.width = f.dataset.fill + "%"; }); return;
-  }
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(en){
-      if (en.isIntersecting){
-        en.target.style.width = en.target.dataset.fill + "%";
-        io.unobserve(en.target);
-      }
-    });
-  }, { threshold:0.6 });
-  fills.forEach(function(f){ io.observe(f); });
-})();
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   THE VOICE ENGINE
-   The rules on page 07 of the guidelines, made executable. Every finding
-   quotes the rule it came from, so the tool teaches the voice rather than
-   just policing it.
-   ═════════════════════════════════════════════════════════════════════════ */
-(function(){
-  var IN = $("#vIn"), OUT = $("#vOut"), CNT = $("#vCount");
-  var ACRONYMS = { LEEMA:1, SEDA:1, SEDFA:1, PFMA:1, SMME:1, SMMES:1, NPC:1, SARS:1, CIPC:1,
-                   VAT:1, BBBEE:1, POPIA:1, TECHNOLOGY:1, INCUBATION:1, NORTH:1, WEST:1, CAPE:1 };
-  var MONTHS = ["January","February","March","April","May","June",
-                "July","August","September","October","November","December"];
-
-  var RULES = [
-    { id:"banned",
-      re:/\b(journeys?|empower(?:ment|ed|ing|s)?|uplift(?:ment|ing|ed|s)?|beneficiar(?:y|ies)|ecosystems?|synerg(?:y|ies|istic))\b/gi,
-      h:"Word that is not in the brand",
-      d:"Replace it with what actually happened.",
-      q:'No "journey", "empower", "upliftment", "beneficiary" or "ecosystem".' },
-    { id:"ourclients", re:/\bour clients\b/gi,
-      h:'"Our clients"',
-      d:"We for the incubator, you for the entrepreneur, the business's own name in the third person.",
-      q:'Never "our clients".' },
-    { id:"unnamed", re:/\b(one of our incubatees|one of the businesses|a local business|an? (?:local )?enterprise we support)\b/gi,
-      h:"Unnamed enterprise",
-      d:"Name it. Reve P Catering, Moela Energies, Thakaramo Security Solution and Training.",
-      q:'Name the enterprise. Never "one of our incubatees".' },
-    { id:"vague", re:/\b(significant(?:ly)?|substantial(?:ly)?|considerable|numerous|various|meaningful|impactful|transformative|world-class)\b/gi,
-      h:"Claim without a number",
-      d:'Say the thing, then the number. "Ten new jobs projected once the resort is operating" beats "significant employment impact".',
-      q:"Say the thing, then the number." },
-    { id:"bang", re:/!+/g,
-      h:"Exclamation mark",
-      d:"The tranche letter does not raise its voice, and neither does the brand.",
-      q:"No exclamation marks." },
-    { id:"emoji", re:/[\u203C\u2049\u2122\u2139\u2194-\u21AA\u231A\u231B\u23E9-\u23FA\u24C2\u25AA-\u25FE\u2600-\u27BF\u2934\u2935\u2B00-\u2BFF\u3030\u303D\u3297\u3299]|[\uD83C-\uDBFF][\uDC00-\uDFFF]|\uFE0F/g,
-      h:"Emoji",
-      d:"Two Unicode characters are permitted: the arrow in links and buttons, and the middot as a metadata separator.",
-      q:"No emoji — not in social posts, not in the interface." },
-    { id:"amount", re:/R\s?\d{1,3}(?:,\d{3})+(?:\.\d+)?\b|R\s?\d{4,}\b/g,
-      h:"Amount format",
-      d:"South African convention is a space and no comma.",
-      q:"R800 000 with a space and no comma." },
-    { id:"date", re:/\b\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4}\b|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b/gi,
-      h:"Date format",
-      d:"Day, month in full, year.",
-      q:"Dates as 29 July 2025." },
-    { id:"percent", re:/\b\d+(?:[.,]\d+)?\s?(?:percent|per cent)\b/gi,
-      h:"Percentage format",
-      d:"Percentages are written out with the sign.",
-      q:"Percentages written out as 75%." },
-    { id:"phone", re:/\b0\d{9}\b|\b0\d{2}[- ]\d{3}[- ]\d{4}\b/g,
-      h:"Telephone format",
-      d:"Three, three, four, separated by spaces.",
-      q:"Phone numbers as 014 403 5209." },
-    { id:"shout", re:/\b[A-Z][A-Z]{3,}\b/g,
-      h:"Uppercase in running text",
-      d:"The mono eyebrow at 12px is the only uppercase setting in the brand.",
-      q:"Sentence case for every heading and label except the mono eyebrow.",
-      skip:function(m){ return ACRONYMS[m.toUpperCase()] === 1; } }
-  ];
-
-  function scan(text){
-    var found = [], marks = [];
-    RULES.forEach(function(r){
-      r.re.lastIndex = 0;
-      var m, hits = [];
-      while ((m = r.re.exec(text)) !== null){
-        if (m[0] === "") { r.re.lastIndex++; continue; }
-        if (r.skip && r.skip(m[0])) continue;
-        hits.push(m[0]);
-        marks.push([m.index, m.index + m[0].length]);
-        if (hits.length > 40) break;
-      }
-      if (hits.length) found.push({ rule:r, hits:hits });
-    });
-    return { found:found, marks:marks };
-  }
-
-  function preview(text, marks){
-    if (!marks.length) return esc(text);
-    marks.sort(function(a,b){ return a[0]-b[0]; });
-    var merged = [], cur = marks[0].slice();
-    for (var i=1;i<marks.length;i++){
-      if (marks[i][0] <= cur[1]) cur[1] = Math.max(cur[1], marks[i][1]);
-      else { merged.push(cur); cur = marks[i].slice(); }
-    }
-    merged.push(cur);
-    var out = "", at = 0;
-    merged.forEach(function(m){
-      out += esc(text.slice(at, m[0])) + '<span class="hit">' + esc(text.slice(m[0], m[1])) + "</span>";
-      at = m[1];
-    });
-    return out + esc(text.slice(at));
-  }
-
-  function render(){
-    var text = IN.value;
-    CNT.textContent = text.length + (text.length === 1 ? " character" : " characters");
-    if (!text.trim()){
-      OUT.innerHTML = '<div class="finding ok"><span class="h">Nothing to read yet</span>' +
-        '<p class="d">Write the way the tranche letter writes — direct, specific and unembarrassed about detail.</p></div>';
-      return;
-    }
-    var res = scan(text);
-    var head = '<div class="finding ' + (res.found.length ? "" : "ok") + '">' +
-      '<span class="h">' + (res.found.length
-        ? res.found.length + (res.found.length === 1 ? " rule to answer" : " rules to answer")
-        : "Reads as house voice") + '</span>' +
-      '<p class="d" style="font-family:Newsreader,serif">' + preview(text, res.marks) + "</p></div>";
-    OUT.innerHTML = head + res.found.map(function(f){
-      var uniq = f.hits.filter(function(v,i,a){ return a.indexOf(v) === i; }).slice(0,6);
-      return '<div class="finding">' +
-        '<span class="h">' + esc(f.rule.h) + " · " + f.hits.length + "</span>" +
-        '<p class="d">' + esc(f.rule.d) + "</p>" +
-        '<span class="q">Found · ' + uniq.map(esc).join(" · ") + "</span>" +
-        '<span class="q" style="color:var(--fg-soft)">Rule · ' + esc(f.rule.q) + "</span></div>";
-    }).join("");
-  }
-
-  /* Rewrites only what has one correct answer: the number conventions. */
-  function conventions(t){
-    t = t.replace(/R\s?(\d[\d,\s]*\d|\d)/g, function(_, n){
-      var digits = n.replace(/[,\s]/g, "");
-      if (!/^\d+$/.test(digits)) return _;
-      return "R" + digits.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    });
-    t = t.replace(/\b(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})\b/g, function(_, d, m, y){
-      var mi = +m - 1; return MONTHS[mi] ? (+d) + " " + MONTHS[mi] + " " + y : _;
-    });
-    t = t.replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, function(_, y, m, d){
-      var mi = +m - 1; return MONTHS[mi] ? (+d) + " " + MONTHS[mi] + " " + y : _;
-    });
-    t = t.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})\b/gi,
-      function(_, mo, d, y){ return (+d) + " " + mo.charAt(0).toUpperCase() + mo.slice(1).toLowerCase() + " " + y; });
-    t = t.replace(/\b(\d+(?:[.,]\d+)?)\s?(?:percent|per cent)\b/gi, "$1%");
-    t = t.replace(/\b0(\d{2})[\s-]?(\d{3})[\s-]?(\d{4})\b/g, "0$1 $2 $3");
-    return t;
-  }
-
-  var SAMPLE = "We are excited about the journey of one of our incubatees! Our clients have seen " +
-    "significant impact across the ecosystem, with R1,250,000 in working capital approved on 29/07/2025 " +
-    "and 75 percent of beneficiaries reporting growth. Call 0144035209.";
-
-  IN.addEventListener("input", render);
-  $("#vFix").addEventListener("click", function(){
-    IN.value = conventions(IN.value); render(); toast("Number conventions applied");
-  });
-  $("#vSample").addEventListener("click", function(){ IN.value = SAMPLE; render(); IN.focus(); });
-  $("#vClear").addEventListener("click", function(){ IN.value = ""; render(); IN.focus(); });
-  render();
-})();
-
 /* ═══════════════════════════════════════════════════════ command palette ══ */
 (function(){
   var pal = $("#pal"), box = $(".pal-box", pal), input = $("#palInput"), list = $("#palList");
@@ -1567,21 +1612,34 @@ var Board = (function(){
   function go(id){ var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block:"start" }); }
 
   var ACTIONS = [
-    { c:"Go", n:"Who we are",        s:"The parent, the programme and the centre", r:function(){ go("who"); } },
-    { c:"Go", n:"What we measure",   s:"The five things the organisation reports on", r:function(){ go("measures"); } },
-    { c:"Go", n:"Enterprises",       s:"Named enterprises and the fixed relationship tiers", r:function(){ go("enterprises"); } },
-    { c:"Go", n:"The system",        s:"Colour, type and the mark, running", r:function(){ go("system"); } },
-    { c:"Go", n:"How we write",      s:"The house voice, made executable", r:function(){ go("voice"); } },
-    { c:"Go", n:"The record",        s:"Tranche correspondence and open slots", r:function(){ go("record"); } },
-    { c:"Go", n:"Contact",           s:"Mogwase, North West", r:function(){ go("contact"); } },
-    { c:"Do", n:"Call the centre",   s:"014 403 5209", r:function(){ location.href = "tel:+27144035209"; } },
-    { c:"Do", n:"Email the centre",  s:"info@leemaincubation.co.za", r:function(){ location.href = "mailto:info@leemaincubation.co.za"; } },
-    { c:"Do", n:"Copy the address",  s:"Stand 43, Factory A, Bodirelo Industrial Park", r:function(){
+    { c:"Go", n:"The incubator",   s:"What the centre does and the four footings", r:function(){ go("about"); } },
+    { c:"Go", n:"The cohort",      s:"Nine enterprises, searchable", r:function(){ go("cohort"); } },
+    { c:"Go", n:"Portfolio",       s:"Counted off the nine intake forms", r:function(){ go("portfolio"); } },
+    { c:"Go", n:"What we measure", s:"The five things the organisation reports on", r:function(){ go("measures"); } },
+    { c:"Go", n:"How it works",    s:"Intake, placement, support, report", r:function(){ go("pipeline"); } },
+    { c:"Go", n:"The record",      s:"Tranche correspondence and open dates", r:function(){ go("record"); } },
+    { c:"Go", n:"Contact",         s:"Mogwase, North West", r:function(){ go("contact"); } },
+    { c:"Do", n:"Call the centre",  s:"014 403 5209", r:function(){ location.href = "tel:+27144035209"; } },
+    { c:"Do", n:"Email the centre", s:"info@leemaincubation.co.za", r:function(){ location.href = "mailto:info@leemaincubation.co.za"; } },
+    { c:"Do", n:"Copy the address", s:"Stand 43, Factory A, Bodirelo Industrial Park", r:function(){
         copy("Stand 43, Factory A, Bodirelo Industrial Park, Mogwase, North West", "Address"); } },
-    { c:"Do", n:"Report mode",       s:"Still the board and remove every moving thing", r:function(){ $("#reportBtn").click(); } },
-    { c:"Do", n:"Back to the top",   s:"", r:function(){ window.scrollTo({ top:0, behavior: reduced.matches ? "auto" : "smooth" }); } }
-  ].concat(TOKENS.map(function(t){
-    return { c:"Copy", n:t.n, s:t.v + " · " + t.ok, r:function(){ copy(t.ok, t.n); } };
+    { c:"Do", n:"Report mode",      s:"Still the board and remove every moving thing", r:function(){ $("#reportBtn").click(); } },
+    { c:"Do", n:"Back to the top",  s:"", r:function(){ window.scrollTo({ top:0, behavior: reduced.matches ? "auto" : "smooth" }); } }
+  ]
+  /* Every enterprise in the cohort is reachable by name from here. */
+  .concat(COHORT.map(function(e){
+    return { c:TIERS[e.tier].label, n:e.name,
+             s:[e.town, e.prov].filter(Boolean).join(", ") + " \u00b7 " + e.sectors[0],
+             r:function(){ go("cohort"); Dir.open(e.id);
+                 setTimeout(function(){
+                   var el = document.querySelector(".ent.is-open");
+                   if (el) el.scrollIntoView({ behavior: reduced.matches ? "auto" : "smooth", block:"center" });
+                 }, reduced.matches ? 0 : 420); } };
+  }))
+  /* And so is each kind of support an enterprise can ask the centre for. */
+  .concat(Object.keys(LOOKING).map(function(k){
+    return { c:"Filter", n:LOOKING[k], s:"Show every enterprise asking for this",
+             r:function(){ Dir.focus("look", k); go("cohort"); } };
   }));
 
   /* Subsequence scoring: contiguous runs and word starts rank first. */
@@ -1686,7 +1744,7 @@ var Board = (function(){
 /* Navigation: progress, current section, and it steps out of the way going down. */
 (function(){
   var nav = $("#nav"), prog = $("#navProg");
-  var ids = ["who","measures","enterprises","system","voice","record","contact"];
+  var ids = ["about","cohort","portfolio","measures","pipeline","record","contact"];
   var links = {}, ticks = {};
   $$(".lnk").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
   $$("#rail a").forEach(function(a){ ticks[a.getAttribute("href").slice(1)] = a; });
