@@ -1,4 +1,24 @@
-# Leema Township Incubator — website
+# Leema Township Incubator
+
+Two things live in this repository, side by side:
+
+| | What it is | Where |
+|---|---|---|
+| **The public website** | One static page about the incubator and its cohort. Served at the repository root and published to GitHub Pages. | `index.html`, `assets/` |
+| **The Incubation Hub** | A Django application that tracks enterprises from application to graduation and produces the quarterly Seda/SEDFA figures. | `manage.py`, `hub/`, `incubator/`, `templates/`, `static/hub/` |
+
+They share a subject and nothing else: no code, no build, no data. The site is
+public by design. The Hub is an internal record system that happens to be kept
+here — **read `docs/INCUBATION_HUB.md` before running it**, and note that
+everything in this repository is publicly readable, including the Hub's source.
+
+The rest of this file describes the website. For the Hub, see
+**[`docs/INCUBATION_HUB.md`](docs/INCUBATION_HUB.md)** and
+**[`docs/SUPPLY_CHAIN.md`](docs/SUPPLY_CHAIN.md)**.
+
+---
+
+## The website
 
 The public site for **Leema Township Incubator**, the programme run by
 **LEEMA Incubation NPC** from Bodirelo Industrial Park in Mogwase, North West.

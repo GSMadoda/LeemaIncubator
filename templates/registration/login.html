@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Sign in · {{ ORG_NAME }}{% endblock %}
+{% block body %}<div class="public"><header><h1>{{ ORG_NAME }}</h1><p class="lede">Staff sign-in for the incubation hub.</p></header>
+{% if form.errors %}<div class="msg error">That username and password don't match. Try again.</div>{% endif %}
+<form method="post">{% csrf_token %}{% for field in form %}{% include "_field.html" %}{% endfor %}
+<input type="hidden" name="next" value="{{ next }}"><button>Sign in</button></form></div>{% endblock %}

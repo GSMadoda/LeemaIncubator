@@ -1,0 +1,18 @@
+{% load static %}<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ ORG_NAME }}{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}"></head>
+<body>{% block body %}<div class="shell">
+<nav class="nav" aria-label="Main">
+  <div class="brand">{{ ORG_NAME }}<small>Incubation Hub</small></div>
+  {% url 'incubator:dashboard' as u1 %}{% url 'incubator:enterprises' as u2 %}{% url 'incubator:report' as u3 %}
+  <a href="{{ u1 }}" {% if request.path == u1 %}aria-current="page"{% endif %}>Overview</a>
+  <a href="{{ u2 }}" {% if request.path == u2 %}aria-current="page"{% endif %}>Enterprises</a>
+  <a href="{{ u3 }}" {% if request.path == u3 %}aria-current="page"{% endif %}>Quarterly report</a>
+  <a href="{% url 'admin:index' %}">Records admin</a>
+  <a href="{% url 'incubator:apply' %}">Application form</a>
+  <div class="spacer"></div>
+  <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>Sign out {{ user.get_username }}</button></form>
+</nav>
+<main>{% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}{% block content %}{% endblock %}</main>
+</div>{% endblock %}</body></html>

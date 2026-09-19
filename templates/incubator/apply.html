@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Apply · {{ ORG_NAME }}{% endblock %}
+{% block body %}<div class="public"><header><h1>Apply to join {{ ORG_NAME }}</h1>
+<p class="lede">For township and rural enterprises in North West, Gauteng and Northern Cape. We'll contact you after screening.</p></header>
+<form method="post" novalidate>{% csrf_token %}{% for e in form.non_field_errors %}<div class="msg error">{{ e }}</div>{% endfor %}
+{% for field in form %}{% include "_field.html" %}{% endfor %}<button>Submit application</button></form></div>{% endblock %}
