@@ -1,0 +1,2 @@
+<div class="trace" role="list" aria-label="Pipeline stages">{% for label, value, n in pipeline %}
+<a role="listitem" href="{% url 'incubator:enterprises' %}?stage={{ value }}"><span class="pad{% if n %} lit{% endif %}">{{ n }}</span><small>{{ label }}</small></a>{% endfor %}</div>

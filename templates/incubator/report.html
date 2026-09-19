@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% load humanize_lite %}{% block content %}
+<h1>Quarterly report</h1><p class="lede">Performance figures submitted by enterprises for one quarter. Q1 runs April to June.</p>
+<form class="filters" method="get"><select name="fy" aria-label="Financial year">{% for y in years %}<option value="{{ y }}" {% if y == fy %}selected{% endif %}>FY {{ y }}/{{ y|add:1|stringformat:"d"|slice:"2:" }}</option>{% endfor %}</select>
+<select name="q" aria-label="Quarter">{% for n in "1234" %}<option value="{{ n }}" {% if n|add:0 == q %}selected{% endif %}>Q{{ n }}</option>{% endfor %}</select>
+<button>Show</button> <a class="btn ghost" href="{% url 'incubator:report_csv' %}?fy={{ fy }}&q={{ q }}">Download CSV</a></form>
+{% if reports %}<table><tr><th>Enterprise</th><th>Province</th><th class="num">Turnover (R)</th><th class="num">Permanent</th><th class="num">Temporary</th><th class="num">New jobs</th></tr>
+{% for r in reports %}<tr><td><a href="{{ r.enterprise.get_absolute_url }}">{{ r.enterprise }}</a></td><td>{{ r.enterprise.get_province_display }}</td><td class="num">{{ r.turnover|rands }}</td><td class="num">{{ r.permanent_jobs }}</td><td class="num">{{ r.temporary_jobs }}</td><td class="num">{{ r.new_jobs }}</td></tr>{% endfor %}
+<tr><th colspan="2">Total</th><th class="num">{{ totals.turnover|rands }}</th><th class="num">{{ totals.perm }}</th><th class="num">{{ totals.temp }}</th><th class="num">{{ totals.new }}</th></tr></table>
+{% else %}<p class="empty">No figures for this quarter yet.</p>{% endif %}
+{% if missing %}<h2>Still to report</h2><p>{% for e in missing %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+{% endblock %}

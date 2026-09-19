@@ -1,0 +1,26 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    env:
+      DJANGO_DEBUG: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install hash-locked dependencies
+        run: pip install --require-hashes -r requirements.txt
+      - name: Check for missing migrations
+        run: python manage.py makemigrations --check --dry-run
+      - name: Run tests
+        run: python manage.py test incubator
+      - name: Production security audit
+        env:
+          DJANGO_DEBUG: "0"
+          DJANGO_SECRET_KEY: ci-only-not-a-real-secret-0123456789abcdefghijklmnopqrstuvwxyz
+          DJANGO_ALLOWED_HOSTS: ci.example.org
+        run: python manage.py check --deploy
