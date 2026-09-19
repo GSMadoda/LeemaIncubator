@@ -21,6 +21,8 @@ python manage.py migrate
 python manage.py test incubator                  # must pass before any commit
 python manage.py makemigrations --check --dry-run
 DJANGO_DEBUG=0 DJANGO_SECRET_KEY=x-long-random DJANGO_ALLOWED_HOSTS=h python manage.py check --deploy
+pip install -r requirements-audit.txt                      # CI-only tooling, separate environment
+pip-audit --require-hashes -r requirements.txt             # dependency vulnerability scan
 python manage.py seed_demo                       # fictional data, empty database only
 ```
 
@@ -32,7 +34,9 @@ python manage.py seed_demo                       # fictional data, empty databas
 3. Label judgement calls as INFERENCE with evidence -> criterion -> conclusion.
 4. Open-source first: reuse Django and mature libraries before writing new subsystems.
 5. Dependencies: pin exact versions with SHA-256 hashes in `requirements.txt`, confirm each hash matches
-   PyPI and record the licence in `docs/SUPPLY_CHAIN.md`. Prefer wheels (no install hooks).
+   PyPI and record the licence in `docs/SUPPLY_CHAIN.md`. Prefer wheels (no install hooks). Any change to
+   `requirements.txt` must be followed by a `pip-audit` run, and the record in `docs/SUPPLY_CHAIN.md`
+   updated with what was actually observed.
 6. Smallest coherent change; add or tighten a test for every behaviour you change or bug you fix.
    A weak test is not evidence.
 7. Distinguish system defects from environment limitations (missing tool, no network).
@@ -44,4 +48,4 @@ python manage.py seed_demo                       # fictional data, empty databas
 - PostgreSQL, backups and a tested restore.
 - POPIA review of the application form, consent wording, retention and Information Officer.
 - Match the quarterly CSV columns to the official SEDFA reporting template.
-- Dependency vulnerability scan (pip-audit or OSV-Scanner); choose a repository licence.
+- Choose a repository licence.

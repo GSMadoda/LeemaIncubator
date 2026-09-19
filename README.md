@@ -54,6 +54,18 @@ DJANGO_DEBUG=1 python manage.py test incubator
 The GitHub Actions workflow runs the tests, a missing-migrations check and Django's production security
 audit on every push.
 
+## Dependency vulnerability scan
+
+A second workflow job scans the hash-locked dependencies for known advisories on every push and pull
+request, and fails if it finds one. To run it yourself:
+
+```bash
+pip install -r requirements-audit.txt
+pip-audit --require-hashes -r requirements.txt
+```
+
+`docs/SUPPLY_CHAIN.md` records the last scan and what it did and did not cover.
+
 ## Before production
 
 - Choose hosting and a domain, then decide on `SECURE_HSTS_INCLUDE_SUBDOMAINS` and `SECURE_HSTS_PRELOAD`.

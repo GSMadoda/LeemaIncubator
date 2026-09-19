@@ -24,3 +24,16 @@ jobs:
           DJANGO_SECRET_KEY: ci-only-not-a-real-secret-0123456789abcdefghijklmnopqrstuvwxyz
           DJANGO_ALLOWED_HOSTS: ci.example.org
         run: python manage.py check --deploy
+
+  audit:
+    name: Dependency vulnerability scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the audit tool (isolated from the application environment)
+        run: pip install -r requirements-audit.txt
+      - name: Audit the hash-locked runtime dependencies
+        run: pip-audit --progress-spinner=off --require-hashes -r requirements.txt

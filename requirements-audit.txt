@@ -1,0 +1,9 @@
+# CI-only tooling. NOT installed into the application environment and NOT a runtime
+# dependency of the hub: it is installed in its own step and only reads the metadata
+# in requirements.txt.
+#
+# Version-pinned rather than SHA-256 hash-locked, unlike requirements.txt. Rationale:
+# pip-audit pulls a large transitive tree whose wheel set differs by Python version and
+# platform, so a hash lock resolved on one interpreter breaks the audit job on another.
+# The runtime dependencies this tool is used to check stay fully hash-locked.
+pip-audit==2.10.1
