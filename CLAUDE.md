@@ -1,9 +1,12 @@
 # Leema Incubation Hub: guidance for Claude Code
 
 ## This repository holds two unrelated projects
-- **The public website**: `index.html` plus `assets/`, one static page, no build step. Published to GitHub
-  Pages from the repository root by `.github/workflows/pages.yml` on every push to main. Everything in this
-  repository is publicly readable and publicly served, the Hub's source included.
+- **The public website**: `index.html` plus `assets/`, one static page, no build step. Published at
+  `/LeemaIncubator/site/`. Its source is never rewritten by the build; `pages.yml` copies it verbatim.
+- **The published Pages root** is a static preview of the Hub, built by `scripts/build_preview.py`: it renders
+  the real views through Django's test client against a throwaway demo database and writes flat HTML. Change a
+  Hub template and the preview follows on the next push. The preview is not the application — nothing on it
+  saves or signs in — and `pages.yml` publishes only the built `_site/`, so the Hub's source is not served.
 - **The Incubation Hub** (below): `manage.py`, `hub/`, `incubator/`, `templates/`, `static/hub/`, `docs/`.
 
 They share no code, no build and no data. A change to one is not a change to the other. `static/hub/` is the

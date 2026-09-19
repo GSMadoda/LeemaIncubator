@@ -1,9 +1,13 @@
-# Publishes the site to GitHub Pages on every push to main.
+# Publishes the Incubation Hub's static preview to GitHub Pages on every push to
+# main, with the Leema Township Incubator website preserved beneath it at /site/.
 #
-# `configure-pages` with `enablement: true` switches Pages on for the
-# repository if it is not already on, so the site goes live without anyone
-# opening Settings. The site is static — there is no build step, the repository
-# root is uploaded as-is.
+# The Hub is a Django application and cannot run on Pages, which serves static
+# files only. scripts/build_preview.py renders its real views through Django's
+# test client against a throwaway database of demo data and writes flat HTML, so
+# the interface can be read from a link without installing anything.
+#
+# Only the built _site/ directory is published. The application's source stays in
+# the repository but is no longer served as browsable files by the site.
 name: Deploy to GitHub Pages
 
 on:
@@ -28,18 +32,34 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Check out the site
+      - name: Check out
         uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install hash-locked dependencies
+        run: pip install --require-hashes -r requirements.txt
+
+      - name: Render the Hub's pages
+        run: python scripts/build_preview.py --base /LeemaIncubator --out _site
+
+      - name: Add the website at /site/
+        run: |
+          mkdir -p _site/site
+          cp -r index.html assets .nojekyll _site/site/
+          cp .nojekyll _site/.nojekyll
 
       - name: Configure Pages, enabling it if it is off
         uses: actions/configure-pages@v5
         with:
           enablement: true
 
-      - name: Upload the repository root
+      - name: Upload the built site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy
         id: deployment

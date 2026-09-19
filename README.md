@@ -7,10 +7,29 @@ Two things live in this repository, side by side:
 | **The public website** | One static page about the incubator and its cohort. Served at the repository root and published to GitHub Pages. | `index.html`, `assets/` |
 | **The Incubation Hub** | A Django application that tracks enterprises from application to graduation and produces the quarterly Seda/SEDFA figures. | `manage.py`, `hub/`, `incubator/`, `templates/`, `static/hub/` |
 
-They share a subject and nothing else: no code, no build, no data. The site is
-public by design. The Hub is an internal record system that happens to be kept
-here — **read `docs/INCUBATION_HUB.md` before running it**, and note that
-everything in this repository is publicly readable, including the Hub's source.
+They share a subject and nothing else: no code, no build, no data.
+
+## What the published link shows
+
+`https://gsmadoda.github.io/LeemaIncubator/` serves a **static preview of the Hub**:
+its real pages and stylesheet, rendered from fictional demo data by
+`scripts/build_preview.py` so the interface can be read from a link. Nothing on it
+saves, submits or signs in — the working application needs a server, a database and
+an account, and GitHub Pages runs no Python.
+
+**The website is preserved and still live, one level down, at
+[`/LeemaIncubator/site/`](https://gsmadoda.github.io/LeemaIncubator/site/).** Its
+source is untouched at `index.html` and `assets/`; only the published address moved.
+
+Rebuild the preview the way CI does:
+
+```bash
+python scripts/build_preview.py --base /LeemaIncubator --out _site
+```
+
+This repository is public, so the Hub's source is publicly readable — but since the
+Pages job now publishes only the built `_site/`, that source is no longer served as
+browsable files. **Read `docs/INCUBATION_HUB.md` before running the Hub.**
 
 The rest of this file describes the website. For the Hub, see
 **[`docs/INCUBATION_HUB.md`](docs/INCUBATION_HUB.md)** and
