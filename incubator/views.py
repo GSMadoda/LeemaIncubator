@@ -10,7 +10,8 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from .forms import ApplicationForm, StageForm
-from .models import Enterprise, Intervention, PerformanceReport, fy_quarter
+from .models import (ComplianceCheck, Enterprise, Intervention, Linkage,
+                     PerformanceReport, Workstream, fy_quarter)
 
 Stage = Enterprise.Stage
 
@@ -59,6 +60,10 @@ def dashboard(request):
         "tier_labels": dict(Enterprise.Tier.choices),
         "relationship_labels": dict(Enterprise.Relationship.choices),
         "untiered": Enterprise.objects.filter(readiness_tier=None).count(),
+        "compliance": ComplianceCheck.objects.aggregate(
+            total=Count("id"),
+            settled=Count("id", filter=Q(status__in=[ComplianceCheck.Status.VERIFIED,
+                                                     ComplianceCheck.Status.NOT_APPLICABLE]))),
         "support": support,
         "new_jobs": jobs["new"] or 0,
         "awaiting": Enterprise.objects.filter(stage__in=[Stage.APPLICANT, Stage.SCREENING]).order_by("applied_on")[:8],
@@ -150,3 +155,42 @@ def quarterly_report_csv(request):
                     e.get_stage_display(), e.black_owned_pct, e.women_owned_pct, e.youth_owned_pct,
                     r.period, r.turnover, r.permanent_jobs, r.temporary_jobs, r.new_jobs])
     return response
+
+
+@login_required
+def compliance_register(request):
+    """Workstream 1: what is verified across the portfolio, and what is still owed."""
+    kinds = list(ComplianceCheck.Kind)
+    checks = ComplianceCheck.objects.select_related("enterprise")
+    by_enterprise = {}
+    for check in checks:
+        by_enterprise.setdefault(check.enterprise, {})[check.kind] = check
+
+    rows = [{"enterprise": enterprise, "checks": [cells.get(k.value) for k in kinds],
+             "settled": sum(1 for c in cells.values() if c.settled)}
+            for enterprise, cells in sorted(by_enterprise.items(), key=lambda kv: kv[0].name)]
+
+    totals = []
+    for kind in kinds:
+        of_kind = [c for c in checks if c.kind == kind.value]
+        settled_of_kind = sum(1 for c in of_kind if c.settled)
+        totals.append({"kind": kind.label, "settled": settled_of_kind,
+                       "outstanding": len(of_kind) - settled_of_kind, "total": len(of_kind)})
+
+    settled = sum(1 for c in checks if c.settled)
+    return render(request, "incubator/compliance.html", {
+        "kinds": [{"value": k.value, "label": k.label, "short": ComplianceCheck.SHORT[k]} for k in kinds],
+        "rows": rows, "totals": totals, "statuses": list(ComplianceCheck.Status),
+        "settled": settled, "total": len(checks),
+        "pct": round(settled / len(checks) * 100) if checks else 0,
+    })
+
+
+@login_required
+def programme(request):
+    """The 90-day support plan and the linkages it brokers."""
+    return render(request, "incubator/programme.html", {
+        "workstreams": Workstream.objects.prefetch_related("enterprises"),
+        "linkages": Linkage.objects.prefetch_related("providers", "recipients"),
+        "portfolio_size": Enterprise.objects.count(),
+    })

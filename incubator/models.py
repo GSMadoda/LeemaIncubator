@@ -319,3 +319,124 @@ class PerformanceReport(models.Model):
 
     def __str__(self):
         return f"{self.enterprise} {self.period}"
+
+
+class ComplianceCheck(models.Model):
+    """One verification item for one enterprise: the compliance register.
+
+    Workstream 1 of the 90-day support plan verifies CIPC, SARS, CSD, B-BBEE, bank
+    details, POPIA consent and baseline figures across the whole portfolio. Until a
+    check is Verified, anything downstream of it -- a funding submission, a tender
+    pack -- is resting on a self-reported claim.
+    """
+
+    class Kind(models.TextChoices):
+        CIPC = "cipc", "CIPC registration"
+        TAX = "tax", "SARS tax compliance"
+        CSD = "csd", "Central Supplier Database"
+        BBBEE = "bbbee", "B-BBEE credentials"
+        BANK = "bank", "Bank confirmation"
+        POPIA = "popia", "POPIA consent"
+        BASELINE = "baseline", "Baseline jobs and turnover"
+
+    class Status(models.TextChoices):
+        OUTSTANDING = "outstanding", "Outstanding"
+        REQUESTED = "requested", "Requested"
+        VERIFIED = "verified", "Verified"
+        FAILED = "failed", "Not compliant"
+        NOT_APPLICABLE = "na", "Not applicable"
+
+    #: Column heading for the register matrix, where the full label is too wide to repeat.
+    SHORT = {Kind.CIPC: "CIPC", Kind.TAX: "SARS", Kind.CSD: "CSD", Kind.BBBEE: "B-BBEE",
+             Kind.BANK: "Bank", Kind.POPIA: "POPIA", Kind.BASELINE: "Baseline"}
+
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE, related_name="compliance")
+    kind = models.CharField(max_length=10, choices=Kind.choices)
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.OUTSTANDING)
+    verified_on = models.DateField(null=True, blank=True)
+    reference = models.CharField(max_length=120, blank=True, help_text="Certificate or reference number.")
+    note = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["enterprise__name", "kind"]
+        constraints = [models.UniqueConstraint(fields=["enterprise", "kind"], name="one_check_per_kind")]
+
+    def clean(self):
+        if self.status == self.Status.VERIFIED and not self.verified_on:
+            raise ValidationError("A verified check must record the date it was verified.")
+
+    @property
+    def settled(self):
+        """Nothing further is owed on this check."""
+        return self.status in (self.Status.VERIFIED, self.Status.NOT_APPLICABLE)
+
+    def __str__(self):
+        return f"{self.enterprise} {self.get_kind_display()}"
+
+
+class Linkage(models.Model):
+    """A commercial introduction brokered between enterprises in the portfolio.
+
+    The report commits these to SEDFA on arm's-length, market-related terms, so that
+    resulting revenue can be tracked. A linkage is real when it is Agreed or Trading;
+    Proposed means LEEMA intends it, nothing more.
+    """
+
+    class Status(models.TextChoices):
+        PROPOSED = "proposed", "Proposed"
+        INTRODUCED = "introduced", "Introduced"
+        AGREED = "agreed", "Agreement signed"
+        TRADING = "trading", "Trading"
+        LAPSED = "lapsed", "Lapsed"
+
+    title = models.CharField(max_length=160)
+    providers = models.ManyToManyField(Enterprise, related_name="linkages_supplying", blank=True,
+                                       help_text="Enterprises supplying into this linkage.")
+    recipients = models.ManyToManyField(Enterprise, related_name="linkages_receiving", blank=True,
+                                        help_text="Enterprises buying or receiving.")
+    rationale = models.TextField()
+    expected_output = models.TextField()
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PROPOSED)
+    opened_on = models.DateField(default=timezone.localdate)
+
+    class Meta:
+        ordering = ["title"]
+
+    def __str__(self):
+        return self.title
+
+
+class Workstream(models.Model):
+    """One workstream of the 90-day support plan, October to December 2026."""
+
+    class Status(models.TextChoices):
+        PLANNED = "planned", "Planned"
+        RUNNING = "running", "Running"
+        DONE = "done", "Complete"
+        BLOCKED = "blocked", "Blocked"
+
+    number = models.PositiveSmallIntegerField(unique=True)
+    title = models.CharField(max_length=160)
+    detail = models.TextField(blank=True)
+    enterprises = models.ManyToManyField(Enterprise, related_name="workstreams", blank=True)
+    covers_whole_portfolio = models.BooleanField(
+        default=False, help_text="Tick where the plan says 'all', rather than listing each enterprise.")
+    start_week = models.PositiveSmallIntegerField()
+    end_week = models.PositiveSmallIntegerField()
+    deliverable = models.TextField("Deliverable or KPI")
+    status = models.CharField(max_length=8, choices=Status.choices, default=Status.PLANNED)
+
+    class Meta:
+        ordering = ["number"]
+
+    def clean(self):
+        if self.end_week < self.start_week:
+            raise ValidationError("A workstream cannot end before it starts.")
+
+    @property
+    def weeks(self):
+        return f"Week {self.start_week}" if self.start_week == self.end_week \
+            else f"Weeks {self.start_week}–{self.end_week}"
+
+    def __str__(self):
+        return f"{self.number}. {self.title}"

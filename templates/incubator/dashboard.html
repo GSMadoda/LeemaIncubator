@@ -1,25 +1,56 @@
-{% extends "base.html" %}{% load humanize_lite %}{% block content %}
-<h1>Overview</h1><p class="lede">Financial year {{ fy }}/{{ fy|add:1|stringformat:"d"|slice:"2:" }}, currently quarter {{ q }}.</p>
+{% extends "base.html" %}{% load humanize_lite %}{% block title %}Overview{% endblock %}{% block content %}
+<header class="page">
+  <h1>Overview</h1>
+  <p class="lede">Financial year {{ fy }}/{{ fy|add:1|stringformat:"d"|slice:"2:" }}, currently quarter {{ q }}.</p>
+</header>
+
 {% include "incubator/_trace.html" %}
+
 <div class="stats">
-<div><b>{{ active_count }}</b><span>Enterprises in support</span></div>
-<div><b>{{ support.n|default:0 }}</b><span>Interventions this year</span></div>
-<div><b>{{ support.hours|default:0|floatformat:0 }}</b><span>Support hours this year</span></div>
-<div><b>R{{ support.cost|default:0|rands }}</b><span>Support spend this year</span></div>
-<div><b>{{ new_jobs }}</b><span>Jobs created this year</span></div>
+  <div><b>{{ active_count }}</b><span>Enterprises in support</span></div>
+  <div><b>{{ support.n|default:0 }}</b><span>Interventions this year</span></div>
+  <div><b>{{ support.hours|default:0|floatformat:0 }}</b><span>Support hours this year</span></div>
+  <div><b>R{{ support.cost|default:0|rands }}</b><span>Support spend this year</span></div>
+  <div><b>{{ new_jobs }}</b><span>Jobs created this year</span></div>
 </div>
-<div class="grid2"><section><h2>Waiting for a decision</h2>
-{% if awaiting %}<table><tr><th>Enterprise</th><th>Applied</th><th>Stage</th></tr>{% for e in awaiting %}
-<tr><td><a href="{{ e.get_absolute_url }}">{{ e }}</a></td><td>{{ e.applied_on }}</td><td><span class="tag">{{ e.get_stage_display }}</span></td></tr>{% endfor %}</table>
-{% else %}<p class="empty">No applications are waiting. New ones from the application form will appear here.</p>{% endif %}</section>
-<section><h2>Readiness tier</h2><table>
-{% for row in by_tier %}<tr><td>{{ tier_labels|get:row.readiness_tier }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}
-{% if untiered %}<tr><td>Not yet tiered</td><td class="num">{{ untiered }}</td></tr>{% endif %}</table></section>
-<section><h2>Standing with LEEMA</h2><table>
-{% for row in by_relationship %}<tr><td>{{ relationship_labels|get:row.relationship }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}</table></section>
-<section><h2>Where active enterprises are</h2>{% if by_province %}<div class="bars">{% for p in by_province %}
-<div><span>{{ province_labels|get:p.province }}</span><i style="width:{% widthratio p.n active_count 240 %}px"></i>{{ p.n }}</div>{% endfor %}</div>
-{% else %}<p class="empty">Onboard an enterprise to see its province here.</p>{% endif %}
-<h2>Overdue milestones</h2>{% if overdue %}<table>{% for m in overdue %}<tr><td><a href="{{ m.enterprise.get_absolute_url }}">{{ m.enterprise }}</a></td><td>{{ m.title }}</td><td>{{ m.due_on }}</td></tr>{% endfor %}</table>
-{% else %}<p class="empty">Nothing is overdue.</p>{% endif %}</section></div>
+
+<div class="meter">
+  <div class="meter-bar"><i style="width:{% widthratio compliance.settled compliance.total 100 %}%"></i></div>
+  <p><b>{{ compliance.settled }}</b> of {{ compliance.total }} compliance checks settled &mdash;
+  <a href="{% url 'incubator:compliance' %}">open the register</a></p>
+</div>
+
+<div class="grid2">
+  <section class="card">
+    <h2>Readiness tier</h2>
+    <table>
+      {% for row in by_tier %}<tr><td>{{ tier_labels|get:row.readiness_tier }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}
+      {% if untiered %}<tr><td>Not yet tiered</td><td class="num">{{ untiered }}</td></tr>{% endif %}
+    </table>
+  </section>
+  <section class="card">
+    <h2>Standing with LEEMA</h2>
+    <table>
+      {% for row in by_relationship %}<tr><td>{{ relationship_labels|get:row.relationship }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}
+    </table>
+  </section>
+</div>
+
+<div class="grid2">
+  <section class="card">
+    <h2>Waiting for a decision</h2>
+    {% if awaiting %}<table><tr><th>Enterprise</th><th>Applied</th><th>Stage</th></tr>{% for e in awaiting %}
+    <tr><td><a href="{{ e.get_absolute_url }}">{{ e }}</a></td><td class="nowrap">{{ e.applied_on }}</td><td><span class="tag {{ e.stage }}">{{ e.get_stage_display }}</span></td></tr>{% endfor %}</table>
+    {% else %}<p class="empty">No applications are waiting. New ones from the application form appear here.</p>{% endif %}
+  </section>
+  <section class="card">
+    <h2>Where active enterprises are</h2>
+    {% if by_province %}<div class="bars">{% for p in by_province %}
+    <div><span>{{ province_labels|get:p.province }}</span><i style="width:{% widthratio p.n active_count 200 %}px"></i>{{ p.n }}</div>{% endfor %}</div>
+    {% else %}<p class="empty">Onboard an enterprise to see its province here.</p>{% endif %}
+    <h2 style="margin-top:var(--s5)">Overdue milestones</h2>
+    {% if overdue %}<table>{% for m in overdue %}<tr><td><a href="{{ m.enterprise.get_absolute_url }}">{{ m.enterprise }}</a></td><td>{{ m.title }}</td><td class="nowrap">{{ m.due_on }}</td></tr>{% endfor %}</table>
+    {% else %}<p class="empty">Nothing is overdue.</p>{% endif %}
+  </section>
+</div>
 {% endblock %}

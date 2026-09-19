@@ -1,18 +1,32 @@
 {% load static %}<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{{ ORG_NAME }}{% endblock %}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<title>{% block title %}Overview{% endblock %} &middot; {{ ORG_NAME }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}"></head>
 <body>{% block body %}<div class="shell">
 <nav class="nav" aria-label="Main">
   <div class="brand">{{ ORG_NAME }}<small>Incubation Hub</small></div>
-  {% url 'incubator:dashboard' as u1 %}{% url 'incubator:enterprises' as u2 %}{% url 'incubator:report' as u3 %}
-  <a href="{{ u1 }}" {% if request.path == u1 %}aria-current="page"{% endif %}>Overview</a>
-  <a href="{{ u2 }}" {% if request.path == u2 %}aria-current="page"{% endif %}>Enterprises</a>
-  <a href="{{ u3 }}" {% if request.path == u3 %}aria-current="page"{% endif %}>Quarterly report</a>
-  <a href="{% url 'admin:index' %}">Records admin</a>
-  <a href="{% url 'incubator:apply' %}">Application form</a>
+  {% url 'incubator:dashboard' as u_home %}{% url 'incubator:enterprises' as u_ent %}
+  {% url 'incubator:compliance' as u_comp %}{% url 'incubator:programme' as u_prog %}
+  {% url 'incubator:report' as u_rep %}
+  <p class="navgroup" id="nav-portfolio">Portfolio</p>
+  <ul aria-labelledby="nav-portfolio">
+    <li><a href="{{ u_home }}" {% if request.path == u_home %}aria-current="page"{% endif %}>Overview</a></li>
+    <li><a href="{{ u_ent }}" {% if request.path == u_ent %}aria-current="page"{% endif %}>Enterprises</a></li>
+  </ul>
+  <p class="navgroup" id="nav-delivery">Delivery</p>
+  <ul aria-labelledby="nav-delivery">
+    <li><a href="{{ u_comp }}" {% if request.path == u_comp %}aria-current="page"{% endif %}>Compliance</a></li>
+    <li><a href="{{ u_prog }}" {% if request.path == u_prog %}aria-current="page"{% endif %}>Programme</a></li>
+    <li><a href="{{ u_rep }}" {% if request.path == u_rep %}aria-current="page"{% endif %}>Quarterly report</a></li>
+  </ul>
+  <p class="navgroup" id="nav-records">Records</p>
+  <ul aria-labelledby="nav-records">
+    <li><a href="{% url 'admin:index' %}">Records admin</a></li>
+    <li><a href="{% url 'incubator:apply' %}">Application form</a></li>
+  </ul>
   <div class="spacer"></div>
-  <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>Sign out {{ user.get_username }}</button></form>
+  <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>Sign out{% if user.is_authenticated %} &middot; {{ user.get_username }}{% endif %}</button></form>
 </nav>
 <main>{% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}{% block content %}{% endblock %}</main>
 </div>{% endblock %}</body></html>

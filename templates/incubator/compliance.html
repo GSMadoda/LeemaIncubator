@@ -1,0 +1,44 @@
+{% extends "base.html" %}{% block title %}Compliance register{% endblock %}{% block content %}
+<header class="page">
+  <h1>Compliance register</h1>
+  <p class="lede">Workstream 1 of the support plan. Every enterprise, every check. Anything downstream of an
+  outstanding check &mdash; a funding submission, a tender pack &mdash; rests on nothing more than a
+  self-reported claim.</p>
+</header>
+
+<div class="meter">
+  <div class="meter-bar"><i style="width:{{ pct }}%"></i></div>
+  <p><b>{{ settled }}</b> of {{ total }} checks settled <span class="muted">({{ pct }}%)</span></p>
+</div>
+
+<div class="grid2">
+  <section class="card">
+    <h2>By check</h2>
+    <table><tr><th>Check</th><th class="num">Settled</th><th class="num">Outstanding</th></tr>
+    {% for t in totals %}<tr><td>{{ t.kind }}</td><td class="num">{{ t.settled }}</td><td class="num">{{ t.outstanding }}</td></tr>{% endfor %}
+    </table>
+  </section>
+  <section class="card">
+    <h2>Key</h2>
+    <ul class="key">
+      {% for s in statuses %}<li><i class="dot {{ s.value }}"></i>{{ s.label }}</li>{% endfor %}
+    </ul>
+    <p class="note">Record a result in <a href="{% url 'admin:incubator_compliancecheck_changelist' %}">Records
+    admin</a>. A check marked Verified must carry the date it was verified.</p>
+  </section>
+</div>
+
+<section class="card">
+  <h2>By enterprise</h2>
+  <div class="scroll">
+  <table class="matrix">
+    <tr><th>Enterprise</th>{% for k in kinds %}<th class="num" title="{{ k.label }}">{{ k.short }}</th>{% endfor %}<th class="num">Settled</th></tr>
+    {% for row in rows %}<tr>
+      <td><a href="{{ row.enterprise.get_absolute_url }}">{{ row.enterprise }}</a></td>
+      {% for c in row.checks %}<td class="num">{% if c %}<i class="dot {{ c.status }}" title="{{ c.get_status_display }}"></i><span class="sr">{{ c.get_status_display }}</span>{% else %}<span class="muted">&mdash;</span>{% endif %}</td>{% endfor %}
+      <td class="num">{{ row.settled }} / {{ kinds|length }}</td>
+    </tr>{% endfor %}
+  </table>
+  </div>
+</section>
+{% endblock %}

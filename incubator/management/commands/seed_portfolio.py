@@ -35,7 +35,8 @@ from datetime import date
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from incubator.models import Cohort, Enterprise, Programme
+from incubator.models import (Cohort, ComplianceCheck, Enterprise, Linkage, Programme,
+                              Workstream)
 
 E = Enterprise
 R, T, M, P, S = E.Relationship, E.Tier, E.Material, E.Province, E.Sector
@@ -302,6 +303,99 @@ PORTFOLIO = [
 ]
 
 
+# Section 5: the commercial linkages LEEMA commits to broker, on arm's-length terms.
+LINKAGES = [
+    dict(
+        title="Women's PPE and consumables supply chain",
+        providers=["Kaborati Holdings"],
+        recipients=["Olacis Co (Pty) Ltd", "Kairos Chem (Pty) Ltd", "Lomatlhola Trading Enterprise (Pty) Ltd"],
+        rationale="A manufacturer with a specialist product alongside three resellers already supplying PPE "
+                  "and consumables to schools, government and corporates.",
+        expected_output="Reseller agreements; a joint catalogue for tenders.",
+    ),
+    dict(
+        title="Digital profile, web and capital-raising services",
+        providers=["Oageng Creative Agency", "MIDC (Pty) Ltd"],
+        recipients=["Sugar Bears", "Olacis Co (Pty) Ltd", "Kairos Chem (Pty) Ltd", "Level 98 Innovations",
+                    "Reve P Catering", "Moela Energies (Pty) Ltd", "TM Leasure Homes (Pty) Ltd"],
+        rationale="Several enterprises lack a usable profile or web presence; Oageng and MIDC (EaziEcom) "
+                  "offer digital and capital-structuring services.",
+        expected_output="Profiles and web presence for the named enterprises; revenue for Oageng and MIDC.",
+    ),
+    dict(
+        title="Technology collaboration",
+        providers=["Oageng Creative Agency", "Level 98 Innovations",
+                   "Far Out Excellent Trading and Projects"],
+        recipients=["Rata Batho Holdings (Pty) Ltd"],
+        rationale="Rata Batho seeks technical development partners; peers hold software and "
+                  "hardware-support capability.",
+        expected_output="Scoping session; possible app, platform or hardware-support work.",
+    ),
+    dict(
+        title="Facilities and technical services bundle",
+        providers=["Lokissa Business Solutions", "Far Out Excellent Trading and Projects",
+                   "Level 98 Innovations"],
+        recipients=[],
+        rationale="Electrical, ICT and water-technology capability can be bundled for corporate and "
+                  "municipal facilities contracts.",
+        expected_output="A joint bid for a facilities-services tender.",
+    ),
+    dict(
+        title="Catering and produce supply",
+        providers=["Motsogapele Food Produce"],
+        recipients=["Reve P Catering", "Sugar Bears", "TM Leasure Homes (Pty) Ltd"],
+        rationale="Three catering and hospitality operators need reliable produce; Motsogapele needs "
+                  "institutional buyers.",
+        expected_output="Supply agreements; shared event-catering referrals.",
+    ),
+]
+
+# Section 7: the 90-day support plan, October to December 2026.
+WORKSTREAMS = [
+    dict(number=1, title="Verification and compliance audit", start_week=1, end_week=4, whole=True,
+         detail="CIPC, SARS tax compliance, CSD, B-BBEE, bank confirmation, POPIA consent, baseline jobs "
+                "and turnover.",
+         deliverable="Verified compliance register; baseline data for SEDFA indicators."),
+    dict(number=2, title="Funding-readiness training", start_week=2, end_week=10, whole=True,
+         detail="Bookkeeping, cash-flow forecasting, pricing and financial statements, delivered via "
+                "Learnable.",
+         deliverable="Completion records; a cash-flow forecast per enterprise."),
+    dict(number=3, title="Profile and brand refresh", start_week=3, end_week=10,
+         enterprises=["Sugar Bears", "Olacis Co (Pty) Ltd", "Kairos Chem (Pty) Ltd", "Level 98 Innovations",
+                      "Reve P Catering", "Moela Energies (Pty) Ltd", "TM Leasure Homes (Pty) Ltd",
+                      "Motsogapele Food Produce"],
+         deliverable="Eight company profiles; a basic web or social presence."),
+    dict(number=4, title="Public procurement readiness", start_week=4, end_week=10,
+         detail="CSD registration, tender documentation and pricing schedules.",
+         enterprises=["Oageng Creative Agency", "Olacis Co (Pty) Ltd", "Kairos Chem (Pty) Ltd",
+                      "Kaborati Holdings", "Level 98 Innovations", "Far Out Excellent Trading and Projects",
+                      "Lomatlhola Trading Enterprise (Pty) Ltd", "Thakaramo Security Solution and Training"],
+         deliverable="Bid-ready document packs; tenders identified per enterprise."),
+    dict(number=5, title="Market linkages", start_week=6, end_week=12,
+         detail="The linkages recorded on the programme page.",
+         enterprises=["Kaborati Holdings", "Olacis Co (Pty) Ltd", "Kairos Chem (Pty) Ltd",
+                      "Lomatlhola Trading Enterprise (Pty) Ltd", "Oageng Creative Agency", "MIDC (Pty) Ltd",
+                      "Sugar Bears", "Reve P Catering", "TM Leasure Homes (Pty) Ltd",
+                      "Motsogapele Food Produce", "Lokissa Business Solutions",
+                      "Far Out Excellent Trading and Projects", "Level 98 Innovations"],
+         deliverable="Signed linkage agreements; first intra-portfolio transactions."),
+    dict(number=6, title="Specialist assessments", start_week=4, end_week=12,
+         detail="PPE standards; food-premises compliance; PSIRA and training accreditation; fuel-sector "
+                "licensing; infrastructure assessment; municipal pilot proposal.",
+         enterprises=["Kaborati Holdings", "Sugar Bears", "Level 98 Innovations",
+                      "Thakaramo Security Solution and Training", "Moela Energies (Pty) Ltd",
+                      "Motsogapele Food Produce"],
+         deliverable="Assessment reports with remedial actions."),
+    dict(number=7, title="Technology venture structuring", start_week=2, end_week=12,
+         detail="Regulatory checklist, content rights, unit economics and a staged pilot model.",
+         enterprises=["Rata Batho Holdings (Pty) Ltd"],
+         deliverable="Business case and financial model; a go / no-go recommendation."),
+    dict(number=8, title="Funding shortlist", start_week=12, end_week=12,
+         detail="Drawn from the verified Tier 1 and Tier 2 enterprises.",
+         deliverable="A funding-readiness shortlist in the next quarterly report."),
+]
+
+
 class Command(BaseCommand):
     help = "Load the 16-enterprise SEDFA portfolio (September 2026). Empty database only."
 
@@ -325,7 +419,32 @@ class Command(BaseCommand):
             for stage in ROUTE[OPENING_STAGE[enterprise.relationship]]:
                 enterprise.move_to(stage, reason="Opening stage from the SEDFA portfolio report, 16 September 2026.")
 
+        by_name = {e.name: e for e in Enterprise.objects.all()}
+
+        # Workstream 1 opens a register for every enterprise: every item outstanding,
+        # which is the true position until each one is actually checked.
+        ComplianceCheck.objects.bulk_create([
+            ComplianceCheck(enterprise=enterprise, kind=kind)
+            for enterprise in by_name.values() for kind in ComplianceCheck.Kind
+        ])
+
+        for spec in LINKAGES:
+            linkage = Linkage.objects.create(
+                title=spec["title"], rationale=spec["rationale"], expected_output=spec["expected_output"],
+                opened_on=date(2026, 9, 16))
+            linkage.providers.set(by_name[n] for n in spec["providers"])
+            linkage.recipients.set(by_name[n] for n in spec["recipients"])
+
+        for spec in WORKSTREAMS:
+            workstream = Workstream.objects.create(
+                number=spec["number"], title=spec["title"], detail=spec.get("detail", ""),
+                start_week=spec["start_week"], end_week=spec["end_week"],
+                deliverable=spec["deliverable"], covers_whole_portfolio=spec.get("whole", False))
+            workstream.enterprises.set(by_name[n] for n in spec.get("enterprises", []))
+
         if opts.get("verbosity", 1):
             self.stdout.write(self.style.SUCCESS(
-                f"Loaded {len(PORTFOLIO)} enterprises across {len(cohorts)} cohorts. "
+                f"Loaded {len(PORTFOLIO)} enterprises across {len(cohorts)} cohorts, "
+                f"{len(LINKAGES)} linkages, {len(WORKSTREAMS)} workstreams and "
+                f"{ComplianceCheck.objects.count()} compliance checks. "
                 "Contact details and per-enterprise risk assessments are deliberately not included."))

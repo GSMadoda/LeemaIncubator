@@ -20,6 +20,11 @@ Tracks enterprises from application to graduation and produces quarterly figures
   `Enterprise.TRANSITIONS` and writes the append-only `StageChange` log. Never bypass it or edit history.
 - Financial year runs April-March (`fy_quarter()`); Q1 = Apr-Jun.
 - Data entry uses Django admin (`incubator/admin.py`). Prefer extending admin over building new CRUD screens.
+- The delivery side is `ComplianceCheck`, `Linkage` and `Workstream`, seeded from the SEDFA report by
+  `seed_portfolio`. Everything opens at its true position: Outstanding, Proposed, Planned. Never seed a
+  check as Verified or a workstream as Running -- that asserts work nobody has done.
+- `scripts/build_preview.py` renders the pages to static HTML for the public site and REFUSES to publish
+  output containing a mobile number or an unrecognised email address. Do not weaken that gate.
 - UI: `templates/`, `static/hub/hub.css`. Board green `#1F4D3A`, marking yellow `#E8B820`, Barlow type.
   The pipeline "circuit trace" is the one signature element; keep everything else plain.
 - South African formats live in `hub/formats/en_ZA/formats.py`.

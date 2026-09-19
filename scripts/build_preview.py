@@ -27,13 +27,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-BANNER = """<div style="background:#E8B820;color:#1a1a1a;font:600 15px/1.5 Barlow,system-ui,sans-serif;\
-padding:12px 20px;text-align:center">
-<strong>Static preview.</strong> The Incubation Hub's real pages, showing LEEMA's September 2026 SEDFA
-portfolio, so the interface can be read without installing it. Nothing here saves, submits or signs in &mdash; the
-working application needs a server, a database and an account. Contact details and per-enterprise risk
-assessments are withheld under POPIA.
-<br><a href="{base}/site/" style="color:#1a1a1a">The Leema Township Incubator website &rarr;</a>
+BANNER = """<div style="background:#16201C;color:#D8E0DA;font:400 13.5px/1.6 Barlow,system-ui,sans-serif;\
+padding:9px 20px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:baseline">
+<span><strong style="color:#E8B820;font-weight:600">Static preview</strong> &middot; LEEMA's September 2026
+SEDFA portfolio. Nothing saves or signs in; contact details are withheld under POPIA.</span>
+<a href="{base}/site/" style="color:#fff">The incubator website &rarr;</a>
 </div>"""
 
 
@@ -127,7 +125,7 @@ def main() -> int:
         shutil.rmtree(out)
     out.mkdir(parents=True)
 
-    paths = ["/", "/enterprises/", "/reports/", "/apply/", "/apply/received/"]
+    paths = ["/", "/enterprises/", "/compliance/", "/programme/", "/reports/", "/apply/", "/apply/received/"]
     paths += [f"/enterprises/{pk}/" for pk in Enterprise.objects.values_list("pk", flat=True)]
 
     written = 0

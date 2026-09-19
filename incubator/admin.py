@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import (Cohort, Diagnostic, Enterprise, Intervention, Milestone,
-                     PerformanceReport, Programme, StageChange)
+from .models import (Cohort, ComplianceCheck, Diagnostic, Enterprise, Intervention,
+                     Linkage, Milestone, PerformanceReport, Programme, StageChange,
+                     Workstream)
 
 admin.site.site_header = "Leema Incubation Hub"
 admin.site.site_title = "Leema Incubation Hub"
@@ -85,3 +86,26 @@ class PerformanceReportAdmin(admin.ModelAdmin):
     list_display = ["enterprise", "fy_start_year", "quarter", "turnover", "permanent_jobs", "new_jobs"]
     list_filter = ["fy_start_year", "quarter"]
     autocomplete_fields = ["enterprise"]
+
+
+@admin.register(ComplianceCheck)
+class ComplianceCheckAdmin(admin.ModelAdmin):
+    list_display = ["enterprise", "kind", "status", "verified_on", "reference"]
+    list_filter = ["status", "kind", "enterprise__readiness_tier"]
+    list_editable = ["status", "verified_on"]
+    search_fields = ["enterprise__name", "reference"]
+    list_select_related = ["enterprise"]
+
+
+@admin.register(Linkage)
+class LinkageAdmin(admin.ModelAdmin):
+    list_display = ["title", "status", "opened_on"]
+    list_filter = ["status"]
+    filter_horizontal = ["providers", "recipients"]
+
+
+@admin.register(Workstream)
+class WorkstreamAdmin(admin.ModelAdmin):
+    list_display = ["number", "title", "weeks", "status", "covers_whole_portfolio"]
+    list_filter = ["status"]
+    filter_horizontal = ["enterprises"]

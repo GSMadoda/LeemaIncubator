@@ -96,3 +96,29 @@ Carried here because they qualify what the data means, not as defects of this lo
 
 Two enterprise pairs also share contact details in the source (TM Leasure Homes with Moela
 Energies; Level 98 with Kaborati). Not loaded, but relevant to verification.
+
+## The operating record
+
+The Hub carries LEEMA's operation end to end, not only the portfolio. Three models cover the
+delivery side, each seeded from the report and each editable in Records admin:
+
+| What | Model | Source | Opens at |
+|---|---|---|---|
+| Verification register | `ComplianceCheck` | Workstream 1 | Seven checks per enterprise, all **Outstanding** |
+| Commercial linkages | `Linkage` | Section 5 linkage table | Five linkages, all **Proposed** |
+| 90-day support plan | `Workstream` | Section 7 | Eight workstreams, all **Planned** |
+
+**Everything opens at its true position, which is "not yet done."** No check starts Verified, no
+linkage starts Agreed, no workstream starts Running. The plan runs October to December 2026 and the
+report is dated 16 September, so anything else would assert work nobody has done. A check cannot be
+marked Verified without the date it was verified, and a workstream cannot end before it starts.
+
+The chain the Hub now records, end to end:
+
+    application → screening → tier and standing assessed → compliance verified
+      → support delivered and training → linkages brokered → quarterly figures
+      → funding-readiness shortlist
+
+Workstream 8 lists no enterprises because the report draws it from "verified Tier 1 and Tier 2" —
+a set that does not exist until workstream 1 finishes. The programme page shows an em dash rather
+than a zero.

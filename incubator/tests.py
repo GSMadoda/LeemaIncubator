@@ -9,7 +9,8 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Enterprise, PerformanceReport, StageChange, fy_quarter
+from .models import (ComplianceCheck, Enterprise, Linkage, PerformanceReport,
+                     StageChange, Workstream, fy_quarter)
 
 
 def make(**kw):
@@ -248,3 +249,81 @@ class PortfolioFilterTests(TestCase):
         response = self.client.get(enterprise.get_absolute_url())
         self.assertContains(response, "POPIA")
         self.assertContains(response, "Tier 3")
+
+
+class OperationsTests(TestCase):
+    """The delivery side: the compliance register, the linkages and the 90-day plan."""
+
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed_portfolio", verbosity=0)
+
+    def setUp(self):
+        get_user_model().objects.create_user("staff2", password="pw-for-tests-only")
+        self.client.login(username="staff2", password="pw-for-tests-only")
+
+    def test_every_enterprise_opens_a_full_compliance_register(self):
+        kinds = len(ComplianceCheck.Kind)
+        self.assertEqual(ComplianceCheck.objects.count(), 16 * kinds)
+        for enterprise in Enterprise.objects.all():
+            self.assertEqual(enterprise.compliance.count(), kinds)
+
+    def test_nothing_starts_verified(self):
+        """The register opens at the true position: nothing has been checked yet."""
+        self.assertEqual(ComplianceCheck.objects.exclude(
+            status=ComplianceCheck.Status.OUTSTANDING).count(), 0)
+
+    def test_a_verified_check_must_carry_its_date(self):
+        check = ComplianceCheck.objects.first()
+        check.status = ComplianceCheck.Status.VERIFIED
+        with self.assertRaises(ValidationError):
+            check.full_clean()
+        check.verified_on = date(2026, 10, 7)
+        check.full_clean()
+
+    def test_one_check_of_each_kind_per_enterprise(self):
+        existing = ComplianceCheck.objects.first()
+        with self.assertRaises(Exception):
+            ComplianceCheck.objects.create(enterprise=existing.enterprise, kind=existing.kind)
+
+    def test_register_counts_settled_work(self):
+        check = ComplianceCheck.objects.first()
+        check.status, check.verified_on = ComplianceCheck.Status.VERIFIED, date(2026, 10, 7)
+        check.save()
+        other = ComplianceCheck.objects.exclude(pk=check.pk).first()
+        other.status = ComplianceCheck.Status.NOT_APPLICABLE
+        other.save()
+        response = self.client.get(reverse("incubator:compliance"))
+        self.assertEqual(response.context["settled"], 2)
+        self.assertEqual(response.context["total"], 16 * len(ComplianceCheck.Kind))
+
+    def test_the_five_report_linkages_are_loaded_with_both_sides(self):
+        self.assertEqual(Linkage.objects.count(), 5)
+        ppe = Linkage.objects.get(title__startswith="Women's PPE")
+        self.assertEqual([e.name for e in ppe.providers.all()], ["Kaborati Holdings"])
+        self.assertEqual(ppe.recipients.count(), 3)
+        self.assertEqual(ppe.status, Linkage.Status.PROPOSED)
+
+    def test_the_eight_workstreams_are_loaded(self):
+        self.assertEqual(Workstream.objects.count(), 8)
+        audit = Workstream.objects.get(number=1)
+        self.assertTrue(audit.covers_whole_portfolio)
+        self.assertEqual(audit.weeks, "Weeks 1–4")
+        self.assertEqual(Workstream.objects.get(number=8).weeks, "Week 12")
+
+    def test_a_workstream_cannot_end_before_it_starts(self):
+        workstream = Workstream(number=99, title="x", start_week=6, end_week=2, deliverable="x")
+        with self.assertRaises(ValidationError):
+            workstream.full_clean()
+
+    def test_programme_page_lists_the_plan_and_the_linkages(self):
+        response = self.client.get(reverse("incubator:programme"))
+        self.assertEqual(len(response.context["workstreams"]), 8)
+        self.assertEqual(len(response.context["linkages"]), 5)
+        self.assertContains(response, "Verification and compliance audit")
+        self.assertContains(response, "Catering and produce supply")
+
+    def test_every_page_in_the_navigation_answers(self):
+        for name in ["dashboard", "enterprises", "compliance", "programme", "report"]:
+            with self.subTest(page=name):
+                self.assertEqual(self.client.get(reverse(f"incubator:{name}")).status_code, 200)

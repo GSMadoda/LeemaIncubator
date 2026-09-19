@@ -1,0 +1,40 @@
+{% extends "base.html" %}{% block title %}Programme{% endblock %}{% block content %}
+<header class="page">
+  <h1>Programme</h1>
+  <p class="lede">The 90-day support plan, October to December 2026, and the commercial linkages it brokers
+  across the portfolio.</p>
+</header>
+
+<section class="card">
+  <h2>Support plan</h2>
+  <div class="scroll">
+  <table><tr><th>#</th><th>Workstream</th><th>Enterprises</th><th>Timing</th><th>Deliverable or KPI</th><th>Status</th></tr>
+  {% for w in workstreams %}<tr>
+    <td class="num">{{ w.number }}</td>
+    <td><b>{{ w.title }}</b>{% if w.detail %}<br><span class="muted">{{ w.detail }}</span>{% endif %}</td>
+    <td class="num">{% if w.covers_whole_portfolio %}All {{ portfolio_size }}{% elif w.enterprises.count %}{{ w.enterprises.count }}{% else %}<span class="muted" title="Named once the enterprises qualify">&mdash;</span>{% endif %}</td>
+    <td class="nowrap">{{ w.weeks }}</td>
+    <td>{{ w.deliverable }}</td>
+    <td><span class="tag {{ w.status }}">{{ w.get_status_display }}</span></td>
+  </tr>{% endfor %}
+  </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Linkages</h2>
+  <p class="note">Brokered on arm's-length, market-related terms and documented as supply or service
+  agreements, so any resulting revenue can be traced. <b>Proposed</b> means intended, not yet introduced.</p>
+  {% for l in linkages %}
+  <article class="linkage">
+    <h3>{{ l.title }} <span class="tag {{ l.status }}">{{ l.get_status_display }}</span></h3>
+    <p>{{ l.rationale }}</p>
+    <dl>
+      {% if l.providers.all %}<dt>Supplying</dt><dd>{% for e in l.providers.all %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+      {% if l.recipients.all %}<dt>Receiving</dt><dd>{% for e in l.recipients.all %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+      <dt>Expected output</dt><dd>{{ l.expected_output }}</dd>
+    </dl>
+  </article>
+  {% empty %}<p class="empty">No linkages recorded.</p>{% endfor %}
+</section>
+{% endblock %}
