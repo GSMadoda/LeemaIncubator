@@ -12,6 +12,11 @@
 {% if awaiting %}<table><tr><th>Enterprise</th><th>Applied</th><th>Stage</th></tr>{% for e in awaiting %}
 <tr><td><a href="{{ e.get_absolute_url }}">{{ e }}</a></td><td>{{ e.applied_on }}</td><td><span class="tag">{{ e.get_stage_display }}</span></td></tr>{% endfor %}</table>
 {% else %}<p class="empty">No applications are waiting. New ones from the application form will appear here.</p>{% endif %}</section>
+<section><h2>Readiness tier</h2><table>
+{% for row in by_tier %}<tr><td>{{ tier_labels|get:row.readiness_tier }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}
+{% if untiered %}<tr><td>Not yet tiered</td><td class="num">{{ untiered }}</td></tr>{% endif %}</table></section>
+<section><h2>Standing with LEEMA</h2><table>
+{% for row in by_relationship %}<tr><td>{{ relationship_labels|get:row.relationship }}</td><td class="num">{{ row.n }}</td></tr>{% endfor %}</table></section>
 <section><h2>Where active enterprises are</h2>{% if by_province %}<div class="bars">{% for p in by_province %}
 <div><span>{{ province_labels|get:p.province }}</span><i style="width:{% widthratio p.n active_count 240 %}px"></i>{{ p.n }}</div>{% endfor %}</div>
 {% else %}<p class="empty">Onboard an enterprise to see its province here.</p>{% endif %}

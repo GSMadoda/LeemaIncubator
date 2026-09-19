@@ -53,6 +53,12 @@ def dashboard(request):
         "active_count": active.count(),
         "pipeline": [(s.label, s.value, pipeline[s]) for s in Stage],
         "by_province": active.values("province").annotate(n=Count("id")).order_by("-n"),
+        "by_tier": Enterprise.objects.exclude(readiness_tier=None)
+                   .values("readiness_tier").annotate(n=Count("id")).order_by("readiness_tier"),
+        "by_relationship": Enterprise.objects.values("relationship").annotate(n=Count("id")).order_by("-n"),
+        "tier_labels": dict(Enterprise.Tier.choices),
+        "relationship_labels": dict(Enterprise.Relationship.choices),
+        "untiered": Enterprise.objects.filter(readiness_tier=None).count(),
         "support": support,
         "new_jobs": jobs["new"] or 0,
         "awaiting": Enterprise.objects.filter(stage__in=[Stage.APPLICANT, Stage.SCREENING]).order_by("applied_on")[:8],
@@ -66,15 +72,22 @@ def dashboard(request):
 def enterprise_list(request):
     qs = Enterprise.objects.select_related("cohort")
     stage, province, term = request.GET.get("stage"), request.GET.get("province"), request.GET.get("q", "").strip()
+    tier, relationship = request.GET.get("tier"), request.GET.get("relationship")
     if stage:
         qs = qs.filter(stage=stage)
     if province:
         qs = qs.filter(province=province)
+    if tier:
+        qs = qs.filter(readiness_tier=tier)
+    if relationship:
+        qs = qs.filter(relationship=relationship)
     if term:
         qs = qs.filter(Q(name__icontains=term) | Q(trading_name__icontains=term) | Q(town__icontains=term))
     return render(request, "incubator/enterprise_list.html", {
         "enterprises": qs, "stages": Stage.choices, "provinces": Enterprise.Province.choices,
-        "sel": {"stage": stage, "province": province, "q": term}})
+        "tiers": Enterprise.Tier.choices, "relationships": Enterprise.Relationship.choices,
+        "sel": {"stage": stage, "province": province, "q": term,
+                "tier": tier, "relationship": relationship}})
 
 
 @login_required

@@ -78,7 +78,9 @@ class Enterprise(models.Model):
         NW = "NW", "North West"
         GP = "GP", "Gauteng"
         NC = "NC", "Northern Cape"
+        MP = "MP", "Mpumalanga"
         OTHER = "OT", "Other"
+        NOT_STATED = "XX", "Not stated"
 
     class Sector(models.TextChoices):
         MANUFACTURING = "manufacturing", "Manufacturing"
@@ -88,8 +90,35 @@ class Enterprise(models.Model):
         ICT = "ict", "ICT & digital"
         SERVICES = "services", "Services"
         RETAIL = "retail", "Retail & trade"
-        ENERGY = "energy", "Energy"
+        ENERGY = "energy", "Energy & automotive"
+        SUPPLY = "supply", "PPE & general supply"
+        SECURITY = "security", "Security"
+        HOSPITALITY = "hospitality", "Food & hospitality"
+        ELECTRICAL = "electrical", "Electrical"
         OTHER = "other", "Other"
+
+    class Relationship(models.TextChoices):
+        """How the enterprise stands with LEEMA, as the SEDFA portfolio report classifies it."""
+        INCUBATEE = "incubatee", "LEEMA Incubatee"
+        RESELLER = "reseller", "LEEMA Reseller"
+        STRATEGIC = "strategic", "LEEMA Strategic Partner"
+        TECH_APPLICANT = "tech_applicant", "Technology Incubation applicant"
+        EXPLORING = "exploring", "Exploring a relationship"
+
+    class Tier(models.IntegerChoices):
+        """Readiness for incubation interventions. Not creditworthiness, and revisited after verification."""
+        GROWTH_READY = 1, "Tier 1 - Growth-ready"
+        STRUCTURING = 2, "Tier 2 - Structuring"
+        FOUNDATION = 3, "Tier 3 - Foundation"
+
+    class Material(models.TextChoices):
+        """State of the enterprise's own profile and supporting material at intake."""
+        CURRENT = "current", "Current and complete"
+        UPDATING = "updating", "Needs updating"
+        IMPROVEMENT = "improvement", "Needs major improvement"
+        REGISTRATION = "registration", "Registration documents only"
+        NONE = "none", "None"
+        NOT_CAPTURED = "not_captured", "Not captured"
 
     name = models.CharField("Registered name", max_length=200)
     trading_name = models.CharField(max_length=200, blank=True)
@@ -97,17 +126,44 @@ class Enterprise(models.Model):
     sector = models.CharField(max_length=20, choices=Sector.choices)
     province = models.CharField(max_length=2, choices=Province.choices)
     town = models.CharField("Town or township", max_length=120)
-    contact_name = models.CharField(max_length=120)
-    contact_email = models.EmailField()
-    contact_phone = models.CharField(max_length=20)
+    # Personal information under POPIA. Left empty in any data committed to a public
+    # repository; captured through the admin on a private deployment.
+    contact_name = models.CharField(max_length=120, blank=True)
+    contact_email = models.EmailField(blank=True)
+    contact_phone = models.CharField(max_length=20, blank=True)
     description = models.TextField("What the business does")
+    relationship = models.CharField(
+        max_length=16, choices=Relationship.choices, default=Relationship.EXPLORING,
+        help_text="Standing with LEEMA, as reported to SEDFA.")
+    readiness_tier = models.PositiveSmallIntegerField(
+        choices=Tier.choices, null=True, blank=True,
+        help_text="Desk-review readiness tier. Guides the type and sequence of support.")
+    material_readiness = models.CharField(
+        "Material at intake", max_length=14, choices=Material.choices,
+        default=Material.NOT_CAPTURED)
+    products_services = models.TextField(blank=True)
+    customers_market = models.TextField("Customers and market", blank=True)
+    competitive_edge = models.TextField(blank=True)
+    goals_challenge = models.TextField("Goals and stated challenge", blank=True)
+    target_1_3_years = models.TextField("One to three year target", blank=True)
+    support_sought = models.TextField(blank=True)
+    jobs_target = models.PositiveIntegerField(
+        null=True, blank=True, help_text="Jobs the enterprise projects, where it quantified one. A projection, never counted as a job created.")
     bbbee_level = models.PositiveSmallIntegerField(
         "B-BBEE level", null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(8)])
-    black_owned_pct = models.PositiveSmallIntegerField("Black-owned %", default=0, validators=PCT)
-    women_owned_pct = models.PositiveSmallIntegerField("Women-owned %", default=0, validators=PCT)
-    youth_owned_pct = models.PositiveSmallIntegerField("Youth-owned %", default=0, validators=PCT)
-    employees_at_intake = models.PositiveIntegerField(default=0)
-    annual_turnover_at_intake = models.DecimalField(max_digits=14, decimal_places=2, default=Decimal("0"))
+    # Like the intake measurements: empty means not captured, which is not the same as zero.
+    black_owned_pct = models.PositiveSmallIntegerField("Black-owned %", null=True, blank=True, validators=PCT)
+    women_owned_pct = models.PositiveSmallIntegerField("Women-owned %", null=True, blank=True, validators=PCT)
+    youth_owned_pct = models.PositiveSmallIntegerField("Youth-owned %", null=True, blank=True, validators=PCT)
+
+    @property
+    def ownership_captured(self):
+        return any(p is not None for p in (self.black_owned_pct, self.women_owned_pct, self.youth_owned_pct))
+    employees_at_intake = models.PositiveIntegerField(
+        null=True, blank=True, help_text="Left empty where intake did not capture it. Empty is not zero.")
+    annual_turnover_at_intake = models.DecimalField(
+        max_digits=14, decimal_places=2, null=True, blank=True,
+        help_text="Left empty where intake did not capture it. Empty is not zero.")
     learnable_enrolled = models.BooleanField("Enrolled on Learnable", default=False)
     stage = models.CharField(max_length=12, choices=Stage.choices, default=Stage.APPLICANT, editable=False)
     cohort = models.ForeignKey(Cohort, null=True, blank=True, on_delete=models.SET_NULL, related_name="enterprises")

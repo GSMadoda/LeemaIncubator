@@ -1,10 +1,12 @@
 {% extends "base.html" %}{% load humanize_lite %}{% block content %}
-<h1>{{ e }}</h1><p class="lede">{{ e.get_sector_display }} in {{ e.town }}, {{ e.get_province_display }}. <span class="tag {{ e.stage }}">{{ e.get_stage_display }}</span></p>
+<h1>{{ e }}</h1><p class="lede">{{ e.get_sector_display }} in {{ e.town }}, {{ e.get_province_display }}. <span class="tag {{ e.stage }}">{{ e.get_stage_display }}</span> <span class="tag">{{ e.get_relationship_display }}</span>{% if e.readiness_tier %} <span class="tag">{{ e.get_readiness_tier_display }}</span>{% endif %}</p>
 <div class="grid2"><section><h2>Details</h2><dl>
 <dt>Registered name</dt><dd>{{ e.name }}</dd><dt>CIPC reg no.</dt><dd>{{ e.registration_number|default:"Not given" }}</dd>
-<dt>Contact</dt><dd>{{ e.contact_name }}, {{ e.contact_phone }}, <a href="mailto:{{ e.contact_email }}">{{ e.contact_email }}</a></dd>
-<dt>Cohort</dt><dd>{{ e.cohort|default:"Not assigned" }}</dd><dt>Ownership</dt><dd>{{ e.black_owned_pct }}% black, {{ e.women_owned_pct }}% women, {{ e.youth_owned_pct }}% youth</dd>
-<dt>At intake</dt><dd>{{ e.employees_at_intake }} employed, R{{ e.annual_turnover_at_intake|rands }} turnover</dd>
+<dt>Contact</dt><dd>{% if e.contact_name or e.contact_email %}{{ e.contact_name }}{% if e.contact_phone %}, {{ e.contact_phone }}{% endif %}{% if e.contact_email %}, <a href="mailto:{{ e.contact_email }}">{{ e.contact_email }}</a>{% endif %}{% else %}<span class="empty">Not recorded here. Personal information under POPIA; capture it on a private deployment.</span>{% endif %}</dd>
+<dt>Cohort</dt><dd>{{ e.cohort|default:"Not assigned" }}</dd><dt>Ownership</dt><dd>{% if e.ownership_captured %}{{ e.black_owned_pct|default_if_none:"—" }}% black, {{ e.women_owned_pct|default_if_none:"—" }}% women, {{ e.youth_owned_pct|default_if_none:"—" }}% youth{% else %}<span class="empty">Not captured at intake</span>{% endif %}</dd>
+<dt>At intake</dt><dd>{% if e.employees_at_intake is not None %}{{ e.employees_at_intake }} employed{% else %}<span class="empty">Employees not captured</span>{% endif %}, {% if e.annual_turnover_at_intake is not None %}R{{ e.annual_turnover_at_intake|rands }} turnover{% else %}<span class="empty">turnover not captured</span>{% endif %}</dd>
+<dt>Material at intake</dt><dd>{{ e.get_material_readiness_display }}</dd>
+{% if e.jobs_target %}<dt>Jobs projected</dt><dd>{{ e.jobs_target }} — a projection by the enterprise, not a job created</dd>{% endif %}
 <dt>Learnable</dt><dd>{{ e.learnable_enrolled|yesno:"Enrolled,Not enrolled" }}</dd></dl>
 <p>{{ e.description|linebreaksbr }}</p>
 <a class="btn ghost" href="{% url 'admin:incubator_enterprise_change' e.pk %}">Edit details</a></section>
@@ -13,6 +15,17 @@
 {% else %}<p class="empty">{{ e.get_stage_display }} is a final stage.</p>{% endif %}
 <h2>Stage history</h2>{% if e.stage_changes.all %}<table>{% for c in e.stage_changes.all %}<tr><td>{{ c.changed_at|date:"j M Y H:i" }}</td><td>{{ c.get_from_stage_display }} to {{ c.get_to_stage_display }}</td><td>{{ c.changed_by|default:"" }}</td></tr>{% endfor %}</table>
 {% else %}<p class="empty">Applied on {{ e.applied_on }}. No stage changes yet.</p>{% endif %}</section></div>
+
+<h2>As submitted</h2>
+<dl class="submission">
+{% if e.products_services %}<dt>Products and services</dt><dd>{{ e.products_services }}</dd>{% endif %}
+{% if e.customers_market %}<dt>Customers and market</dt><dd>{{ e.customers_market }}</dd>{% endif %}
+{% if e.competitive_edge %}<dt>Competitive edge</dt><dd>{{ e.competitive_edge }}</dd>{% endif %}
+{% if e.goals_challenge %}<dt>Goals and stated challenge</dt><dd>{{ e.goals_challenge }}</dd>{% endif %}
+{% if e.target_1_3_years %}<dt>One to three year target</dt><dd>{{ e.target_1_3_years }}</dd>{% endif %}
+{% if e.support_sought %}<dt>Support sought</dt><dd>{{ e.support_sought }}</dd>{% endif %}
+</dl>
+{% if not e.products_services and not e.goals_challenge %}<p class="empty">No submission detail recorded.</p>{% endif %}
 
 <h2>Latest diagnostic</h2>{% if diagnostic %}<table><tr><th>Assessed</th><th class="num">Finance</th><th class="num">Marketing</th><th class="num">Operations</th><th class="num">Compliance</th><th class="num">People</th><th class="num">Digital</th><th class="num">Overall</th></tr>
 <tr><td>{{ diagnostic.assessed_on }}</td><td class="num">{{ diagnostic.finance }}</td><td class="num">{{ diagnostic.marketing }}</td><td class="num">{{ diagnostic.operations }}</td><td class="num">{{ diagnostic.compliance }}</td><td class="num">{{ diagnostic.people }}</td><td class="num">{{ diagnostic.digital }}</td><td class="num"><b>{{ diagnostic.overall }}</b> / 5</td></tr></table>

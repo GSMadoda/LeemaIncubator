@@ -36,8 +36,9 @@ class CohortAdmin(admin.ModelAdmin):
 
 @admin.register(Enterprise)
 class EnterpriseAdmin(admin.ModelAdmin):
-    list_display = ["name", "sector", "province", "stage", "cohort", "applied_on"]
-    list_filter = ["stage", "province", "sector", "cohort", "learnable_enrolled"]
+    list_display = ["name", "relationship", "readiness_tier", "sector", "province", "stage", "cohort", "applied_on"]
+    list_filter = ["relationship", "readiness_tier", "material_readiness", "stage", "province", "sector",
+                   "cohort", "learnable_enrolled"]
     search_fields = ["name", "trading_name", "registration_number", "contact_name", "town"]
     readonly_fields = ["stage", "created_at"]
     inlines = [MilestoneInline, StageChangeInline]

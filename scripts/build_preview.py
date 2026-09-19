@@ -6,8 +6,12 @@ Django's test client against a throwaway database of demo data, and writes the
 output as flat files that any static host can serve.
 
 What comes out is the Hub's own templates and stylesheet, with working links
-between pages. It is a photograph, not the application: nothing submits,
-nothing saves, and the figures are the fictional demo cohort.
+between pages. It is a photograph, not the application: nothing submits and
+nothing saves.
+
+The data is LEEMA's real September 2026 SEDFA portfolio, loaded by
+seed_portfolio, which excludes contact details and per-enterprise risk
+assessments because this output is published. See docs/PORTFOLIO_DATA.md.
 
     python scripts/build_preview.py [--base /LeemaIncubator/preview] [--out preview]
 """
@@ -25,9 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 BANNER = """<div style="background:#E8B820;color:#1a1a1a;font:600 15px/1.5 Barlow,system-ui,sans-serif;\
 padding:12px 20px;text-align:center">
-<strong>Static preview.</strong> These are the Incubation Hub's real pages, rendered from fictional demo data
-so the interface can be read without installing it. Nothing here saves, submits or signs in &mdash; the working
-application needs a server, a database and an account.
+<strong>Static preview.</strong> The Incubation Hub's real pages, showing LEEMA's September 2026 SEDFA
+portfolio, so the interface can be read without installing it. Nothing here saves, submits or signs in &mdash; the
+working application needs a server, a database and an account. Contact details and per-enterprise risk
+assessments are withheld under POPIA.
 <br><a href="{base}/site/" style="color:#1a1a1a">The Leema Township Incubator website &rarr;</a>
 </div>"""
 
@@ -46,6 +51,36 @@ def rewrite(html: str, base: str, depth: int) -> str:
     # Forms cannot post anywhere; make that visible rather than silently broken.
     html = re.sub(r'<form([^>]*)method="post"([^>]*)>', r'<form\1onsubmit="return false"\2>', html, flags=re.I)
     return html.replace("</body>", "</body>")
+
+
+# Addresses that legitimately belong on a published page: the organisation's own,
+# and the unroutable example domain. Anything else is treated as a person's address.
+ALLOWED_EMAILS = {"info@leemaincubation.co.za", "info@leema-industries.com"}
+SA_MOBILE = re.compile(r"\b0[6-8]\d[\s-]?\d{3}[\s-]?\d{4}\b")
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+
+
+def assert_no_personal_information(out: Path) -> None:
+    """Fail the build rather than publish a contact detail.
+
+    The portfolio's source report is POPIA-confidential and this output is public, so
+    this is a gate, not a warning. It matches patterns rather than a list of names,
+    because a list of the names to suppress would itself be the thing to suppress.
+    """
+    offences = []
+    for path in sorted(out.rglob("*")):
+        if not path.is_file() or path.suffix not in {".html", ".csv", ".txt", ".json"}:
+            continue
+        text = path.read_text(errors="ignore")
+        for phone in set(SA_MOBILE.findall(text)):
+            offences.append(f"{path.relative_to(out)}: mobile number {phone}")
+        for address in set(EMAIL.findall(text)):
+            if address.lower() not in ALLOWED_EMAILS and not address.endswith(".invalid"):
+                offences.append(f"{path.relative_to(out)}: email address {address}")
+    if offences:
+        raise SystemExit(
+            "Refusing to publish: personal information found in the built output.\n  "
+            + "\n  ".join(offences))
 
 
 def write(out: Path, url_path: str, html: str) -> Path:
@@ -79,7 +114,7 @@ def main() -> int:
     from django.test import Client
 
     call_command("migrate", verbosity=0)
-    call_command("seed_demo", verbosity=0)
+    call_command("seed_portfolio", verbosity=0)
 
     from incubator.models import Enterprise
 
@@ -122,7 +157,9 @@ def main() -> int:
         print(f"  /reports/export.csv              -> {(out / 'reports' / 'export.csv').relative_to(BASE_DIR)}")
 
     shutil.rmtree(tmp, ignore_errors=True)
+    assert_no_personal_information(out)
     print(f"\n{written} pages written to {out.relative_to(BASE_DIR)}/ for base {base}/")
+    print("No personal information in the output.")
     return 0
 
 
