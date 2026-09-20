@@ -327,3 +327,23 @@ class OperationsTests(TestCase):
         for name in ["dashboard", "enterprises", "compliance", "programme", "report"]:
             with self.subTest(page=name):
                 self.assertEqual(self.client.get(reverse(f"incubator:{name}")).status_code, 200)
+
+    def test_milestones_are_derived_from_the_plan(self):
+        from incubator.models import Milestone
+        # Workstreams 1 and 2 cover all sixteen; 3, 4, 5, 6 and 7 name theirs; 8 names none.
+        self.assertEqual(Milestone.objects.count(), 16 + 16 + 8 + 8 + 13 + 6 + 1)
+        audit = Milestone.objects.filter(title__startswith="1.").first()
+        self.assertEqual(audit.due_on, date(2026, 10, 28))     # end of week 4, plan starts 1 October
+        self.assertEqual(Milestone.objects.filter(title__startswith="8.").count(), 0)
+
+    def test_nothing_is_overdue_before_the_plan_starts(self):
+        from incubator.models import Milestone
+        self.assertEqual([m for m in Milestone.objects.all() if m.overdue], [])
+
+    def test_record_page_shows_the_delivery_record(self):
+        enterprise = Enterprise.objects.get(name="Reve P Catering")
+        response = self.client.get(enterprise.get_absolute_url())
+        self.assertEqual(len(response.context["compliance"]), len(ComplianceCheck.Kind))
+        self.assertEqual(response.context["compliance_settled"], 0)
+        self.assertContains(response, "Verification and compliance audit")
+        self.assertContains(response, "Catering and produce supply")

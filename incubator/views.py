@@ -102,6 +102,9 @@ def enterprise_detail(request, pk):
         "e": e, "stage_form": StageForm(enterprise=e) if e.allowed_transitions() else None,
         "diagnostic": e.diagnostics.first(),
         "support_total": e.interventions.aggregate(hours=Sum("hours"), cost=Sum("cost")),
+        "compliance": e.compliance.all(),
+        "compliance_settled": sum(1 for c in e.compliance.all() if c.settled),
+        "linkages": (e.linkages_supplying.all() | e.linkages_receiving.all()).distinct(),
     })
 
 

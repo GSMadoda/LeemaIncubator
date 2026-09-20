@@ -183,3 +183,15 @@ dd .empty,td .empty,p .empty{display:inline;padding:0;background:none;border:0;f
 .key li{display:flex;align-items:center;gap:var(--s2)}
 table.matrix th.num,table.matrix td.num{text-align:center;padding-left:var(--s2);padding-right:var(--s2)}
 table.matrix td:first-child{white-space:normal;min-width:190px}
+
+/* ---------- enterprise record ---------- */
+.tags{margin:var(--s3) 0 0;display:flex;gap:var(--s2);flex-wrap:wrap}
+.intro{margin:0 0 var(--s4);max-width:74ch}
+h2 .count{float:right;font-weight:400;color:var(--muted);font-size:.9rem}
+ul.checks{list-style:none;margin:0;padding:0}
+ul.checks li{display:flex;align-items:baseline;gap:var(--s2);padding:6px 0;
+  border-bottom:1px solid var(--line);font-size:.95rem}
+ul.checks li:last-child{border-bottom:0}
+ul.checks li .muted{margin-left:auto;font-size:.88rem;text-align:right}
+section.card h3{margin-top:0;color:var(--muted);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase}
+section.card .grid2{gap:var(--s5)}

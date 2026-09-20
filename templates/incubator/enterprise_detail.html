@@ -1,44 +1,95 @@
-{% extends "base.html" %}{% load humanize_lite %}{% block content %}
-<h1>{{ e }}</h1><p class="lede">{{ e.get_sector_display }} in {{ e.town }}, {{ e.get_province_display }}. <span class="tag {{ e.stage }}">{{ e.get_stage_display }}</span> <span class="tag">{{ e.get_relationship_display }}</span>{% if e.readiness_tier %} <span class="tag">{{ e.get_readiness_tier_display }}</span>{% endif %}</p>
-<div class="grid2"><section><h2>Details</h2><dl>
-<dt>Registered name</dt><dd>{{ e.name }}</dd><dt>CIPC reg no.</dt><dd>{{ e.registration_number|default:"Not given" }}</dd>
-<dt>Contact</dt><dd>{% if e.contact_name or e.contact_email %}{{ e.contact_name }}{% if e.contact_phone %}, {{ e.contact_phone }}{% endif %}{% if e.contact_email %}, <a href="mailto:{{ e.contact_email }}">{{ e.contact_email }}</a>{% endif %}{% else %}<span class="empty">Not recorded here. Personal information under POPIA; capture it on a private deployment.</span>{% endif %}</dd>
-<dt>Cohort</dt><dd>{{ e.cohort|default:"Not assigned" }}</dd><dt>Ownership</dt><dd>{% if e.ownership_captured %}{{ e.black_owned_pct|default_if_none:"—" }}% black, {{ e.women_owned_pct|default_if_none:"—" }}% women, {{ e.youth_owned_pct|default_if_none:"—" }}% youth{% else %}<span class="empty">Not captured at intake</span>{% endif %}</dd>
-<dt>At intake</dt><dd>{% if e.employees_at_intake is not None %}{{ e.employees_at_intake }} employed{% else %}<span class="empty">Employees not captured</span>{% endif %}, {% if e.annual_turnover_at_intake is not None %}R{{ e.annual_turnover_at_intake|rands }} turnover{% else %}<span class="empty">turnover not captured</span>{% endif %}</dd>
-<dt>Material at intake</dt><dd>{{ e.get_material_readiness_display }}</dd>
-{% if e.jobs_target %}<dt>Jobs projected</dt><dd>{{ e.jobs_target }} — a projection by the enterprise, not a job created</dd>{% endif %}
-<dt>Learnable</dt><dd>{{ e.learnable_enrolled|yesno:"Enrolled,Not enrolled" }}</dd></dl>
-<p>{{ e.description|linebreaksbr }}</p>
-<a class="btn ghost" href="{% url 'admin:incubator_enterprise_change' e.pk %}">Edit details</a></section>
-<section><h2>Stage</h2>{% if stage_form %}<form method="post" action="{% url 'incubator:change_stage' e.pk %}">{% csrf_token %}
-{% for field in stage_form %}{% include "_field.html" %}{% endfor %}<button>Change stage</button></form>
-{% else %}<p class="empty">{{ e.get_stage_display }} is a final stage.</p>{% endif %}
-<h2>Stage history</h2>{% if e.stage_changes.all %}<table>{% for c in e.stage_changes.all %}<tr><td>{{ c.changed_at|date:"j M Y H:i" }}</td><td>{{ c.get_from_stage_display }} to {{ c.get_to_stage_display }}</td><td>{{ c.changed_by|default:"" }}</td></tr>{% endfor %}</table>
-{% else %}<p class="empty">Applied on {{ e.applied_on }}. No stage changes yet.</p>{% endif %}</section></div>
+{% extends "base.html" %}{% load humanize_lite %}{% block title %}{{ e }}{% endblock %}{% block content %}
+<header class="page">
+  <h1>{{ e }}</h1>
+  <p class="lede">{{ e.get_sector_display }} in {{ e.town }}, {{ e.get_province_display }}</p>
+  <p class="tags"><span class="tag {{ e.stage }}">{{ e.get_stage_display }}</span>
+    <span class="tag">{{ e.get_relationship_display }}</span>
+    {% if e.readiness_tier %}<span class="tag">{{ e.get_readiness_tier_display }}</span>{% endif %}
+    {% if e.cohort %}<span class="tag">{{ e.cohort }}</span>{% endif %}</p>
+</header>
 
-<h2>As submitted</h2>
-<dl class="submission">
-{% if e.products_services %}<dt>Products and services</dt><dd>{{ e.products_services }}</dd>{% endif %}
-{% if e.customers_market %}<dt>Customers and market</dt><dd>{{ e.customers_market }}</dd>{% endif %}
-{% if e.competitive_edge %}<dt>Competitive edge</dt><dd>{{ e.competitive_edge }}</dd>{% endif %}
-{% if e.goals_challenge %}<dt>Goals and stated challenge</dt><dd>{{ e.goals_challenge }}</dd>{% endif %}
-{% if e.target_1_3_years %}<dt>One to three year target</dt><dd>{{ e.target_1_3_years }}</dd>{% endif %}
-{% if e.support_sought %}<dt>Support sought</dt><dd>{{ e.support_sought }}</dd>{% endif %}
-</dl>
-{% if not e.products_services and not e.goals_challenge %}<p class="empty">No submission detail recorded.</p>{% endif %}
+<div class="grid2">
+  <section class="card">
+    <h2>The business</h2>
+    <p class="intro">{{ e.description|linebreaksbr }}</p>
+    <dl>
+      <dt>Registered name</dt><dd>{{ e.name }}</dd>
+      <dt>CIPC reg no.</dt><dd>{{ e.registration_number|default:"Not given" }}</dd>
+      <dt>Contact</dt><dd>{% if e.contact_name or e.contact_email %}{{ e.contact_name }}{% if e.contact_phone %}, {{ e.contact_phone }}{% endif %}{% if e.contact_email %}, <a href="mailto:{{ e.contact_email }}">{{ e.contact_email }}</a>{% endif %}{% else %}<span class="empty">withheld under POPIA</span>{% endif %}</dd>
+      <dt>Ownership</dt><dd>{% if e.ownership_captured %}{{ e.black_owned_pct|default_if_none:"—" }}% black, {{ e.women_owned_pct|default_if_none:"—" }}% women, {{ e.youth_owned_pct|default_if_none:"—" }}% youth{% else %}<span class="empty">not captured at intake</span>{% endif %}</dd>
+      <dt>At intake</dt><dd>{% if e.employees_at_intake is not None %}{{ e.employees_at_intake }} employed{% else %}<span class="empty">employees not captured</span>{% endif %}; {% if e.annual_turnover_at_intake is not None %}R{{ e.annual_turnover_at_intake|rands }} turnover{% else %}<span class="empty">turnover not captured</span>{% endif %}</dd>
+      <dt>Material</dt><dd>{{ e.get_material_readiness_display }}</dd>
+      {% if e.jobs_target %}<dt>Jobs projected</dt><dd>{{ e.jobs_target }} <span class="empty">— the enterprise's projection, not a job created</span></dd>{% endif %}
+      <dt>Learnable</dt><dd>{{ e.learnable_enrolled|yesno:"Enrolled,Not enrolled" }}</dd>
+    </dl>
+    <p><a class="btn ghost" href="{% url 'admin:incubator_enterprise_change' e.pk %}">Edit details</a></p>
+  </section>
 
-<h2>Latest diagnostic</h2>{% if diagnostic %}<table><tr><th>Assessed</th><th class="num">Finance</th><th class="num">Marketing</th><th class="num">Operations</th><th class="num">Compliance</th><th class="num">People</th><th class="num">Digital</th><th class="num">Overall</th></tr>
-<tr><td>{{ diagnostic.assessed_on }}</td><td class="num">{{ diagnostic.finance }}</td><td class="num">{{ diagnostic.marketing }}</td><td class="num">{{ diagnostic.operations }}</td><td class="num">{{ diagnostic.compliance }}</td><td class="num">{{ diagnostic.people }}</td><td class="num">{{ diagnostic.digital }}</td><td class="num"><b>{{ diagnostic.overall }}</b> / 5</td></tr></table>
-{% else %}<p class="empty">No diagnostic yet.</p>{% endif %}<p><a href="{% url 'admin:incubator_diagnostic_add' %}?enterprise={{ e.pk }}">Record a diagnostic</a></p>
+  <section class="card">
+    <h2>Stage</h2>
+    {% if stage_form %}<form method="post" action="{% url 'incubator:change_stage' e.pk %}">{% csrf_token %}
+    {% for field in stage_form %}{% include "_field.html" %}{% endfor %}<button>Change stage</button></form>
+    {% else %}<p class="empty">{{ e.get_stage_display }} is a final stage.</p>{% endif %}
+    <h2 style="margin-top:var(--s5)">History</h2>
+    {% if e.stage_changes.all %}<table>{% for c in e.stage_changes.all %}<tr><td class="nowrap">{{ c.changed_at|date:"j M Y" }}</td><td>{{ c.get_from_stage_display }} &rarr; {{ c.get_to_stage_display }}</td></tr>{% endfor %}</table>
+    {% else %}<p class="note">Applied {{ e.applied_on|date:"j M Y" }}. No stage changes yet.</p>{% endif %}
+  </section>
+</div>
 
-<h2>Support delivered</h2>{% with ivs=e.interventions.all %}{% if ivs %}<table><tr><th>Date</th><th>Type</th><th>Provider</th><th>Summary</th><th class="num">Hours</th><th class="num">Cost (R)</th></tr>
-{% for i in ivs %}<tr><td>{{ i.delivered_on }}</td><td>{{ i.get_kind_display }}</td><td>{{ i.provider }}</td><td>{{ i.summary }}</td><td class="num">{{ i.hours }}</td><td class="num">{{ i.cost|rands }}</td></tr>{% endfor %}
-<tr><th colspan="4">Total</th><th class="num">{{ support_total.hours }}</th><th class="num">{{ support_total.cost|rands }}</th></tr></table>
-{% else %}<p class="empty">No support recorded yet.</p>{% endif %}{% endwith %}<p><a href="{% url 'admin:incubator_intervention_add' %}?enterprise={{ e.pk }}">Record support</a></p>
+<div class="grid2">
+  <section class="card">
+    <h2>Verification <span class="count">{{ compliance_settled }} / {{ compliance|length }}</span></h2>
+    <ul class="checks">
+      {% for c in compliance %}<li><i class="dot {{ c.status }}"></i>{{ c.get_kind_display }}
+        <span class="muted">{{ c.get_status_display }}{% if c.verified_on %}, {{ c.verified_on|date:"j M Y" }}{% endif %}</span></li>{% endfor %}
+    </ul>
+  </section>
 
-<div class="grid2"><section><h2>Milestones</h2>{% with ms=e.milestones.all %}{% if ms %}<table>{% for m in ms %}<tr><td>{{ m.title }}</td><td>{{ m.due_on }}</td><td>{% if m.overdue %}<span class="tag declined">Overdue</span>{% else %}{{ m.get_status_display }}{% endif %}</td></tr>{% endfor %}</table>
-{% else %}<p class="empty">No milestones set.</p>{% endif %}{% endwith %}<p><a href="{% url 'admin:incubator_milestone_add' %}?enterprise={{ e.pk }}">Add a milestone</a></p></section>
-<section><h2>Quarterly performance</h2>{% with rs=e.reports.all %}{% if rs %}<table><tr><th>Period</th><th class="num">Turnover (R)</th><th class="num">Perm. jobs</th><th class="num">New jobs</th></tr>
-{% for r in rs %}<tr><td>{{ r.period }}</td><td class="num">{{ r.turnover|rands }}</td><td class="num">{{ r.permanent_jobs }}</td><td class="num">{{ r.new_jobs }}</td></tr>{% endfor %}</table>
-{% else %}<p class="empty">No quarterly figures yet.</p>{% endif %}{% endwith %}<p><a href="{% url 'admin:incubator_performancereport_add' %}?enterprise={{ e.pk }}">Add quarterly figures</a></p></section></div>
+  <section class="card">
+    <h2>Planned work</h2>
+    {% with ms=e.milestones.all %}{% if ms %}<table>
+      {% for m in ms %}<tr><td>{{ m.title }}</td><td class="nowrap">{{ m.due_on|date:"j M Y" }}</td>
+      <td>{% if m.overdue %}<span class="tag failed">Overdue</span>{% else %}<span class="tag {{ m.status }}">{{ m.get_status_display }}</span>{% endif %}</td></tr>{% endfor %}
+    </table>{% else %}<p class="note">No milestones set. <a href="{% url 'admin:incubator_milestone_add' %}?enterprise={{ e.pk }}">Add one</a>.</p>{% endif %}{% endwith %}
+    {% if linkages %}<h2 style="margin-top:var(--s5)">Linkages</h2>
+    <ul class="checks">{% for l in linkages %}<li><a href="{% url 'incubator:programme' %}">{{ l.title }}</a> <span class="muted">{{ l.get_status_display }}</span></li>{% endfor %}</ul>{% endif %}
+  </section>
+</div>
+
+<section class="card">
+  <h2>As submitted</h2>
+  <dl class="submission">
+    {% if e.products_services %}<dt>Products and services</dt><dd>{{ e.products_services }}</dd>{% endif %}
+    {% if e.customers_market %}<dt>Customers and market</dt><dd>{{ e.customers_market }}</dd>{% endif %}
+    {% if e.competitive_edge %}<dt>Competitive edge</dt><dd>{{ e.competitive_edge }}</dd>{% endif %}
+    {% if e.goals_challenge %}<dt>Goals and stated challenge</dt><dd>{{ e.goals_challenge }}</dd>{% endif %}
+    {% if e.target_1_3_years %}<dt>One to three year target</dt><dd>{{ e.target_1_3_years }}</dd>{% endif %}
+    {% if e.support_sought %}<dt>Support sought</dt><dd>{{ e.support_sought }}</dd>{% endif %}
+  </dl>
+</section>
+
+<section class="card">
+  <h2>Delivery record</h2>
+  <div class="grid2">
+    <div>
+      <h3>Diagnostic</h3>
+      {% if diagnostic %}<table><tr><th>Assessed</th><th class="num">Finance</th><th class="num">Marketing</th><th class="num">Ops</th><th class="num">Compliance</th><th class="num">People</th><th class="num">Digital</th><th class="num">Overall</th></tr>
+      <tr><td>{{ diagnostic.assessed_on }}</td><td class="num">{{ diagnostic.finance }}</td><td class="num">{{ diagnostic.marketing }}</td><td class="num">{{ diagnostic.operations }}</td><td class="num">{{ diagnostic.compliance }}</td><td class="num">{{ diagnostic.people }}</td><td class="num">{{ diagnostic.digital }}</td><td class="num"><b>{{ diagnostic.overall }}</b>/5</td></tr></table>
+      {% else %}<p class="note">Not assessed yet. <a href="{% url 'admin:incubator_diagnostic_add' %}?enterprise={{ e.pk }}">Record one</a>.</p>{% endif %}
+
+      <h3 style="margin-top:var(--s5)">Support delivered</h3>
+      {% with ivs=e.interventions.all %}{% if ivs %}<table><tr><th>Date</th><th>Type</th><th>Provider</th><th class="num">Hours</th><th class="num">Cost (R)</th></tr>
+      {% for i in ivs %}<tr><td class="nowrap">{{ i.delivered_on }}</td><td>{{ i.get_kind_display }}</td><td>{{ i.provider }}</td><td class="num">{{ i.hours }}</td><td class="num">{{ i.cost|rands }}</td></tr>{% endfor %}
+      <tr><th colspan="3">Total</th><th class="num">{{ support_total.hours }}</th><th class="num">{{ support_total.cost|rands }}</th></tr></table>
+      {% else %}<p class="note">Nothing recorded yet. <a href="{% url 'admin:incubator_intervention_add' %}?enterprise={{ e.pk }}">Record support</a>.</p>{% endif %}{% endwith %}
+    </div>
+    <div>
+      <h3>Quarterly performance</h3>
+      {% with rs=e.reports.all %}{% if rs %}<table><tr><th>Period</th><th class="num">Turnover (R)</th><th class="num">Perm.</th><th class="num">New jobs</th></tr>
+      {% for r in rs %}<tr><td>{{ r.period }}</td><td class="num">{{ r.turnover|rands }}</td><td class="num">{{ r.permanent_jobs }}</td><td class="num">{{ r.new_jobs }}</td></tr>{% endfor %}</table>
+      {% else %}<p class="note">No figures yet. The first are due for the quarter ending March 2027.
+      <a href="{% url 'admin:incubator_performancereport_add' %}?enterprise={{ e.pk }}">Add figures</a>.</p>{% endif %}{% endwith %}
+    </div>
+  </div>
+</section>
 {% endblock %}

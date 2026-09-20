@@ -30,13 +30,13 @@ through Enterprise.move_to(), so the seeded history records how each one got the
 
     python manage.py seed_portfolio          # empty database only
 """
-from datetime import date
+from datetime import date, timedelta
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from incubator.models import (Cohort, ComplianceCheck, Enterprise, Linkage, Programme,
-                              Workstream)
+from incubator.models import (Cohort, ComplianceCheck, Enterprise, Linkage, Milestone,
+                              Programme, Workstream)
 
 E = Enterprise
 R, T, M, P, S = E.Relationship, E.Tier, E.Material, E.Province, E.Sector
@@ -57,6 +57,9 @@ ROUTE = {
 }
 
 C1, C2 = "27 Aug - 2 Sep 2026", "9 - 15 Sep 2026"
+
+#: Week 1 of the 90-day support plan, which the report sets at October 2026.
+PLAN_START = date(2026, 10, 1)
 
 PORTFOLIO = [
     dict(
@@ -442,9 +445,21 @@ class Command(BaseCommand):
                 deliverable=spec["deliverable"], covers_whole_portfolio=spec.get("whole", False))
             workstream.enterprises.set(by_name[n] for n in spec.get("enterprises", []))
 
+        # Each workstream is work owed to a named enterprise by a date, which is what a
+        # milestone is. Deriving them from the plan keeps the two in step: the plan is the
+        # only place the dates are stated, and nothing here is invented.
+        milestones = []
+        for workstream in Workstream.objects.prefetch_related("enterprises"):
+            due = PLAN_START + timedelta(days=workstream.end_week * 7 - 1)
+            covered = by_name.values() if workstream.covers_whole_portfolio else workstream.enterprises.all()
+            milestones += [Milestone(enterprise=e, title=f"{workstream.number}. {workstream.title}", due_on=due)
+                           for e in covered]
+        Milestone.objects.bulk_create(milestones)
+
         if opts.get("verbosity", 1):
             self.stdout.write(self.style.SUCCESS(
                 f"Loaded {len(PORTFOLIO)} enterprises across {len(cohorts)} cohorts, "
                 f"{len(LINKAGES)} linkages, {len(WORKSTREAMS)} workstreams and "
-                f"{ComplianceCheck.objects.count()} compliance checks. "
+                f"{ComplianceCheck.objects.count()} compliance checks and "
+                f"{Milestone.objects.count()} milestones. "
                 "Contact details and per-enterprise risk assessments are deliberately not included."))
