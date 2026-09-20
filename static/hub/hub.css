@@ -148,6 +148,9 @@ dl.submission dd{margin:var(--s1) 0 0;max-width:74ch}
 .msg.error{border-color:var(--bad)}
 .empty{color:var(--muted);padding:var(--s4);background:var(--card);border:1px dashed var(--line-strong);
   border-radius:var(--radius)}
+/* Inside a description list the note sits on one line with its value, so it must not
+   carry block padding: an inline box with vertical padding overlaps the rows beneath. */
+dd .empty,td .empty,p .empty{display:inline;padding:0;background:none;border:0;font-style:italic}
 
 /* ---------- public pages ---------- */
 .public{max-width:720px;margin:0 auto;padding:var(--s7) var(--s5)}
